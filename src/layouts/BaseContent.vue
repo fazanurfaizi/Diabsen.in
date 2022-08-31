@@ -14,6 +14,6 @@
 <script>
 
 export default {
-  name: 'ContentComponent'
+  name: 'BaseContent'
 }
 </script>

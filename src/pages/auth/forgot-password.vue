@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import Footer from './componets/Footer.vue';
+import Footer from '@/layouts/TheFooter.vue';
 export default {
     name: "MagicLink",
     components: { Footer }
