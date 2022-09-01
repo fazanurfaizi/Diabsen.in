@@ -33,6 +33,6 @@ export default {
     Header,
     SidebarMobile,
     Footer
-}
+  }
 }
 </script>

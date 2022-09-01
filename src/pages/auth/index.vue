@@ -65,18 +65,22 @@ export default {
     async login(){
 
       let param = {
-        grant_type: "password",
-        client_id: "2",
-        client_secret: "GPLDq2IbUubERddpJRPNwuAhHt0u4mfBTADsM40P",
+        grant_type: process.env.VUE_APP_GRANT_TYPE,
+        client_id: process.env.VUE_APP_CLIENT_ID,
+        client_secret: process.env.VUE_APP_CLIENT_SECRET,
         username: this.email,
         password: this.password,
         scope: "*"
       }
       
-      await this.axios.post("http://localhost:8000/oauth/token", param).then((response) => {
-        console.log(response);
-        Cookies.set('access_token', response.data.access_token);
-        Cookies.set('refresh_token', response.data.refresh_token);
+      await this.axios.post(process.env.VUE_APP_API_URL_AUTH + "/oauth/token", param).then((response) => {
+        Cookies.set('access_token', response.data.access_token, {
+          // expires: 10/86400
+          expires: response.data.expires_in/86400
+        });
+        Cookies.set('refresh_token', response.data.refresh_token, {
+          expires: 1
+        });
         this.$router.push('/dashboard')
       }).catch((e) => {
         console.log(e);

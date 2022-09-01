@@ -10,7 +10,7 @@
 <script>
 import BaseContent from '@/layouts/BaseContent.vue';
 export default {
-    name: "ProfilePage",
-    components: { BaseContent }
+  name: "ProfilePage",
+  components: { BaseContent }
 }
 </script>

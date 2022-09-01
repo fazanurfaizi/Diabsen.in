@@ -10,7 +10,7 @@
 </template>
 
 <script>
-  export default {
-    name: 'DashboardPage',
-  }
+export default {
+  name: 'DashboardPage',
+}
 </script>
