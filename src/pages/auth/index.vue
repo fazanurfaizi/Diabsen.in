@@ -18,16 +18,17 @@
           </div>
 
           <div>
-            <div class="mt-1">
+            <div class="mt-1 relative">
               <input 
                 v-model="password" 
                 placeholder="Password" 
                 id="password" 
                 name="password" 
-                type="password" 
+                :type="isShowPassword ? 'text':'password'" 
                 autocomplete="current-password" 
                 required="" 
                 class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm" />
+                <Icon @click="isShowPassword = !isShowPassword" :name="isShowPassword ? 'eye':'eye-off'" class="h-5 w-5 absolute right-2 top-2 cursor-pointer" />
             </div>
           </div>         
 
@@ -58,7 +59,8 @@ export default {
   data() {
     return {
       email: '',
-      password: ''
+      password: '',
+      isShowPassword: false
     }
   },
   methods: {
