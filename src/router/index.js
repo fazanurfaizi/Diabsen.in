@@ -8,6 +8,8 @@ import ForgotPassword from '../pages/auth/forgot-password.vue';
 import DashboardPage from '../pages/dashboard/index.vue';
 
 import ProfilePage from '../pages/profile/index.vue';
+import ProfileEdit from '../pages/profile/edit.vue';
+import ChangePassword from '../pages/profile/change-password.vue';
 
 import FoobarList from '../pages/foobar/index.vue';
 import FoobarCreate from '../pages/foobar/index.vue';
@@ -35,6 +37,16 @@ let routes = [
     {
         path: "/profile",
         component: ProfilePage,
+        meta: { requiresAuth: true }
+    },
+    {
+        path: "/profile/edit",
+        component: ProfileEdit,
+        meta: { requiresAuth: true }
+    },
+    {
+        path: "/profile/change-password",
+        component: ChangePassword,
         meta: { requiresAuth: true }
     },
     {
