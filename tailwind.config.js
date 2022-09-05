@@ -6,6 +6,18 @@ module.exports = {
   ],
   theme: {
     extend: {
+      width: {
+        '229px': '229px',
+      },
+      height: {
+        '36px': '36px',
+      },
+      margin: {
+        '25px': '25px',
+      },
+      padding: {
+        '5px': '5px',
+      },
       colors: {
         'primary': {
           light: '#3a5c9d',
@@ -17,6 +29,10 @@ module.exports = {
           DEFAULT: '#EB7714',
           dark: 'red'
         },
+        'title-content': '#6E6B7B',
+        'button': '#4299E1',
+        'text-table': '#5E5873',
+        'thead': '#F3F2F7'
       }
     },
   },

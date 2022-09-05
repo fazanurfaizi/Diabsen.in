@@ -11,6 +11,8 @@ import ProfilePage from '../pages/profile/index.vue';
 import ProfileEdit from '../pages/profile/edit.vue';
 import ChangePassword from '../pages/profile/change-password.vue';
 
+import SchoolList from "../pages/school/index"
+
 import FoobarList from '../pages/foobar/index.vue';
 import FoobarCreate from '../pages/foobar/index.vue';
 import FoobarEdit from '../pages/foobar/index.vue';
@@ -47,6 +49,11 @@ let routes = [
     {
         path: "/profile/change-password",
         component: ChangePassword,
+        meta: { requiresAuth: true }
+    },
+    {
+        path: '/schools',
+        component: SchoolList,
         meta: { requiresAuth: true }
     },
     {
