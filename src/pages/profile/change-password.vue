@@ -14,7 +14,7 @@
                 </div>
     
                 <div class="lg:flex gap-[8px] lg:flex-col-2">
-                    <div class="lg:w-[384px]">
+                    <div class="lg:w-1/2">
                         <label for="new_password" class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]">Kata Sandi Baru
                             <Asterisk />
                         </label>

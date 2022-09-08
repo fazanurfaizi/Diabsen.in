@@ -28,7 +28,7 @@
 
           <template #content-profile>
             <div class="p-[20px] bg-white rounded-[4px] border border-[#E3E6EA] w-full">
-              <div class="grid lg:grid-cols-2 lg:gap-[250px] text-[#6E6B7B] text-[14px]">
+              <div class="grid lg:grid-cols-2 text-[#6E6B7B] text-[14px]">
                 <div>
                   <div class="flex flex-col py-1">
                     <span class="font-bold">Nama Lengkap :</span>
