@@ -10,7 +10,7 @@
                         </label>
                         <input placeholder="Nama Lengkap" type="text" required="" v-model="user.name"
                             class="appearance-none block w-full h-[44px] py-[14px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary sm:text-[14px]" />
-                        <div class="text-sm mt-2 text-red-500 errors_name"></div>
+                        <div class="text-sm mt-2 text-[12px] mt-[8px] text-[#F56565] errors_name"></div>
                     </div>
                     <div>
                         <label for="gender" class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]">Jenis Kelamin
@@ -23,7 +23,7 @@
                                 v-bind:value="gen[1]">{{ gen[0] }}
                             </option>
                         </select>
-                        <div class="text-sm mt-2 text-red-500 errors_gender"></div>
+                        <div class="text-sm mt-2 text-[12px] mt-[8px] text-[#F56565] errors_gender"></div>
                     </div>
                     <div>
                         <label for="first_name" class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]">No.
@@ -32,17 +32,17 @@
                         </label>
                         <input placeholder="No. WhatsApps" id="phone_num" type="text" required="" v-model="user.phone"
                             class="appearance-none block w-full h-[44px] py-[14px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary sm:text-[14px]" />
-                        <div class="text-sm mt-2 text-red-500 errors_phone_num"></div>
+                        <div class="text-sm mt-2 text-[12px] mt-[8px] text-[#F56565] errors_phone_num"></div>
                     </div>
                     <div>
                         <label for="first_name" class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]">Tanggal
                             Lahir
                             <Asterisk />
                         </label>
-                        <input placeholder="Tanggal lahir" id="birthdate" type="date" required=""
+                        <input placeholder="Tanggal lahir" id="birthdate" type="date" required
                             v-model="user.birthdate"
                             class="bg-clip-padding appearance-none block w-full h-[44px] py-[14px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary sm:text-[14px]" />
-                        <div class="text-sm mt-2 text-red-500 errors_birthdate"></div>
+                        <div class="text-sm mt-2 text-[12px] mt-[8px] text-[#F56565] errors_birthdate"></div>
                     </div>
                     <div>
                         <label for="first_name" class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]">E-Mail
@@ -51,7 +51,7 @@
                         <input placeholder="E-Mail" id="email" type="text" required=""
                             v-model="user.email"
                             class="appearance-none block w-full h-[44px] py-[14px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary sm:text-[14px]" />
-                        <div class="text-sm mt-2 text-red-500 errors_email"></div>
+                        <div class="text-sm mt-2 text-[12px] mt-[8px] text-[#F56565] errors_email"></div>
                     </div>
                     <div>
                         <label for="first_name" class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]">Jabatan
@@ -77,6 +77,8 @@
     import TheBackButton from './components/TheBackButton.vue'
     import Asterisk from '@/components/Asterisk.vue'
     import Cookies from 'js-cookie'
+    import { DateTime } from 'luxon'
+
     export default {
         name: 'ProfileEdit',
         components: {
@@ -129,8 +131,6 @@
                         .map(word => word[0])
                         .join('');
 
-                    console.log(response.data)
-
                 });
             },
 
@@ -165,12 +165,16 @@
                         console.error(e.message);
                     }
                 });
-
-                console.log(params)
             }
         },
         created() {
             this.getProfile();
+        },
+        mounted() {
+            let today = DateTime.now().setLocale('id')
+                        .toFormat('yyyy-LL-dd');
+
+            document.getElementById("birthdate").max = today;   
         }
     }
 </script>
