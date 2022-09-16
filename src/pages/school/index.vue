@@ -59,7 +59,7 @@
     },
     methods: {
       getResult(page=1, sortOrder=this.sortOrder, sort=this.sort, limit=this.perPage, name=""){
-        this.axios.get("http://localhost:9000"+"/school/?page="+page+"&sortOrder="+sortOrder+
+        this.axios.get("http://localhost:8090"+"/school/?page="+page+"&sortOrder="+sortOrder+
         "&sort="+sort+"&limit="+limit+"&name="+name, {
           headers: {
             'Authorization': 'Bearer '+ Cookies.get('access_token')
