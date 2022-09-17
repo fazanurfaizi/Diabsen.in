@@ -3,7 +3,7 @@
     <Content>
       <template #title>Dashboard</template>
       <template #content>
-        Hello
+        <div class="text-red-600">tes</div>
       </template>
     </Content>
   </Layout>

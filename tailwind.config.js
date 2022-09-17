@@ -17,8 +17,12 @@ module.exports = {
           DEFAULT: '#EB7714',
           dark: 'red'
         },
+      },
+      fontSize: {
+        'base': '13px',
       }
     },
+    
   },
   plugins: [],
 }
