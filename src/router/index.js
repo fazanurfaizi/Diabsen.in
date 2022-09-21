@@ -1,6 +1,6 @@
 import { createWebHistory, createRouter } from "vue-router";
 
-import Cookies from 'js-cookie';
+// import Cookies from 'js-cookie';
 
 import LoginPage from '../pages/auth/index.vue';
 import MagicLink from '../pages/auth/magic-link.vue';
@@ -17,6 +17,8 @@ import SchoolCreate from '../pages/school/create.vue';
 import FoobarList from '../pages/foobar/index.vue';
 import FoobarCreate from '../pages/foobar/index.vue';
 import FoobarEdit from '../pages/foobar/index.vue';
+
+import store from '../store/index'
 
 
 let routes = [
@@ -85,12 +87,12 @@ const router = createRouter({
 });
 
 router.beforeEach((to) => {
-    if (to.meta.requiresAuth && !Cookies.get('access_token')) {
+    if (to.meta.requiresAuth && !store.getters.isAuthenticated) {
         return {
             path: '/',
             query: { redirect: to.fullPath },
         }
-    }else if (!to.meta.requiresAuth && Cookies.get('access_token')) {
+    }else if (!to.meta.requiresAuth && store.getters.isAuthenticated) {
         return {
           path: '/dashboard'
         }

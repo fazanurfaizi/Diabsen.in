@@ -10,7 +10,7 @@
       <ul v-show="open" class="relative accordion-collapse collapse" id="collapseSidenavEx1" aria-labelledby="sidenavEx1" data-bs-parent="#sidenavExample">
         <li class="relative" v-for="item in data.child" :key="item">
           <router-link :to="item.path">
-            <a href="#!" class="flex items-center text-sm py-4 pl-12 pr-6 h-6 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-gray-900 hover:bg-gray-100 transition duration-300 ease-in-out" data-mdb-ripple="true" data-mdb-ripple-color="dark">
+            <a href="#!" :class="item.path === link ? 'underline' : ''" class="flex items-center text-sm py-4 pl-12 pr-6 h-6 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap rounded hover:text-gray-900 hover:bg-gray-100 transition duration-300 ease-in-out" data-mdb-ripple="true" data-mdb-ripple-color="dark">
               {{ item.name }}
             </a>
           </router-link>
@@ -38,6 +38,7 @@ export default {
       open: false,
       path: "",
       isActive: false,
+      link: null,
     }
   },
   props: {
@@ -47,6 +48,7 @@ export default {
   },
   methods: {
     setActive(){
+      this.link = this.$route.path
       if(typeof(this.data.child) !== 'undefined'){
         const listLink = this.data.child.filter((item) => {
           if(item.path === this.$route.path){
