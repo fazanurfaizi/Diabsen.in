@@ -244,9 +244,11 @@
                                             class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]">Peta Lokasi
                                             <Asterisk />
                                         </label>
-                                        <input placeholder="Peta Lokasi" id="current_password" name="current_password"
+                                        <!-- <div class="h-[235px]" id="map" ref="map"></div> -->
+                                        <!-- <input placeholder="Peta Lokasi" id="current_password" name="current_password"
                                             type="text" required=""
-                                            class="appearance-none block w-full h-[44px] py-[14px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary text-[14px]" />
+                                            class="appearance-none block w-full h-[44px] py-[14px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary text-[14px]" /> -->
+                                        <GoogleMaps :getLocation="getLocation" :center="center" :zoom="13" />
                                         <div class="text-[12px] mt-[8px] text-[#F56565] errors_current_password">
                                         </div>
                                     </div>
@@ -393,6 +395,7 @@ import Asterisk from '@/components/Asterisk.vue'
 import StepIndicators from './components/StepIndicators.vue';
 import StepLabel from './components/StepLabel.vue';
 import StepperLayout from './layouts/StepperLayout.vue';
+import GoogleMaps from '@/components/GoogleMaps.vue';
 
 export default {
     name: "SchoolCreate",
@@ -401,13 +404,17 @@ export default {
         Asterisk,
         StepIndicators,
         StepLabel,
-        StepperLayout
+        StepperLayout,
+        GoogleMaps
     },
     data() {
         return {
             step: 1,
             total_page: 3,
-            count: 1
+            count: 1,
+            center: { lat: -6.905977, lng: 107.613144 },
+            lat: null,
+            long: null
         }
     },
     methods: {
@@ -426,6 +433,11 @@ export default {
         adminField() {
             this.count++;
             console.log(this.count)
+        },
+        getLocation(lat, long) {
+            this.lat = lat;
+            this.long = long;
+            console.log(this.lat, this.long)
         }
     },
 
