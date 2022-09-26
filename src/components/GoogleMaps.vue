@@ -1,5 +1,5 @@
 <template>
-    <div class="h-[235px] rounded-[8px] border border-[#CBD5E0]" ref="map"></div>
+    <div class="h-[235px] rounded-[4px] border border-[#CBD5E0]" ref="map"></div>
 </template>
 
 <script>
@@ -9,7 +9,8 @@ export default {
     props: {
         center: Object,
         zoom: Number,
-        getLocation: Function
+        getLocation: Function,
+        location: Object,
     },
     data() {
         return {
@@ -35,6 +36,11 @@ export default {
         const map = new this.google.maps.Map(this.$refs['map'], {
             center: this.center,
             zoom: this.zoom
+        });
+
+        this.marker = new this.google.maps.Marker({
+            position: this.location,
+            map: map
         });
 
         const placeMarker = (map, location) => {
