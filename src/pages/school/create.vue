@@ -27,8 +27,7 @@
                                                     id="current_password" name="current_password" type="text"
                                                     required=""
                                                     class="appearance-none block w-full h-[44px] py-[14px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary text-[14px]" />
-                                                <div
-                                                    class="text-[12px] mt-[8px] text-[#F56565] errors_current_password">
+                                                <div class="text-[12px] mt-[8px] text-[#F56565] errors_npsn" ref="npsn">
                                                 </div>
                                             </div>
 
@@ -44,8 +43,8 @@
                                                     <option value="0">Negeri</option>
                                                     <option value="1">Swasta</option>
                                                 </select>
-                                                <div
-                                                    class="text-[12px] mt-[8px] text-[#F56565] errors_current_password">
+                                                <div class="text-[12px] mt-[8px] text-[#F56565] errors_current_password"
+                                                    ref="status">
                                                 </div>
                                             </div>
 
@@ -62,8 +61,8 @@
                                                     <option value="g">Pemerintah</option>
                                                     <option value="e">BUMN</option>
                                                 </select>
-                                                <div
-                                                    class="text-[12px] mt-[8px] text-[#F56565] errors_current_password">
+                                                <div class="text-[12px] mt-[8px] text-[#F56565] errors_current_password"
+                                                    ref="ownership_status">
                                                 </div>
                                             </div>
 
@@ -79,8 +78,8 @@
                                                     id="current_password" name="current_password" type="date"
                                                     required=""
                                                     class="appearance-none block w-full h-[44px] py-[14px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary text-[14px]" />
-                                                <div
-                                                    class="text-[12px] mt-[8px] text-[#F56565] errors_current_password">
+                                                <div class="text-[12px] mt-[8px] text-[#F56565] errors_current_password"
+                                                    ref="operational_date">
                                                 </div>
                                             </div>
                                         </div>
@@ -96,8 +95,8 @@
                                                     id="current_password" name="current_password" type="text"
                                                     required=""
                                                     class="appearance-none block w-full h-[44px] py-[14px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary text-[14px]" />
-                                                <div
-                                                    class="text-[12px] mt-[8px] text-[#F56565] errors_current_password">
+                                                <div class="text-[12px] mt-[8px] text-[#F56565] errors_current_password"
+                                                    ref="name">
                                                 </div>
                                             </div>
 
@@ -108,7 +107,8 @@
                                                     <Asterisk />
                                                 </label>
                                                 <select v-model="form.study_type"
-                                                    class="bg-white appearance-none block w-full h-[44px] py-[10px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary sm:text-[14px]">
+                                                    class="bg-white appearance-none block w-full h-[44px] py-[10px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary sm:text-[14px]"
+                                                    ref="study_type">
                                                     <option value="" selected>-- Pilih Jenjang Pendidikan --</option>
                                                     <option value="sd">SD</option>
                                                     <option value="smp">SMP</option>
@@ -117,8 +117,8 @@
                                                     <option value="mts">MTS</option>
                                                     <option value="ma">MA</option>
                                                 </select>
-                                                <div
-                                                    class="text-[12px] mt-[8px] text-[#F56565] errors_current_password">
+                                                <div class="text-[12px] mt-[8px] text-[#F56565] errors_current_password"
+                                                    ref="study_type">
                                                 </div>
                                             </div>
 
@@ -133,8 +133,8 @@
                                                     placeholder="Masukan No. SK Pendirian" id="current_password"
                                                     name="current_password" type="text" required=""
                                                     class="appearance-none block w-full h-[44px] py-[14px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary text-[14px]" />
-                                                <div
-                                                    class="text-[12px] mt-[8px] text-[#F56565] errors_current_password">
+                                                <div class="text-[12px] mt-[8px] text-[#F56565] errors_current_password"
+                                                    ref="establishment_letter">
                                                 </div>
                                             </div>
 
@@ -150,8 +150,8 @@
                                                     id="current_password" name="current_password" type="number"
                                                     required=""
                                                     class="appearance-none block w-full h-[44px] py-[14px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary text-[14px]" />
-                                                <div
-                                                    class="text-[12px] mt-[8px] text-[#F56565] errors_current_password">
+                                                <div class="text-[12px] mt-[8px] text-[#F56565] errors_current_password"
+                                                    ref="teaching_learning_time">
                                                 </div>
                                             </div>
                                         </div>
@@ -177,8 +177,8 @@
                                                             id="current_password" name="current_password" type="text"
                                                             required=""
                                                             class="appearance-none block w-full h-[44px] py-[14px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary text-[14px]" />
-                                                        <div
-                                                            class="text-[12px] mt-[8px] text-[#F56565] errors_current_password">
+                                                        <div class="text-[12px] mt-[8px] text-[#F56565] errors_current_password"
+                                                            ref="address">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -198,8 +198,8 @@
                                                                 {{ province.name }}
                                                             </option>
                                                         </select>
-                                                        <div
-                                                            class="text-[12px] mt-[8px] text-[#F56565] errors_current_password">
+                                                        <div class="text-[12px] mt-[8px] text-[#F56565] errors_current_password"
+                                                            ref="province_id">
                                                         </div>
                                                     </div>
 
@@ -217,8 +217,8 @@
                                                                     {{ district.name }}
                                                                 </option>
                                                             </select>
-                                                            <div
-                                                                class="text-[12px] mt-[8px] text-[#F56565] errors_current_password">
+                                                            <div class="text-[12px] mt-[8px] text-[#F56565] errors_current_password"
+                                                                ref="district_id">
                                                             </div>
                                                         </div>
 
@@ -238,8 +238,8 @@
                                                                     required="" min="1"
                                                                     class="appearance-none w-full h-[44px] py-[14px] px-[12px] shadow-sm placeholder-gray-400 focus:outline-none" />
                                                             </span>
-                                                            <div
-                                                                class="text-[12px] mt-[8px] text-[#F56565] errors_current_password">
+                                                            <div class="text-[12px] mt-[8px] text-[#F56565] errors_current_password"
+                                                                ref="rw">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -261,8 +261,8 @@
                                                                 {{ city.name }}
                                                             </option>
                                                         </select>
-                                                        <div
-                                                            class="text-[12px] mt-[8px] text-[#F56565] errors_current_password">
+                                                        <div class="text-[12px] mt-[8px] text-[#F56565] errors_current_password"
+                                                            ref="city_id">
                                                         </div>
                                                     </div>
 
@@ -280,8 +280,8 @@
                                                                 {{ sub_district.name }}
                                                             </option>
                                                         </select>
-                                                        <div
-                                                            class="text-[12px] mt-[8px] text-[#F56565] errors_current_password">
+                                                        <div class="text-[12px] mt-[8px] text-[#F56565] errors_current_password"
+                                                            ref="sub_district_id">
                                                         </div>
                                                     </div>
 
@@ -300,8 +300,8 @@
                                                                 {{ postal_code.code }}
                                                             </option>
                                                         </select>
-                                                        <div
-                                                            class="text-[12px] mt-[8px] text-[#F56565] errors_current_password">
+                                                        <div class="text-[12px] mt-[8px] text-[#F56565] errors_current_password"
+                                                            ref="postal_code_id">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -316,7 +316,8 @@
                                         </label>
                                         <GoogleMaps :location="{lat: form.latitude, lng: form.longitude}"
                                             :getLocation="getLocation" :center="center" :zoom="13" />
-                                        <div class="text-[12px] mt-[8px] text-[#F56565] errors_current_password">
+                                        <div class="text-[12px] mt-[8px] text-[#F56565] errors_current_password"
+                                            ref="gmaps">
                                         </div>
                                     </div>
                                 </div>
@@ -340,8 +341,8 @@
                                                         placeholder="Masukan Nomor Telepon" id="current_password"
                                                         name="current_password" type="text" required=""
                                                         class="appearance-none block w-full h-[44px] py-[14px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary text-[14px]" />
-                                                    <div
-                                                        class="text-[12px] mt-[8px] text-[#F56565] errors_current_password">
+                                                    <div class="text-[12px] mt-[8px] text-[#F56565] errors_current_password"
+                                                        ref="phone_number">
                                                     </div>
                                                 </div>
 
@@ -355,8 +356,8 @@
                                                         id="current_password" name="current_password" type="text"
                                                         required=""
                                                         class="appearance-none block w-full h-[44px] py-[14px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary text-[14px]" />
-                                                    <div
-                                                        class="text-[12px] mt-[8px] text-[#F56565] errors_current_password">
+                                                    <div class="text-[12px] mt-[8px] text-[#F56565] errors_current_password"
+                                                        ref="email">
                                                     </div>
                                                 </div>
 
@@ -372,8 +373,8 @@
                                                         id="current_password" name="current_password" type="text"
                                                         required=""
                                                         class="appearance-none block w-full h-[44px] py-[14px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary text-[14px]" />
-                                                    <div
-                                                        class="text-[12px] mt-[8px] text-[#F56565] errors_current_password">
+                                                    <div class="text-[12px] mt-[8px] text-[#F56565] errors_current_password"
+                                                        ref="fax_number">
                                                     </div>
                                                 </div>
 
@@ -386,8 +387,8 @@
                                                         id="current_password" name="current_password" type="text"
                                                         required=""
                                                         class="appearance-none block w-full h-[44px] py-[14px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary text-[14px]" />
-                                                    <div
-                                                        class="text-[12px] mt-[8px] text-[#F56565] errors_current_password">
+                                                    <div class="text-[12px] mt-[8px] text-[#F56565] errors_current_password"
+                                                        ref="website">
                                                     </div>
                                                 </div>
                                             </div>
@@ -412,7 +413,7 @@
                                                         required=""
                                                         class="appearance-none block w-full h-[44px] py-[14px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary text-[14px]" />
                                                     <div
-                                                        class="text-[12px] mt-[8px] text-[#F56565] errors_current_password">
+                                                        class="text-[12px] mt-[8px] text-[#F56565] errors_current_password" ref="admin_name">
                                                     </div>
                                                 </div>
                                                 <div class="flex flex-col py-1">
@@ -425,14 +426,14 @@
                                                         required=""
                                                         class="appearance-none block w-full h-[44px] py-[14px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary text-[14px]" />
                                                     <div
-                                                        class="text-[12px] mt-[8px] text-[#F56565] errors_current_password">
+                                                        class="text-[12px] mt-[8px] text-[#F56565] errors_current_password" ref="admin_email">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div>
                                                 <div class="flex flex-row-reverse items-end gap-[6px]">
                                                     <button
-                                                        class="bg-[#4299E1] hover:bg-blue-700 py-[8px] px-[4px] rounded text-white text-[14px]"
+                                                        class="bg-[#4299E1] hover:bg-blue-700 py-[4px] px-[8px] rounded text-white text-[14px]"
                                                         @click.prevent="adminField()">
                                                         <Icon set="teamui" name="plus"></Icon>
                                                     </button>
@@ -490,6 +491,7 @@ export default {
             cities: null,
             postal_codes: null,
             form: {
+                npsn: null,
                 name: null,
                 status: "",
                 study_type: "",
@@ -523,16 +525,51 @@ export default {
     },
     methods: {
         nextPage() {
-            if (this.step !== this.total_page) {
-                this.step++;
-                console.log(this.step)
+            if (this.step == 1) {
+                const step = [
+                    'npsn', 'name', 'status', 'study_type', 'ownership_status', 'establishment_letter',
+                    'operational_date', 'teaching_learning_time'
+                ];
+
+                for (let i in step) {
+                    if (!this.form[step[i]]) {
+                        this.$refs[step[i]].innerHTML = `The ${step[i]} field is required.`;
+                        console.log(step[i]);
+                        return false;
+                    }
+                }
             }
+
+            if (this.step == 2) {
+                const step = [
+                    'address', 'province_id', 'city_id', 'district_id', 'sub_district_id', 'postal_code_id',
+                ];
+
+                for (let i in step) {
+                    if (!this.form[step[i]]) {
+                        this.$refs[step[i]].innerHTML = `The ${step[i]} field is required.`;
+                        console.log(step[i]);
+                        return false;
+                    }
+                }
+
+                if (!this.form.rt && !this.form.rw){
+                    this.$refs['rw'].innerHTML = `The RT/RW field is required.`;
+                    return false;
+                }
+
+                if (!this.form.latitude && !this.form.latitude) {
+                    this.$refs['gmaps'].innerHTML = `The location field is required.`;
+                        return false;
+                }
+
+            }
+
+            this.step++;
         },
         previousPage() {
-            if (this.step > 1) {
-                this.step--;
-                console.log(this.step)
-            }
+            this.step--;
+            console.log(this.step)
         },
         adminField() {
             this.form.admin.push({ name: null, email: null });
@@ -609,6 +646,31 @@ export default {
         },
 
         storeSchool() {
+            if (this.step == 3) {
+                const step = [
+                    'phone_number', 'email',
+                ];
+
+                for (let i in step) {
+                    if (!this.form[step[i]]) {
+                        this.$refs[step[i]].innerHTML = `The ${step[i]} field is required.`;
+                        console.log(step[i]);
+                        return false;
+                    }
+                }
+
+                if (!this.form.admin[0].name){
+                    this.$refs['admin_name'][0].innerHTML = `The Name field is required.`;
+                    return false;
+                }
+
+                if (!this.form.admin[0].email){
+                    this.$refs['admin_email'][0].innerHTML = `The Email field is required.`;
+                    return false;
+                }
+
+            }
+
             const token = Cookies.get("access_token");
             this.axios.post(process.env.VUE_APP_API_URL_MASTER_DATA + '/school', this.form, {
                 headers: {
@@ -626,8 +688,7 @@ export default {
                     console.error(e.message);
                 }
             });
-
-        }
+        },
 
     },
     created() {
