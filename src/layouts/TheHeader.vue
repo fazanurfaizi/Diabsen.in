@@ -34,7 +34,6 @@
 </template>
 
 <script>
-import Cookies from 'js-cookie'
 export default {
   name: 'TheHeader',
   data(){
@@ -44,8 +43,7 @@ export default {
   },
   methods: {
     logout(){
-      Cookies.remove('refresh_token');
-      Cookies.remove('access_token');
+      this.$store.commit('logout')
       this.$router.push({path: '/'})
     }
   }, 

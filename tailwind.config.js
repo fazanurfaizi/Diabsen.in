@@ -31,6 +31,12 @@ module.exports = {
         },
         'title-content': '#6E6B7B',
         'button': '#4299E1',
+        'btn': {
+          primary: '#4299E1',
+          DEFAULT: '#4299E1',
+          warning: '#FAB215',
+          error: '#E53E3E',
+        },        
         'text-table': '#5E5873',
         'thead': '#F3F2F7'
       }

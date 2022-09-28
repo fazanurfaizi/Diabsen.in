@@ -262,7 +262,6 @@
 import EditLayout from "@/pages/profile/layouts/EditLayout.vue";
 import TheBackButton from "./components/TheBackButton.vue";
 import Asterisk from "@/components/Asterisk.vue";
-import Cookies from "js-cookie";
 import { DateTime } from "luxon";
 
 export default {
@@ -290,7 +289,7 @@ export default {
   },
   methods: {
     getProfile() {
-      const token = Cookies.get("access_token");
+      const token = this.$store.state.auth.token;
       this.axios
         .get(`${process.env.VUE_APP_API_URL_AUTH}/user/profile`, {
           headers: {
@@ -316,7 +315,7 @@ export default {
     },
 
     updateProfile() {
-      const token = Cookies.get("access_token");
+      const token = this.$store.state.auth.token;
 
       let params = {
         name: this.user.name,

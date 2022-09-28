@@ -8,12 +8,11 @@
           <div class="py-10 bg-gray-50">
             <div class="md:mx-8">
               <BreadCrumb />
-              <Footer color-text="black" />
               <slot />
             </div>
           </div>
-          
         </main>
+        <Footer color-text="black" />
       </div>
   </div>
 </template>
