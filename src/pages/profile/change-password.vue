@@ -50,7 +50,6 @@
 import EditLayout from '@/pages/profile/layouts/EditLayout.vue'
 import Asterisk from '@/components/Asterisk.vue'
 import TheBackButton from './components/TheBackButton.vue'
-import Cookies from 'js-cookie'
 export default {
     name: 'ChangePassword',
     components: { EditLayout, Asterisk, TheBackButton },
@@ -63,7 +62,7 @@ export default {
     },
     methods: {
         changePassword() {
-            const token = Cookies.get('access_token');
+            const token = this.$store.state.auth.token;
 
             let params = {
                 current_password: this.current_password,

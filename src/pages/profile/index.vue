@@ -103,7 +103,6 @@
 import BaseContent from "@/layouts/BaseContent.vue";
 import ProfileLayout from "@/pages/profile/layouts/ProfileLayout.vue";
 import TheEditButton from "@/pages/profile/components/TheEditButton.vue";
-import Cookies from "js-cookie";
 
 export default {
   name: "ProfilePage",
@@ -122,7 +121,7 @@ export default {
     };
   },
   mounted() {
-    const token = Cookies.get("access_token");
+    const token = this.$store.state.auth.token;
     this.axios
       .get(`${process.env.VUE_APP_API_URL_AUTH}/user/profile`, {
         headers: {
