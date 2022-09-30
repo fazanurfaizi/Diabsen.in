@@ -2,9 +2,7 @@
   <v-container>
     <template #title>Dashboard</template>
     <template #content>
-      <!-- <div class="text-red-600">Hello</div>
-      <Button>Tes</Button> -->
-      <!-- <TheTable /> -->
+      <h1>Hy</h1>
     </template>
   </v-container>
 </template>

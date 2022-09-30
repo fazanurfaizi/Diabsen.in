@@ -1,37 +1,34 @@
 <template>
-	<div class="flex h-screen overflow-hidden">
+	<div class="flex h-screen overflow-hidden  scrollbar-thin">
 		<!-- Sidebar -->
 		<Sidebar
 			:sidebar-open="sidebarOpen"
 			@close-sidebar="sidebarOpen = false"
 		/>
-
-		<!-- Content Area -->
+		
 		<div
 			class="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden"
 		>
-			
-		<!-- Header -->
-		<Header 
-			:sidebar-open="sidebarOpen"
-			@toggle-sidebar="sidebarOpen = !sidebarOpen"
-		/>
+			<Header 
+				:sidebar-open="sidebarOpen"
+				@toggle-sidebar="sidebarOpen = !sidebarOpen"
+			/>
 
-		<main>
-			<div class="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">          
-			<breadcrumb/>			
-			<router-view v-slot="{ Component }">
-				<transition name="fade" mode="out-in">
-					<keep-alive>
-						<component :is="Component" />
-					</keep-alive>
-				</transition>
-			</router-view>
-			</div>
-		</main>
+			<main>
+				<div class="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto bg-gray-100">          
+					<breadcrumb/>			
 
-		<!-- Footer -->
-		<Footer color-text="black" />
+					<router-view v-slot="{ Component }">
+						<transition name="fade" mode="out-in">
+							<keep-alive>
+								<component :is="Component" />
+							</keep-alive>
+						</transition>
+					</router-view>
+					
+					<Footer color-text="black" />
+				</div>
+			</main>
 		</div>
 	</div>
 </template>
@@ -59,3 +56,22 @@ export default defineComponent({
   },
 })
 </script>
+
+<style scoped>
+::-webkit-scrollbar-track {
+	-webkit-box-shadow: inset 0 0 2px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar {
+	width: 10px;
+	background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb {
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 2px rgba(0,0,0,.3);
+	background-color: bg-gray-400;
+}
+</style>

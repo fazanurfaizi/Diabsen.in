@@ -10,10 +10,6 @@ import ProfilePage from '../pages/profile/index.vue';
 import ProfileEdit from '../pages/profile/edit.vue';
 import ChangePassword from '../pages/profile/change-password.vue';
 
-import FoobarList from '../pages/foobar/index.vue';
-import FoobarCreate from '../pages/foobar/index.vue';
-import FoobarEdit from '../pages/foobar/index.vue';
-
 import store from '../store/index'
 
 
@@ -33,11 +29,13 @@ let routes = [
         name: 'forgot-password',
         component: ForgotPassword
     },
-
     {
         path: '/',
         name: 'index',
         component: BaseLayout,
+        meta: {
+            breadcrumbName: 'Beranda'
+        },
         children: [
             {
                 path: "/dashboard",
@@ -63,42 +61,68 @@ let routes = [
                 component: ChangePassword,
                 meta: { requiresAuth: true }
             },
-        
             {            
-                path: '/',    
-                name: 'schools',
+                path: '/schools',   
+                name: 'schools-layout',
                 component: RouterView,
+                meta: {
+                    breadCrumb: 'Sekolah'
+                },
                 children: [
                     {
-                        path: '/schools',
+                        path: '',
                         name: 'school-list',
                         component: () => import('@/pages/school/index.vue'),
-                        meta: { requiresAuth: true }
+                        meta: {
+                            requiresAuth: true,                            
+                        },                            
                     },
                     {
                         path: '/schools/create',
                         name: "school-create",
                         component: () => import('@/pages/school/create.vue'),
-                        meta: { requiresAuth: true }
+                        meta: {
+                            requiresAuth: true,
+                            breadCrumb: 'Tambah Sekolah'
+                        },                        
                     },
                 ]
             },
         
             {
-                path: '/foobar/list',
-                component: FoobarList,
-                meta: { requiresAuth: true }
-            },
-            {
-                path: '/foobar/create',
-                component: FoobarCreate,
-                meta: { requiresAuth: true }
-            },
-            {
-                path: '/foobar/edit',
-                component: FoobarEdit,
-                meta: { requiresAuth: true }
-            },
+                path: '/foobar',
+                name: 'foobar-layout',
+                component: RouterView,
+                meta: {
+                    breadCrumb: 'FooBar'
+                },
+                children: [
+                    {
+                        path: '',
+                        name: 'foobar-list',
+                        component: () => import('@/pages/foobar/index.vue'),
+                        // meta: { requiresAuth: true }
+                    },
+                    {
+                        path: '/create',
+                        name: 'foobar-create',
+                        component: () => import('@/pages/foobar/create.vue'),
+                        meta: {
+                            breadCrumb: 'Tambah'
+                        },
+                        // meta: { requiresAuth: true }
+                    },
+                    {
+                        path: '/edit',
+                        name: 'foobar-edit',
+                        component: () => import('@/pages/foobar/edit.vue'),
+                        meta: {
+                            breadCrumb: 'Ubah'
+                        },
+                        // meta: { requiresAuth: true }
+                    },
+                ]
+            }
         ]
     }
 ]
@@ -116,7 +140,7 @@ router.beforeEach((to) => {
         }
     }else if (!to.meta.requiresAuth && store.getters.isAuthenticated) {
         return {
-          path: '/dashboard'
+            path: '/dashboard'
         }
     }
 })

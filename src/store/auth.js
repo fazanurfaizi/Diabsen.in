@@ -1,7 +1,7 @@
 export default{
   state () {
     return {
-      token: 'ini token'
+      token: ''
     }
   },
   getters: {

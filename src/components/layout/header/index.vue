@@ -1,9 +1,3 @@
-<!-- <template>
-  <div class="sticky top-0 z-10 flex-shrink-0 flex h-16 bg-primary shadow border-b-8 border-secondary">
-        
-  </div>
-</template> -->
-
 <template>
 	<header class="sticky top-0 bg-primary shadow border-b-8 border-secondary z-30">
 		<div class="px-4 sm:px-6 lg:px-8">
@@ -29,7 +23,7 @@
 				</div>
 
 				<!-- Header Right -->
-				<div class="flex-1 px-1 flex justify-end">
+				<div class="flex-1 px-1 flex justify-end" ref="dropdown">
           <div class="ml-4 flex items-center md:ml-6">
             <div class="ml-3 relative">
               <div class="max-w-xs h-6 w-6 bg-primary-light text-white flex items-center justify-center text-xs rounded-full ">
@@ -96,7 +90,7 @@
 
 <script>
 import heroiconsOutlineVue from '@/components/icons/heroicons-outline.vue'
-import { defineComponent, ref } from 'vue'
+import { defineComponent, onMounted, onUnmounted, ref } from 'vue'
 import { useRouter } from 'vue-router';
 import { useStore } from 'vuex';
 
@@ -115,14 +109,37 @@ export default defineComponent({
     const store = useStore()
     const router = useRouter()
 
+    const dropdown = ref(null)
+
     const isShow = ref(false);
+
+    // close on click outside
+    const clickHandler = ({ target }) => {
+      if (!dropdown.value) return
+      if (
+          !isShow.value ||
+          dropdown.value.contains(target)      
+      ) return
+
+      isShow.value = !isShow.value
+      // emit('close-dropdown')
+    }
 
     const logout = () => {
       store.commit('logout')
       router.push('index')
     }
 
+    onMounted(() => {        
+      document.addEventListener('click', clickHandler)      
+    })
+    
+    onUnmounted(() => {      
+      document.removeEventListener('click', clickHandler)      
+    })
+
     return {
+      dropdown,
       isShow,
       logout
     }
