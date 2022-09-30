@@ -31,7 +31,7 @@
               </div>
             </div>
             <div class="text-sm text-white pl-2 cursor-pointer" @click="isShow = !isShow" >
-              John Doe
+              {{ user?.name }}
             </div>
             <div class="ml-1 relative">
               <div>
@@ -89,10 +89,9 @@
 </template>
 
 <script>
-import heroiconsOutlineVue from '@/components/icons/heroicons-outline.vue'
 import { defineComponent, onMounted, onUnmounted, ref } from 'vue'
-import { useRouter } from 'vue-router';
 import { useStore } from 'vuex';
+import heroiconsOutlineVue from '@/components/icons/heroicons-outline.vue'
 
 export default defineComponent({
   name: 'TheHeader',
@@ -106,8 +105,7 @@ export default defineComponent({
     },
   },
   setup() {
-    const store = useStore()
-    const router = useRouter()
+    const store = useStore()    
 
     const dropdown = ref(null)
 
@@ -125,9 +123,10 @@ export default defineComponent({
       // emit('close-dropdown')
     }
 
+    const user = store.getters['profile/getUser']
+
     const logout = () => {
-      store.commit('logout')
-      router.push('index')
+      store.dispatch('auth/logout')
     }
 
     onMounted(() => {        
@@ -141,6 +140,7 @@ export default defineComponent({
     return {
       dropdown,
       isShow,
+      user,
       logout
     }
   }

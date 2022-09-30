@@ -8,6 +8,9 @@ import Container from '@/components/layout/container/index.vue'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import store from './store/index'
+import { setupAxiosInterceptors } from './core/services/api.service';
+
+setupAxiosInterceptors(store)
 
 createApp(App)
     .use(router)
