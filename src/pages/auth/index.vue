@@ -46,15 +46,15 @@
         </form>
       </div>
     </div>
-    <Footer />
+    <!-- <Footer /> -->
   </div>
 </template>
 
 <script>
-import Footer from '@/layouts/TheFooter.vue';
+// import Footer from '@/layouts/TheFooter.vue';
 export default {
   name: "LoginPage",
-  components: { Footer },
+  // components: { Footer },
   data() {
     return {
       email: '',

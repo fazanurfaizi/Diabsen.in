@@ -1,55 +1,52 @@
 <template>
-  <layout>
-    <base-content>
-      <template #title>Profile</template>
-      <template #content>
-        <ProfileLayout>
-          <template #profile-side>
-            <div
-              class="
-                py-[30px]
-                px-[12px]
-                bg-white
-                rounded-[4px]
-                border border-[#CBD5E0]
-                lg:h-[515px] lg:w-[12.5rem]
-              "
-            >
-              <ProfilePanel :user="user">
-                <ProfileNav />
-              </ProfilePanel>
-            </div>
-          </template>
+  <container>
+    <template #title>Profile</template>
+    <template #content>
+      <ProfileLayout>
+        <template #profile-side>
+          <div
+            class="
+              py-[30px]
+              px-[12px]
+              bg-white
+              rounded-[4px]
+              border border-[#CBD5E0]
+              lg:h-[515px] lg:w-[12.5rem]
+            "
+          >
+            <ProfilePanel :user="user">
+              <ProfileNav />
+            </ProfilePanel>
+          </div>
+        </template>
 
-          <template #content-profile>
-            <div
-              class="
-                gap-[12px]
-                p-[20px]
-                bg-white
-                rounded-[4px]
-                border border-[#CBD5E0]
-                w-full
-              "
-            >
-              <slot></slot>
-            </div>
-          </template>
-        </ProfileLayout>
-      </template>
-    </base-content>
-  </layout>
+        <template #content-profile>
+          <div
+            class="
+              gap-[12px]
+              p-[20px]
+              bg-white
+              rounded-[4px]
+              border border-[#CBD5E0]
+              w-full
+            "
+          >
+            <slot></slot>
+          </div>
+        </template>
+      </ProfileLayout>
+    </template>
+  </container>
 </template>
 
 <script>
-import BaseContent from "@/layouts/BaseContent.vue";
 import ProfileLayout from "@/pages/profile/layouts/ProfileLayout.vue";
 import ProfilePanel from "@/pages/profile/layouts/ProfilePanel.vue";
 import ProfileNav from "./ProfileNav.vue";
 
 export default {
   name: "EditLayout",
-  components: { BaseContent, ProfileLayout, ProfilePanel, ProfileNav },
+  components: { ProfileLayout, ProfilePanel, ProfileNav },
   data() {
     return {
       user: {

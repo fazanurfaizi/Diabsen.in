@@ -1,14 +1,12 @@
 <template>
-  <Layout>
-    <Content>
-      <template #title>Dashboard</template>
-      <template #content>
-        <!-- <div class="text-red-600">Hello</div>
-        <Button>Tes</Button> -->
-        <!-- <TheTable /> -->
-      </template>
-    </Content>
-  </Layout>
+  <v-container>
+    <template #title>Dashboard</template>
+    <template #content>
+      <!-- <div class="text-red-600">Hello</div>
+      <Button>Tes</Button> -->
+      <!-- <TheTable /> -->
+    </template>
+  </v-container>
 </template>
 
 <script>

@@ -1,37 +1,61 @@
 <template>
-  <div>
-      <SidebarMobile />
-      <Sidebar />
-      <div class="md:pl-64 flex flex-col flex-1">
-        <Header />
-        <main class="flex-1">
-          <div class="py-10 bg-gray-50">
-            <div class="md:mx-8">
-              <BreadCrumb />
-              <slot />
-            </div>
-          </div>
-        </main>
-        <Footer color-text="black" />
-      </div>
-  </div>
+	<div class="flex h-screen overflow-hidden">
+		<!-- Sidebar -->
+		<Sidebar
+			:sidebar-open="sidebarOpen"
+			@close-sidebar="sidebarOpen = false"
+		/>
+
+		<!-- Content Area -->
+		<div
+			class="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden"
+		>
+			
+		<!-- Header -->
+		<Header 
+			:sidebar-open="sidebarOpen"
+			@toggle-sidebar="sidebarOpen = !sidebarOpen"
+		/>
+
+		<main>
+			<div class="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">          
+			<breadcrumb/>			
+			<router-view v-slot="{ Component }">
+				<transition name="fade" mode="out-in">
+					<keep-alive>
+						<component :is="Component" />
+					</keep-alive>
+				</transition>
+			</router-view>
+			</div>
+		</main>
+
+		<!-- Footer -->
+		<Footer color-text="black" />
+		</div>
+	</div>
 </template>
 
 <script>
-import BreadCrumb from './BreadCrumb.vue';
-import Sidebar from './TheSidebar.vue';
-import Header from './TheHeader.vue';
-import SidebarMobile from './SidebarMobile.vue';
-import Footer from './TheFooter.vue';
+import { defineComponent, ref } from 'vue';
+import Breadcrumb from '@/components/layout/breadcrumb/index.vue';
+import Sidebar from '@/components/layout/sidebar/index.vue';
+import Header from '@/components/layout/header/index.vue';
+import Footer from '@/components/layout/footer/index.vue';
 
-export default {
+export default defineComponent({
   name: 'BaseLayout',
   components: {
-    BreadCrumb,
+    Breadcrumb,
     Sidebar,
-    Header,
-    SidebarMobile,
+    Header,    
     Footer
-  }
-}
+  },
+  setup() {
+    const sidebarOpen = ref(false)
+    return {
+      sidebarOpen,
+    }
+  },
+})
 </script>

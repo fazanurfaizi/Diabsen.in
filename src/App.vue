@@ -1,11 +1,13 @@
 <template>
-  <div class="text-base">
-    <router-view></router-view>
-  </div>
+	<!-- <component :is="layout">
+	</component> -->
+	<router-view />
 </template>
 
-<script>
-export default {
-  name: 'App',
-}
+<script setup>
+// import { computed } from 'vue'
+// import { useRoute } from 'vue-router'
+
+// const route = useRoute()
+// const layout = computed(() => `${route.meta.layout || 'base'}-layout`)
 </script>

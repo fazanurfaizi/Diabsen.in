@@ -1,19 +1,17 @@
 <template>
-  <Layout>
-    <Content>
-      <template v-slot:title>Daftar Sekolah</template>
-      <template v-slot:content>
-        <TheTable 
-          :rows="dataTable"
-          :column="headerTable"
-          >
-          <template #nav-right>
-            <Button>Tambah Sekolah</Button>
-          </template>
-        </TheTable>
-      </template>
-    </Content>
-  </Layout>
+  <v-container>
+    <template v-slot:title>Daftar Sekolah</template>
+    <template v-slot:content>
+      <TheTable 
+        :rows="dataTable"
+        :column="headerTable"
+        >
+        <template #nav-right>
+          <Button>Tambah Sekolah</Button>
+        </template>
+      </TheTable>
+    </template>
+  </v-container>
 </template>
 <script>
 import TheTable from '@/components/TheTable.vue';

@@ -6,4 +6,12 @@
     html {
         font-family: 'Roboto', sans-serif;
     }
-  }
+}
+
+.active-link {
+    @apply bg-secondary-light;
+}
+
+.exact-active-link {
+    @apply !text-white;
+}

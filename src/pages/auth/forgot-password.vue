@@ -23,14 +23,14 @@
         </form>
       </div>
     </div>
-    <Footer />
+    <!-- <Footer /> -->
   </div>
 </template>
 
 <script>
-import Footer from '@/layouts/TheFooter.vue';
+// import Footer from '@/layouts/TheFooter.vue';
 export default {
   name: "MagicLink",
-  components: { Footer }
+  // components: { Footer }
 }
 </script>

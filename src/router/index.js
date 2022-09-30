@@ -1,7 +1,6 @@
-import { createWebHistory, createRouter } from "vue-router";
+import { createWebHistory, createRouter, RouterView } from "vue-router";
 
-// import Cookies from 'js-cookie';
-
+import BaseLayout from '@/layouts/BaseLayout.vue'
 import LoginPage from '../pages/auth/index.vue';
 import MagicLink from '../pages/auth/magic-link.vue';
 import ForgotPassword from '../pages/auth/forgot-password.vue';
@@ -10,9 +9,6 @@ import DashboardPage from '../pages/dashboard/index.vue';
 import ProfilePage from '../pages/profile/index.vue';
 import ProfileEdit from '../pages/profile/edit.vue';
 import ChangePassword from '../pages/profile/change-password.vue';
-
-import SchoolList from "../pages/school/index"
-import SchoolCreate from '../pages/school/create.vue';
 
 import FoobarList from '../pages/foobar/index.vue';
 import FoobarCreate from '../pages/foobar/index.vue';
@@ -23,67 +19,93 @@ import store from '../store/index'
 
 let routes = [
     {
-        path: "/",
+        path: "/auth",
+        name: 'login',        
         component: LoginPage
     },
     {
         path: "/magic-link",
+        name: 'magic-link',
         component: MagicLink
     },
     {
         path: "/forgot-password",
+        name: 'forgot-password',
         component: ForgotPassword
     },
+
     {
-        path: "/dashboard",
-        component: DashboardPage,
-        meta: { requiresAuth: true }
-    },
-    {
-        path: "/profile",
-        component: ProfilePage,
-        meta: { requiresAuth: true }
-    },
-    {
-        path: "/profile/edit",
-        component: ProfileEdit,
-        meta: { requiresAuth: true }
-    },
-    {
-        path: "/profile/change-password",
-        component: ChangePassword,
-        meta: { requiresAuth: true }
-    },
-    {
-        path: '/schools',
-        component: SchoolList,
-        meta: { requiresAuth: true }
-    },
-    {
-        path: '/schools/create',
-        component: SchoolCreate,
-        meta: { requiresAuth: true }
-    },
-    {
-        path: '/foobar/list',
-        component: FoobarList,
-        meta: { requiresAuth: true }
-    },
-    {
-        path: '/foobar/create',
-        component: FoobarCreate,
-        meta: { requiresAuth: true }
-    },
-    {
-        path: '/foobar/edit',
-        component: FoobarEdit,
-        meta: { requiresAuth: true }
-    },
+        path: '/',
+        name: 'index',
+        component: BaseLayout,
+        children: [
+            {
+                path: "/dashboard",
+                name: 'dashboard',
+                component: DashboardPage,
+                meta: { requiresAuth: true }
+            },
+            {
+                path: "/profile",
+                name: 'profile',
+                component: ProfilePage,
+                meta: { requiresAuth: true }
+            },
+            {
+                path: "/profile/edit",
+                name: 'profile-edit',
+                component: ProfileEdit,
+                meta: { requiresAuth: true }
+            },
+            {
+                path: "/profile/change-password",
+                name: 'profile-change-password',
+                component: ChangePassword,
+                meta: { requiresAuth: true }
+            },
+        
+            {            
+                path: '/',    
+                name: 'schools',
+                component: RouterView,
+                children: [
+                    {
+                        path: '/schools',
+                        name: 'school-list',
+                        component: () => import('@/pages/school/index.vue'),
+                        meta: { requiresAuth: true }
+                    },
+                    {
+                        path: '/schools/create',
+                        name: "school-create",
+                        component: () => import('@/pages/school/create.vue'),
+                        meta: { requiresAuth: true }
+                    },
+                ]
+            },
+        
+            {
+                path: '/foobar/list',
+                component: FoobarList,
+                meta: { requiresAuth: true }
+            },
+            {
+                path: '/foobar/create',
+                component: FoobarCreate,
+                meta: { requiresAuth: true }
+            },
+            {
+                path: '/foobar/edit',
+                component: FoobarEdit,
+                meta: { requiresAuth: true }
+            },
+        ]
+    }
 ]
 
 const router = createRouter({
     history: createWebHistory(),
-    routes,
+    routes,    
 });
 
 router.beforeEach((to) => {
