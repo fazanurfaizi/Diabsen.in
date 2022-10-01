@@ -38,7 +38,7 @@
                 <div class="flex flex-row-reverse items-end gap-[7px]">
                     <button @click.prevent="changePassword()"
                         class="bg-[#4299E1] hover:bg-blue-700 p-[4px] rounded-[4px] text-white w-[78px] h-[36px] text-[14px]">Simpan</button>
-                    <TheBackButton />
+                    <!-- <TheBackButton /> -->
                 </div>
 
             </div>
@@ -49,10 +49,10 @@
 <script>
 import EditLayout from '@/pages/profile/layouts/EditLayout.vue'
 import Asterisk from '@/components/Asterisk.vue'
-import TheBackButton from './components/TheBackButton.vue'
+// import TheBackButton from './components/TheBackButton.vue'
 export default {
     name: 'ChangePassword',
-    components: { EditLayout, Asterisk, TheBackButton },
+    components: { EditLayout, Asterisk },
     data() {
         return {
             current_password: null,

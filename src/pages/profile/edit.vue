@@ -1,296 +1,154 @@
 <template>
-  <form>
-    <EditLayout>
-      <div class="grid grid-cols-1 gap-[20px]">
-        <div class="grid gap-[24px] lg:grid-cols-2">
-          <div>
-            <label
-              for="first_name"
-              class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]"
-              >Nama Lengkap
-              <Asterisk />
-            </label>
-            <input
-              placeholder="Nama Lengkap"
-              type="text"
-              required=""
-              v-model="user.name"
-              class="
-                appearance-none
-                block
-                w-full
-                h-[44px]
-                py-[14px]
-                px-[12px]
-                border border-gray-300
-                rounded-[4px]
-                shadow-sm
-                placeholder-gray-400
-                focus:outline-none focus:ring-secondary focus:border-secondary
-                sm:text-[14px]
-              "
-            />
-            <div
-              class="
-                text-sm
-                mt-2
-                text-[12px]
-                mt-[8px]
-                text-[#F56565]
-                errors_name
-              "
-            ></div>
-          </div>
-          <div>
-            <label
-              for="gender"
-              class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]"
-              >Jenis Kelamin
-              <Asterisk />
-            </label>
-            <select
-              v-model="user.gender"
-              class="
-                bg-white
-                appearance-none
-                block
-                w-full
-                h-[44px]
-                py-[10px]
-                px-[12px]
-                border border-gray-300
-                rounded-[4px]
-                shadow-sm
-                placeholder-gray-400
-                focus:outline-none focus:ring-secondary focus:border-secondary
-                sm:text-[14px]
-              "
-            >
-              <option disabled>-- Pilih Jenis Kelamin --</option>
-              <option
-                v-for="gen in gender"
-                :key="gen"
-                :selected="gen[1] === user.gender"
-                v-bind:value="gen[1]"
-              >
-                {{ gen[0] }}
-              </option>
-            </select>
-            <div
-              class="
-                text-sm
-                mt-2
-                text-[12px]
-                mt-[8px]
-                text-[#F56565]
-                errors_gender
-              "
-            ></div>
-          </div>
-          <div>
-            <label
-              for="first_name"
-              class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]"
-              >No. WhatsApps
-              <Asterisk />
-            </label>
-            <input
-              placeholder="No. WhatsApps"
-              id="phone_num"
-              type="text"
-              required=""
-              v-model="user.phone"
-              class="
-                appearance-none
-                block
-                w-full
-                h-[44px]
-                py-[14px]
-                px-[12px]
-                border border-gray-300
-                rounded-[4px]
-                shadow-sm
-                placeholder-gray-400
-                focus:outline-none focus:ring-secondary focus:border-secondary
-                sm:text-[14px]
-              "
-            />
-            <div
-              class="
-                text-sm
-                mt-2
-                text-[12px]
-                mt-[8px]
-                text-[#F56565]
-                errors_phone_num
-              "
-            ></div>
-          </div>
-          <div>
-            <label
-              for="first_name"
-              class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]"
-              >Tanggal Lahir
-              <Asterisk />
-            </label>
-            <input
-              placeholder="Tanggal lahir"
-              id="birthdate"
-              type="date"
-              required
-              v-model="user.birthdate"
-              class="
-                bg-clip-padding
-                appearance-none
-                block
-                w-full
-                h-[44px]
-                py-[14px]
-                px-[12px]
-                border border-gray-300
-                rounded-[4px]
-                shadow-sm
-                placeholder-gray-400
-                focus:outline-none focus:ring-secondary focus:border-secondary
-                sm:text-[14px]
-              "
-            />
-            <div
-              class="
-                text-sm
-                mt-2
-                text-[12px]
-                mt-[8px]
-                text-[#F56565]
-                errors_birthdate
-              "
-            ></div>
-          </div>
-          <div>
-            <label
-              for="first_name"
-              class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]"
-              >E-Mail
-              <Asterisk />
-            </label>
-            <input
-              placeholder="E-Mail"
-              id="email"
-              type="text"
-              required=""
-              v-model="user.email"
-              class="
-                appearance-none
-                block
-                w-full
-                h-[44px]
-                py-[14px]
-                px-[12px]
-                border border-gray-300
-                rounded-[4px]
-                shadow-sm
-                placeholder-gray-400
-                focus:outline-none focus:ring-secondary focus:border-secondary
-                sm:text-[14px]
-              "
-            />
-            <div
-              class="
-                text-sm
-                mt-2
-                text-[12px]
-                mt-[8px]
-                text-[#F56565]
-                errors_email
-              "
-            ></div>
-          </div>
-          <div>
-            <label
-              for="first_name"
-              class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]"
-              >Jabatan
-              <Asterisk />
-            </label>
-            <input
-              placeholder="Jabatan"
-              type="text"
-              readonly
-              :value="user.role"
-              class="
-                bg-gray-100
-                appearance-none
-                block
-                w-full
-                h-[44px]
-                py-[14px]
-                px-[12px]
-                border border-gray-300
-                rounded-[4px]
-                shadow-sm
-                placeholder-gray-400
-                focus:outline-none focus:ring-secondary focus:border-secondary
-                sm:text-[14px]
-              "
-            />
-          </div>
+  <v-container>
+    <template #title>Profile</template>
+    <template #content>
+      <div class="block md:flex">
+        <div class="w-full md:w-3/12 h-screen p-4 sm:p-6 lg:p-4 bg-white rounded-2xl border-2">
+          <ProfilePanel :user="user">
+            <ProfileNav />
+          </ProfilePanel>
         </div>
-        <div class="flex flex-row-reverse items-end gap-[7px]">
-          <button
-            @click.prevent="updateProfile()"
-            class="
-              bg-[#4299E1]
-              hover:bg-blue-700
-              p-[4px]
-              rounded-[4px]
-              text-white
-              w-[78px]
-              h-[36px]
-              text-[14px]
-            "
-          >
-            Simpan
-          </button>
-          <TheBackButton />
+
+        <div class="w-full md:w-9/12 p-8 h-fit bg-white lg:ml-4 rounded-2xl border-2">
+          <form>
+            <div class="grid gap-[24px] lg:grid-cols-2">
+              <div>
+                <VLabel id="name" label="Nama Lengkap" required />
+                <VInput
+                  id="name"
+                  name="name"
+                  placeholder="Nama Lengkap"
+                  type="text"
+                  v-model="user.name"
+                  required
+                />
+              </div>
+
+              <div>                
+                <VLabel id="gender" label="Jenis Kelamin" required />
+                <VSelect 
+                  v-model="user.gender"
+                  :options="genderOptions"
+                  optionValue="value"
+                  optionLabel="text"
+                  label="Pilih Jenis Kelamin"
+                />
+              </div>
+
+              <div>
+                <VLabel id="phone" label="No. WhatsApps" required />
+                <VInput
+                  id="phone"
+                  name="phone"
+                  placeholder="No. WhatsApps"
+                  type="text"
+                  v-model="user.phone"
+                  required
+                />               
+              </div>
+
+              <div>
+                <VLabel id="birthday" label="Tanggal Lahir" required />
+                <VInput
+                  id="birthday"
+                  name="birthday"
+                  placeholder="Tanggal Lahir"
+                  type="date"
+                  v-model="user.birthdate"
+                  required
+                />
+              </div>
+
+              <div>
+                <VLabel id="email" label="E-Mail" required />
+                <VInput
+                  id="email"
+                  name="email"
+                  placeholder="E-Mail"
+                  type="email"
+                  v-model="user.email"
+                  required
+                />                
+              </div>
+
+              <div>
+                <VLabel id="role" label="Jabatan" required />
+                <VInput
+                  id="role"
+                  name="role"
+                  placeholder="Jabatan"
+                  type="text"
+                  v-model="user.role"
+                  required
+                  readonly
+                  />                     
+                  <!-- class="bg-[#E53E3E1A] border-red-500" -->
+              </div>
+            </div>
+            <div class="flex flex-row-reverse items-end gap-2 mt-2">             
+              <v-button size="md" color="primary" @click="updateProfile">
+                Simpan
+              </v-button>
+              <v-button size="md" color="info" outline @click="handleOnBack">
+                Batal
+              </v-button>
+            </div>
+          </form>
         </div>
-      </div>
-    </EditLayout>
-  </form>
+      </div>      
+    </template>
+  </v-container>
 </template>
 
 <script>
-import EditLayout from "@/pages/profile/layouts/EditLayout.vue";
-import TheBackButton from "./components/TheBackButton.vue";
-import Asterisk from "@/components/Asterisk.vue";
-import { DateTime } from "luxon";
+import { defineComponent, onMounted, reactive, ref } from "vue";
+import ProfilePanel from "@/pages/profile/layouts/ProfilePanel.vue";
+import ProfileNav from "./layouts/ProfileNav.vue";
+import VInput from "@/components/form/input.vue";
+import VLabel from '@/components/form/label.vue'
+import VSelect from '@/components/form/select.vue'
+import VButton from '@/components/ui/button/index.vue'
+import axios from "axios";
+import { useStore } from 'vuex'
+import { useRouter } from "vue-router";
 
-export default {
-  name: "ProfileEdit",
-  components: {
-    EditLayout,
-    Asterisk,
-    TheBackButton,
+export default defineComponent({
+  name: 'ProfileEdit',
+  components: {    
+    ProfilePanel,
+    ProfileNav,
+    VInput,
+    VLabel,  
+    VSelect,  
+    VButton,
   },
-  data() {
-    return {
-      user: {
-        name: null,
-        email: null,
-        phone: null,
-        gender: null,
-        birthdate: null,
-        role: null,
+  setup() {
+    const store = useStore()
+    const router = useRouter()
+
+    const user = reactive({
+      name: null,
+      email: null,
+      phone: null,
+      gender: null,
+      birthdate: null,
+      role: null,
+    })
+
+    const genderOptions = ref([
+      {
+        text: 'Pria',
+        value: 'm'
       },
-      gender: [
-        ["Pria", "m"],
-        ["Perempuan", "f"],
-      ],
-    };
-  },
-  methods: {
-    getProfile() {
-      const token = this.$store.state.auth.token;
-      this.axios
+      {
+        text: 'Perempuan',
+        value: 'f'
+      }
+    ])
+
+    const getProfile = () => {
+      const token = store.getters['auth/getToken'];
+      axios
         .get(`${process.env.VUE_APP_API_URL_AUTH}/user/profile`, {
           headers: {
             Accept: "application/json",
@@ -299,33 +157,33 @@ export default {
         })
         .then((response) => {
           const { name, email, phone, gender, birthdate, role } = response.data;
+          
+          user.name = name;
+          user.email = email;
+          user.phone = phone;
+          user.gender = gender;
+          user.birthdate = birthdate;
+          user.role = role;
 
-          this.user.name = name;
-          this.user.email = email;
-          this.user.phone = phone;
-          this.user.gender = gender;
-          this.user.birthdate = birthdate;
-          this.user.role = role;
-
-          this.user.profile = name
+          user.profile = name
             .split(" ")
             .map((word) => word[0])
             .join("");
         });
-    },
+    }
 
-    updateProfile() {
-      const token = this.$store.state.auth.token;
+    const updateProfile = () => {
+      const token = store.getters['auth/getToken'];
 
       let params = {
-        name: this.user.name,
-        phone_num: this.user.phone,
-        gender: this.user.gender,
-        birthdate: this.user.birthdate,
-        email: this.user.email,
+        name: user.name,
+        phone_num: user.phone,
+        gender: user.gender,
+        birthdate: user.birthdate,
+        email: user.email,
       };
 
-      this.axios
+      axios
         .put(process.env.VUE_APP_API_URL_AUTH + "/user/profile", params, {
           headers: {
             Accept: "application/json",
@@ -346,16 +204,23 @@ export default {
           } else {
             console.error(e.message);
           }
-        });
-    },
-  },
-  created() {
-    this.getProfile();
-  },
-  mounted() {
-    let today = DateTime.now().setLocale("id").toFormat("yyyy-LL-dd");
+        });      
+    }
 
-    document.getElementById("birthdate").max = today;
-  },
-};
+    const handleOnBack = () => {
+      router.back()
+    }
+
+    onMounted(() => {
+      getProfile()
+    })
+
+    return {
+      user,
+      genderOptions,
+      updateProfile,
+      handleOnBack      
+    }
+  }
+})
 </script>

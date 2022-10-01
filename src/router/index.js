@@ -5,7 +5,6 @@ import AuthLayout from '@/layouts/AuthLayout.vue'
 
 import MagicLink from '../pages/auth/magic-link.vue';
 
-import ProfilePage from '../pages/profile/index.vue';
 import ProfileEdit from '../pages/profile/edit.vue';
 import ChangePassword from '../pages/profile/change-password.vue';
 
@@ -56,26 +55,36 @@ let routes = [
                 meta: { requiresAuth: true }
             },
             {
-                path: "profile",
-                name: 'profile',
-                component: ProfilePage,
-                meta: { requiresAuth: true }
-            },
-            {
-                path: "profile/edit",
-                name: 'profile-edit',
-                component: ProfileEdit,
-                meta: { requiresAuth: true }
-            },
-            {
-                path: "profile/change-password",
-                name: 'profile-change-password',
-                component: ChangePassword,
-                meta: { requiresAuth: true }
+                path: '/profile',
+                name: 'profile',                
+                component: RouterView,
+                meta: {
+                    breadCrumb: 'Profil'
+                },
+                children: [
+                    {
+                        path: '',
+                        name: 'profile-user',
+                        component: () => import('@/pages/profile/index.vue'),
+                        meta: { requiresAuth: true }
+                    },
+                    {
+                        path: "edit",
+                        name: 'profile-edit',
+                        component: ProfileEdit,
+                        meta: { requiresAuth: true }
+                    },
+                    {
+                        path: "change-password",
+                        name: 'profile-change-password',
+                        component: ChangePassword,
+                        meta: { requiresAuth: true }
+                    },
+                ]
             },
             {            
                 path: '/schools',   
-                name: 'schools-layout',
+                name: 'schools',
                 component: RouterView,
                 meta: {
                     breadCrumb: 'Sekolah'
@@ -103,7 +112,7 @@ let routes = [
         
             {
                 path: '/foobar',
-                name: 'foobar-layout',
+                name: 'foobar',
                 component: RouterView,
                 meta: {
                     breadCrumb: 'FooBar'

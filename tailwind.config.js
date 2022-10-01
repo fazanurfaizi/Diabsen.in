@@ -1,4 +1,5 @@
 const plugin = require('tailwindcss/plugin')
+const colors = require('tailwindcss/colors')
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -19,7 +20,8 @@ module.exports = {
       },
       padding: {
         '5px': '5px',
-      },
+      },    
+
       colors: {
         'primary': {
           light: '#3a5c9d',
@@ -41,7 +43,7 @@ module.exports = {
         },        
         'text-table': '#5E5873',
         'thead': '#F3F2F7'
-      }
+      },
     },
   },
   plugins: [

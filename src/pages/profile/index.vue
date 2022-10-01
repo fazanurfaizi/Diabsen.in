@@ -1,9 +1,9 @@
 <template>
-  <cotaniner>
+  <v-container>
     <template #title>Profile</template>
     <template #content>
-      <ProfileLayout>
-        <template #profile-side>
+      <div class="lg:flex">
+        <div class="m-4 flex-initial lg:h-[37rem]">
           <div
             class="
               py-[30px]
@@ -38,14 +38,19 @@
                 <span class="font-bold text-[14px]">{{ user.name }}</span>
                 <span class="text-[12px] font-normal">{{ user.role }}</span>
               </div>
-              <div class="flex flex-col items-center">
-                <TheEditButton />
+              <div class="flex flex-col items-center">                
+                <router-link 
+                  :to="{ name: 'profile-edit' }"
+                  class="bg-[#4299E1] hover:bg-blue-700 py-[0.5rem] px-[0.25rem] rounded text-white w-[78px] h-[36px] text-[14px]"
+                >
+                  Edit Profile
+              </router-link>
               </div>
             </div>
           </div>
-        </template>
+        </div>
 
-        <template #content-profile>
+        <div class="m-4 flex-auto lg:h-[37rem]">
           <div
             class="
               p-[20px]
@@ -91,19 +96,15 @@
               </div>
             </div>
           </div>
-        </template>
-      </ProfileLayout>
+        </div>
+      </div>
     </template>
-  </cotaniner>
+  </v-container>
 </template>
 
 <script>
-import ProfileLayout from "@/pages/profile/layouts/ProfileLayout.vue";
-import TheEditButton from "@/pages/profile/components/TheEditButton.vue";
-
 export default {
-  name: "ProfilePage",
-  components: { ProfileLayout, TheEditButton },
+  name: "ProfilePage",  
   data() {
     return {
       user: {
