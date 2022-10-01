@@ -1,9 +1,14 @@
 import { axiosInstance } from './api.service'
 
 class ProfileService {
+
+    constructor() {
+        this.baseUrl = process.env.VUE_APP_API_URL_AUTH
+    }
+
     async getProfile() {
         return await new Promise((resolve, reject) => {
-            axiosInstance.get(`${process.env.VUE_APP_API_URL_AUTH}/user/profile`)
+            axiosInstance.get(`${this.baseUrl}/user/profile`)
                 .then((response) => resolve(response))
                 .catch((error) => reject(error))
         })
@@ -19,7 +24,21 @@ class ProfileService {
                 birthdate: formData.birthdate,
             }
             
-            axiosInstance.put(`${process.env.VUE_APP_API_URL_AUTH}/user/profile`, params)
+            axiosInstance.put(`${this.baseUrl}/user/profile`, params)
+                .then((response) => resolve(response))
+                .catch((error) => reject(error))
+        })
+    }
+
+    async changePassword(formData) {
+        return await new Promise((resolve, reject) => {
+            let params = {
+                current_password: formData.current_password,
+                new_password: formData.new_password,
+                confirm_password: formData.confirm_password,
+            }
+
+            axiosInstance.put(`${this.baseUrl}/user/change-password`, params)
                 .then((response) => resolve(response))
                 .catch((error) => reject(error))
         })

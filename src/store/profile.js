@@ -27,6 +27,11 @@ export default {
       profileService.updateProfile(payload)
         .then(() => dispatch('getProfile'))
         .catch((error) => Promise.reject(error))
+    },
+    async changePassword(_, payload) {
+      profileService.changePassword(payload)
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err))
     }
   }
 }
