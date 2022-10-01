@@ -19,10 +19,14 @@ export default {
     async getProfile({ commit }) {      
       profileService.getProfile()
         .then((response) => {
-          commit('setUser', response.data)
-          console.log(response)
+          commit('setUser', response.data)          
         })
-        .catch((error) => console.log(error))      
-    },    
+        .catch((error) => console.log(error))
+    },
+    async updateProfile({ dispatch }, payload) {
+      profileService.updateProfile(payload)
+        .then(() => dispatch('getProfile'))
+        .catch((error) => Promise.reject(error))
+    }
   }
 }

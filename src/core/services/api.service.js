@@ -29,7 +29,7 @@ export const setupAxiosInterceptors = (store) => {
         async (err) => {
             const originalConfig = err.config
 
-            if(originalConfig.url !== '/auth/login' && err.response) {
+            if(originalConfig.url !== '/oauth/token' && err.response) {                
                 // Access Token was expired
                 if(err.response.status === 401 && !originalConfig._retry) {
                     originalConfig._retry = true

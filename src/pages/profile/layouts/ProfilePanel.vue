@@ -4,7 +4,7 @@
             <div
                 class="max-w-xs h-24 w-24 mt-3 bg-secondary-light text-white text-3xl flex items-center justify-center font-bold rounded-full"
             >
-                {{ user.profile }}
+                {{ profile }}
             </div>
 
         </div>        
@@ -17,9 +17,25 @@
 </template>
 
 <script>
-export default {
-    name: 'ProfilePanel',
-    props: ['user'],
-}
+import { computed, defineComponent } from 'vue';
+
+export default defineComponent({
+    name: 'profile-panel',
+    props: {
+        user: {
+            type: Object,
+            required: false
+        }
+    },
+    setup(props) {
+        const profile = computed(
+            () => props.user.name.split(' ').map((name) => name[0]).join('')
+        )
+
+        return {
+            profile
+        }
+    }
+})
 </script>
 

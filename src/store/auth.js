@@ -31,17 +31,27 @@ export default {
           dispatch('profile/getProfile', null, { root: true })
         })
         .catch((error) => console.log(error))
-        .finally(() => router.push({ path: router.currentRoute.value.query.redirect || '/dashboard', force: true }))
+        .finally(
+          () => router.push({ 
+            path: router.currentRoute.value.query.redirect || '/dashboard', force: true 
+          })
+        )
     },
+    
     async refresh({ commit }, payload) {      
-      authService.refresh(payload.token)
+      authService.refresh(payload)
         .then((response) => {
           commit('setToken', response.data.access_token)                    
           commit('setRefreshToken', response.data.refresh_token)          
         })
         .catch((error) => console.log(error))      
-        .finally(() => router.push({ path: router.currentRoute.value.query.redirect || '/dashboard', force: true }))
+        .finally(
+          () => router.push({ 
+            path: router.currentRoute.value.query.redirect || router.currentRoute.value.path, force: true 
+          })
+        )
     },
+
     async logout({ commit }) {
       commit('setToken', null)
       commit('setRefreshToken', null)
