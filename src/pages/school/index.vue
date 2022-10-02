@@ -33,7 +33,7 @@ export default {
       headerTable:[
         {
           title: "NPSN",
-          key: "NPSN",
+          key: "npsn",
           sort: "ASC",
         },
         {
@@ -51,7 +51,7 @@ export default {
         },
         {
           title: "Kode Pos",
-          key: "zip_code",
+          key: "postal_code",
         },
         {
           title: "Alamat",
