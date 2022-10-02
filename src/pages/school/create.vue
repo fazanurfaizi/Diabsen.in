@@ -1,36 +1,19 @@
-<<<<<<< HEAD
-<template>    
+<template>
     <v-container>
         <template #title>Tambah Sekolah</template>
         <template #content>
-            <div class="grid grid-cols-1 gap-[16px]">
-                <div class="p-[20px] bg-white rounded-[8px] border border-[#CBD5E0] w-full">
-                    <div class="flex flex-col lg:items-center">
-                        <div class="flex flex-row items-center py-[12px]">
-                            <div class="border-[2px] rounded-[200px] border-[#1F4690] px-[7px] text-[14px]">
-                                <span class="font-bold text-[#1F4690]">1</span>
-                            </div>
-                            <span class="bg-[#CBD5E0] w-[200px] h-[2px]"></span>
-                            <div class="border-[2px] rounded-[200px] border-[#CBD5E0] px-[7px] text-[14px]">
-                                <span class="font-bold text-[#CBD5E0]">2</span>
-                            </div>
-                            <span class="bg-[#CBD5E0] w-[200px] h-[2px]"></span>
-                            <div class="border-[2px] rounded-[200px] border-[#CBD5E0] px-[7px] text-[14px]">
-                                <span class="font-bold text-[#CBD5E0]">3</span>
-                            </div>
-                        </div>
-                        <div class="flex flex-row gap-[99px]">
-                            <span class="font-bold text-justify text-[#6E6B7B]">Identitas Sekolah</span>
-                            <span class="font-bold  text-justify text-[#6E6B7B]">Alamat Sekolah</span>
-                            <span class="font-bold  text-justify text-[#6E6B7B]">Kontak Sekolah</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="p-[20px] bg-white rounded-[8px] border border-[#CBD5E0] w-full">
+            <StepperLayout>
+                <template #indicators>
+                    <StepIndicators :step="step"></StepIndicators>
+                </template>
+                <template #label>
+                    <StepLabel></StepLabel>
+                </template>
+                <template #content>
                     <div class="grid grid-cols-1 gap-[20px]">
                         <div v-if="step === 1" id="step-1">
-                            <div class="grid grid-cols-1 gap-[20px]">
+                            <div
+                                class="grid grid-cols-1 gap-[20px] p-[20px] bg-white rounded-[8px] border border-[#CBD5E0] w-full">
                                 <div class="text-[18px] text-[#6E6B7B]">Data Sekolah</div>
                                 <div class="grid lg:grid-cols-2 lg:gap-[24px] text-[#6E6B7B] text-[14px]">
                                     <div>
@@ -39,11 +22,11 @@
                                                 class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]">NPSN
                                                 <Asterisk />
                                             </label>
-                                            <input placeholder="NPSN" id="current_password" name="current_password"
-                                                type="text" required=""
+                                            <input v-model="form.npsn" placeholder="Masukan NPSN"
+                                                id="current_password" name="current_password" type="text"
+                                                required=""
                                                 class="appearance-none block w-full h-[44px] py-[14px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary text-[14px]" />
-                                            <div
-                                                class="text-[12px] mt-[8px] text-[#F56565] errors_current_password">
+                                            <div class="text-[12px] mt-[8px] text-[#F56565] errors_npsn" ref="npsn">
                                             </div>
                                         </div>
 
@@ -53,11 +36,14 @@
                                                 Sekolah
                                                 <Asterisk />
                                             </label>
-                                            <input placeholder="Status Sekolah" id="current_password"
-                                                name="current_password" type="text" required=""
-                                                class="appearance-none block w-full h-[44px] py-[14px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary text-[14px]" />
-                                            <div
-                                                class="text-[12px] mt-[8px] text-[#F56565] errors_current_password">
+                                            <select v-model="form.status"
+                                                class="bg-white appearance-none block w-full h-[44px] py-[10px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary sm:text-[14px]">
+                                                <option value="" selected>-- Pilih Status --</option>
+                                                <option value="0">Negeri</option>
+                                                <option value="1">Swasta</option>
+                                            </select>
+                                            <div class="text-[12px] mt-[8px] text-[#F56565] errors_current_password"
+                                                ref="status">
                                             </div>
                                         </div>
 
@@ -67,11 +53,15 @@
                                                 Kepemilikan
                                                 <Asterisk />
                                             </label>
-                                            <input placeholder="Status Kepemilikan" id="current_password"
-                                                name="current_password" type="text" required=""
-                                                class="appearance-none block w-full h-[44px] py-[14px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary text-[14px]" />
-                                            <div
-                                                class="text-[12px] mt-[8px] text-[#F56565] errors_current_password">
+                                            <select v-model="form.ownership_status"
+                                                class="bg-white appearance-none block w-full h-[44px] py-[10px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary sm:text-[14px]">
+                                                <option value="" selected>-- Pilih Status Kepemilikan --</option>
+                                                <option value="f">Yayasan</option>
+                                                <option value="g">Pemerintah</option>
+                                                <option value="e">BUMN</option>
+                                            </select>
+                                            <div class="text-[12px] mt-[8px] text-[#F56565] errors_current_password"
+                                                ref="ownership_status">
                                             </div>
                                         </div>
 
@@ -82,11 +72,13 @@
                                                 Izin Operasional
                                                 <Asterisk />
                                             </label>
-                                            <input placeholder="Tanggal SK Izin Operasional" id="current_password"
-                                                name="current_password" type="text" required=""
+                                            <input v-model="form.operational_date"
+                                                placeholder="Masukan Tanggal SK Izin Operasional"
+                                                id="current_password" name="current_password" type="date"
+                                                required=""
                                                 class="appearance-none block w-full h-[44px] py-[14px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary text-[14px]" />
-                                            <div
-                                                class="text-[12px] mt-[8px] text-[#F56565] errors_current_password">
+                                            <div class="text-[12px] mt-[8px] text-[#F56565] errors_current_password"
+                                                ref="operational_date">
                                             </div>
                                         </div>
                                     </div>
@@ -98,11 +90,12 @@
                                                 Sekolah
                                                 <Asterisk />
                                             </label>
-                                            <input placeholder="Nama Sekolah" id="current_password"
-                                                name="current_password" type="text" required=""
+                                            <input v-model="form.name" placeholder="Masukan Nama Sekolah"
+                                                id="current_password" name="current_password" type="text"
+                                                required=""
                                                 class="appearance-none block w-full h-[44px] py-[14px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary text-[14px]" />
-                                            <div
-                                                class="text-[12px] mt-[8px] text-[#F56565] errors_current_password">
+                                            <div class="text-[12px] mt-[8px] text-[#F56565] errors_current_password"
+                                                ref="name">
                                             </div>
                                         </div>
 
@@ -112,11 +105,19 @@
                                                 Pendidikan
                                                 <Asterisk />
                                             </label>
-                                            <input placeholder="Jenjang Pendidikan" id="current_password"
-                                                name="current_password" type="text" required=""
-                                                class="appearance-none block w-full h-[44px] py-[14px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary text-[14px]" />
-                                            <div
-                                                class="text-[12px] mt-[8px] text-[#F56565] errors_current_password">
+                                            <select v-model="form.study_type"
+                                                class="bg-white appearance-none block w-full h-[44px] py-[10px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary sm:text-[14px]"
+                                                ref="study_type">
+                                                <option value="" selected>-- Pilih Jenjang Pendidikan --</option>
+                                                <option value="sd">SD</option>
+                                                <option value="smp">SMP</option>
+                                                <option value="sma">SMA</option>
+                                                <option value="mi">MI</option>
+                                                <option value="mts">MTS</option>
+                                                <option value="ma">MA</option>
+                                            </select>
+                                            <div class="text-[12px] mt-[8px] text-[#F56565] errors_current_password"
+                                                ref="study_type">
                                             </div>
                                         </div>
 
@@ -127,11 +128,12 @@
                                                 Sekolah
                                                 <Asterisk />
                                             </label>
-                                            <input placeholder="No. SK Pendirian" id="current_password"
+                                            <input v-model="form.establishment_letter"
+                                                placeholder="Masukan No. SK Pendirian" id="current_password"
                                                 name="current_password" type="text" required=""
                                                 class="appearance-none block w-full h-[44px] py-[14px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary text-[14px]" />
-                                            <div
-                                                class="text-[12px] mt-[8px] text-[#F56565] errors_current_password">
+                                            <div class="text-[12px] mt-[8px] text-[#F56565] errors_current_password"
+                                                ref="establishment_letter">
                                             </div>
                                         </div>
 
@@ -142,52 +144,14 @@
                                                 Mengajar (KBM)
                                                 <Asterisk />
                                             </label>
-                                            <input placeholder="Waktu Kegiatan Mengajar (KBM)" id="current_password"
-                                                name="current_password" type="text" required=""
+                                            <input v-model="form.teaching_learning_time"
+                                                placeholder="Masukan Waktu Kegiatan Mengajar (KBM)"
+                                                id="current_password" name="current_password" type="number"
+                                                required=""
                                                 class="appearance-none block w-full h-[44px] py-[14px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary text-[14px]" />
-                                            <div
-                                                class="text-[12px] mt-[8px] text-[#F56565] errors_current_password">
+                                            <div class="text-[12px] mt-[8px] text-[#F56565] errors_current_password"
+                                                ref="teaching_learning_time">
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="text-[18px] text-[#6E6B7B]">
-                                    Tambah Admin
-                                </div>
-                                <div class="grid lg:grid-cols-2 lg:gap-[24px] text-[#6E6B7B] text-[14px]">
-                                    <div>
-                                        <div class="flex flex-col py-1">
-                                            <label for="current_password"
-                                                class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]">Nama
-                                                Lengkap
-                                                <Asterisk />
-                                            </label>
-                                            <input placeholder="Nama Lengkap" id="current_password"
-                                                name="current_password" type="text" required=""
-                                                class="appearance-none block w-full h-[44px] py-[14px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary text-[14px]" />
-                                            <div
-                                                class="text-[12px] mt-[8px] text-[#F56565] errors_current_password">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="flex flex-col py-1">
-                                            <label for="current_password"
-                                                class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]">E-Mail
-                                                <Asterisk />
-                                            </label>
-                                            <input placeholder="Email" id="current_password" name="current_password"
-                                                type="text" required=""
-                                                class="appearance-none block w-full h-[44px] py-[14px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary text-[14px]" />
-                                            <div
-                                                class="text-[12px] mt-[8px] text-[#F56565] errors_current_password">
-                                            </div>
-                                        </div>
-                                        <div class="flex flex-row-reverse items-end gap-[6px]">
-                                            <button
-                                                class="bg-[#4299E1] hover:bg-blue-700 py-[0.5rem] px-[0.25rem] rounded text-white w-[110px] h-[36px] text-[14px]"
-                                                @click.prevent="nextPage()">Tambah</button>
                                         </div>
                                     </div>
                                 </div>
@@ -195,177 +159,283 @@
                         </div>
                         <div v-if="step === 2" id="step-2">
                             <div class="grid grid-cols-1 gap-[20px]">
-                                <div class="grid lg:grid-cols-2 lg:gap-[24px] text-[#6E6B7B] text-[14px]">
-                                    <div>
-                                        <div class="flex flex-col py-1">
-                                            <label for="current_password"
-                                                class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]">Alamat
-                                                <Asterisk />
-                                            </label>
-                                            <input placeholder="Alamat" id="current_password" name="current_password"
-                                                type="text" required=""
-                                                class="appearance-none block w-full h-[44px] py-[14px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary text-[14px]" />
-                                            <div
-                                                class="text-[12px] mt-[8px] text-[#F56565] errors_current_password">
-                                            </div>
-                                        </div>
-
-                                        <div class="flex flex-col py-1">
-                                            <label for="current_password"
-                                                class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]">Desa/Kelurahan
-                                                <Asterisk />
-                                            </label>
-                                            <input placeholder="Desa/Kelurahan" id="current_password"
-                                                name="current_password" type="text" required=""
-                                                class="appearance-none block w-full h-[44px] py-[14px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary text-[14px]" />
-                                            <div
-                                                class="text-[12px] mt-[8px] text-[#F56565] errors_current_password">
-                                            </div>
-                                        </div>
-
-                                        <div class="grid grid-cols-2 gap-[24px]">
-
-                                            <div class="flex flex-col py-1">
-                                                <label for="current_password"
-                                                    class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]">Kota/Kabupaten
-                                                    <Asterisk />
-                                                </label>
-                                                <input placeholder="Kota/Kabupaten" id="current_password"
-                                                    name="current_password" type="text" required=""
-                                                    class="appearance-none block w-full h-[44px] py-[14px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary text-[14px]" />
-                                                <div
-                                                    class="text-[12px] mt-[8px] text-[#F56565] errors_current_password">
-                                                </div>
-                                            </div>
-
-                                            <div class="flex flex-col py-1">
-                                                <label for="current_password"
-                                                    class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]">Kode
-                                                    Pos
-                                                    <Asterisk />
-                                                </label>
-                                                <input placeholder="Kode Pos"
-                                                    id="current_password" name="current_password" type="text"
-                                                    required=""
-                                                    class="appearance-none block w-full h-[44px] py-[14px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary text-[14px]" />
-                                                <div
-                                                    class="text-[12px] mt-[8px] text-[#F56565] errors_current_password">
-                                                </div>
-                                            </div>
-                                        </div>
-
+                                <div
+                                    class="grid grid-cols-1 gap-[20px] p-[20px] bg-white rounded-[8px] border border-[#CBD5E0] w-full">
+                                    <div class="text-[18px] text-[#6E6B7B]">
+                                        Identitas Sekolah
                                     </div>
-
                                     <div>
-                                        <div class="flex flex-col py-1">
-                                            <label for="current_password"
-                                                class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]">RT/RW
-                                                <Asterisk />
-                                            </label>
-                                            <input placeholder="RT/RW" id="current_password"
-                                                name="current_password" type="text" required=""
-                                                class="appearance-none block w-full h-[44px] py-[14px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary text-[14px]" />
-                                            <div
-                                                class="text-[12px] mt-[8px] text-[#F56565] errors_current_password">
+                                        <div class="grid lg:grid-cols-1 lg:gap-[24px] text-[#6E6B7B] text-[14px]">
+                                            <div>
+                                                <div class="flex flex-col py-1">
+                                                    <label for="current_password"
+                                                        class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]">Alamat
+                                                        <Asterisk />
+                                                    </label>
+                                                    <input v-model="form.address" placeholder="Masukan Alamat"
+                                                        id="current_password" name="current_password" type="text"
+                                                        required=""
+                                                        class="appearance-none block w-full h-[44px] py-[14px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary text-[14px]" />
+                                                    <div class="text-[12px] mt-[8px] text-[#F56565] errors_current_password"
+                                                        ref="address">
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
+                                        <div class="grid lg:grid-cols-2 lg:gap-[24px] text-[#6E6B7B] text-[14px]">
+                                            <div>
+                                                <div class="flex flex-col py-1">
+                                                    <label for="current_password"
+                                                        class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]">Provinsi
+                                                        <Asterisk />
+                                                    </label>
+                                                    <select v-model="form.province_id" @change="getCity"
+                                                        class="bg-white appearance-none block w-full h-[44px] py-[10px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary sm:text-[14px]">
+                                                        <option value="" selected>-- Pilih Provinsi --</option>
+                                                        <option v-for="province in provinces" :key="province"
+                                                            v-bind:value="province.id">
+                                                            {{ province.name }}
+                                                        </option>
+                                                    </select>
+                                                    <div class="text-[12px] mt-[8px] text-[#F56565] errors_current_password"
+                                                        ref="province_id">
+                                                    </div>
+                                                </div>
 
-                                        <div class="flex flex-col py-1">
-                                            <label for="current_password"
-                                                class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]">Kecamatan
-                                                <Asterisk />
-                                            </label>
-                                            <input placeholder="Kecamatan" id="current_password"
-                                                name="current_password" type="text" required=""
-                                                class="appearance-none block w-full h-[44px] py-[14px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary text-[14px]" />
-                                            <div
-                                                class="text-[12px] mt-[8px] text-[#F56565] errors_current_password">
+                                                <div>
+                                                    <div class="flex flex-col py-1">
+                                                        <label for="current_password"
+                                                            class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]">Kecamatan
+                                                            <Asterisk />
+                                                        </label>
+                                                        <select v-model="form.district_id" @change="getSubDistrict"
+                                                            class="bg-white appearance-none block w-full h-[44px] py-[10px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary sm:text-[14px]">
+                                                            <option value="" selected>-- Pilih Kecamatan --</option>
+                                                            <option v-for="district in districts" :key="district"
+                                                                :value="district.id">
+                                                                {{ district.name }}
+                                                            </option>
+                                                        </select>
+                                                        <div class="text-[12px] mt-[8px] text-[#F56565] errors_current_password"
+                                                            ref="district_id">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="flex flex-col py-1">
+                                                        <label for="current_password"
+                                                            class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]">RT/RW
+                                                            <Asterisk />
+                                                        </label>
+                                                        <span
+                                                            class="flex flex-col-3 block w-full border border-gray-300 rounded-[4px] focus:ring-secondary focus:border-secondary text-[14px]">
+                                                            <input v-model="form.rt" placeholder="RT" type="text"
+                                                                required="" min="1"
+                                                                class="appearance-none w-full h-[44px] py-[14px] px-[12px] shadow-sm placeholder-gray-400 focus:outline-none" />
+                                                            <span
+                                                                class="flex items-center h-[44px] text-gray-400">/</span>
+                                                            <input v-model="form.rw" placeholder="RW" type="text"
+                                                                required="" min="1"
+                                                                class="appearance-none w-full h-[44px] py-[14px] px-[12px] shadow-sm placeholder-gray-400 focus:outline-none" />
+                                                        </span>
+                                                        <div class="text-[12px] mt-[8px] text-[#F56565] errors_current_password"
+                                                            ref="rw">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
                                             </div>
-                                        </div>
 
-                                        <div class="flex flex-col py-1">
-                                            <label for="current_password"
-                                                class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]">Provinsi
-                                                <Asterisk />
-                                            </label>
-                                            <input placeholder="Provinsi" id="current_password"
-                                                name="current_password" type="text" required=""
-                                                class="appearance-none block w-full h-[44px] py-[14px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary text-[14px]" />
-                                            <div
-                                                class="text-[12px] mt-[8px] text-[#F56565] errors_current_password">
+                                            <div>
+                                                <div class="flex flex-col py-1">
+                                                    <label for="current_password"
+                                                        class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]">Kota/Kabupaten
+                                                        <Asterisk />
+                                                    </label>
+                                                    <select v-model="form.city_id" @change="getDistrict"
+                                                        class="bg-white appearance-none block w-full h-[44px] py-[10px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary sm:text-[14px]">
+                                                        <option value="" selected>-- Pilih Kota/Kabupaten --
+                                                        </option>
+                                                        <option v-for="city in cities" :key="city"
+                                                            v-bind:value="city.id">
+                                                            {{ city.name }}
+                                                        </option>
+                                                    </select>
+                                                    <div class="text-[12px] mt-[8px] text-[#F56565] errors_current_password"
+                                                        ref="city_id">
+                                                    </div>
+                                                </div>
+
+                                                <div class="flex flex-col py-1">
+                                                    <label for="current_password"
+                                                        class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]">Desa/Kelurahan
+                                                        <Asterisk />
+                                                    </label>
+                                                    <select v-model="form.sub_district_id" @change="getPostalCode"
+                                                        class="bg-white appearance-none block w-full h-[44px] py-[10px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary sm:text-[14px]">
+                                                        <option value="" selected>-- Pilih Desa/Kelurahan --
+                                                        </option>
+                                                        <option v-for="sub_district in sub_districts"
+                                                            :key="sub_district" v-bind:value="sub_district.id">
+                                                            {{ sub_district.name }}
+                                                        </option>
+                                                    </select>
+                                                    <div class="text-[12px] mt-[8px] text-[#F56565] errors_current_password"
+                                                        ref="sub_district_id">
+                                                    </div>
+                                                </div>
+
+                                                <div class="flex flex-col py-1">
+                                                    <label for="current_password"
+                                                        class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]">Kode
+                                                        Pos
+                                                        <Asterisk />
+                                                    </label>
+                                                    <select v-model="form.postal_code_id"
+                                                        class="bg-white appearance-none block w-full h-[44px] py-[10px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary sm:text-[14px]">
+                                                        <option value="" selected>-- Pilih Kode Pos --
+                                                        </option>
+                                                        <option v-for="postal_code in postal_codes"
+                                                            :key="postal_code" v-bind:value="postal_code.id">
+                                                            {{ postal_code.code }}
+                                                        </option>
+                                                    </select>
+                                                    <div class="text-[12px] mt-[8px] text-[#F56565] errors_current_password"
+                                                        ref="postal_code_id">
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="flex flex-col py-1">
                                     <label for="current_password"
-                                        class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]">Peta Lokasi
+                                        class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]">Peta
+                                        Lokasi
                                         <Asterisk />
                                     </label>
-                                    <input placeholder="Peta Lokasi" id="current_password"
-                                        name="current_password" type="text" required=""
-                                        class="appearance-none block w-full h-[44px] py-[14px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary text-[14px]" />
-                                    <div class="text-[12px] mt-[8px] text-[#F56565] errors_current_password">
+                                    <GoogleMaps :location="{lat: form.latitude, lng: form.longitude}"
+                                        :getLocation="getLocation" :center="center" :zoom="13" />
+                                    <div class="text-[12px] mt-[8px] text-[#F56565] errors_current_password"
+                                        ref="gmaps">
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div v-if="step === 3" id="step-3">
                             <div class="grid grid-cols-1 gap-[20px]">
-                                <div class="grid lg:grid-cols-2 lg:gap-[24px] text-[#6E6B7B] text-[14px]">
-                                    <div>
-                                        <div class="flex flex-col py-1">
-                                            <label for="current_password"
-                                                class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]">Nomor Telepon
-                                                <Asterisk />
-                                            </label>
-                                            <input placeholder="Nomor Telepon" id="current_password" name="current_password"
-                                                type="text" required=""
-                                                class="appearance-none block w-full h-[44px] py-[14px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary text-[14px]" />
-                                            <div
-                                                class="text-[12px] mt-[8px] text-[#F56565] errors_current_password">
-                                            </div>
-                                        </div>
-
-                                        <div class="flex flex-col py-1">
-                                            <label for="current_password"
-                                                class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]">E-Mail Sekolah
-                                                <Asterisk />
-                                            </label>
-                                            <input placeholder="E-Mail Sekolah" id="current_password"
-                                                name="current_password" type="text" required=""
-                                                class="appearance-none block w-full h-[44px] py-[14px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary text-[14px]" />
-                                            <div
-                                                class="text-[12px] mt-[8px] text-[#F56565] errors_current_password">
-                                            </div>
-                                        </div>
-
+                                <div
+                                    class="grid grid-cols-1 gap-[20px] p-[20px] bg-white rounded-[8px] border border-[#CBD5E0] w-full">
+                                    <div class="text-[18px] text-[#6E6B7B]">
+                                        Kontak Sekolah
                                     </div>
-
-                                    <div>
-                                        <div class="flex flex-col py-1">
-                                            <label for="current_password"
-                                                class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]">Nomor Fax
-                                                <Asterisk />
-                                            </label>
-                                            <input placeholder="Nomor Fax" id="current_password"
-                                                name="current_password" type="text" required=""
-                                                class="appearance-none block w-full h-[44px] py-[14px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary text-[14px]" />
-                                            <div
-                                                class="text-[12px] mt-[8px] text-[#F56565] errors_current_password">
+                                    <div class="grid lg:grid-cols-2 lg:gap-[24px] text-[#6E6B7B] text-[14px]">
+                                        <div>
+                                            <div class="flex flex-col py-1">
+                                                <label for="current_password"
+                                                    class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]">Nomor
+                                                    Telepon
+                                                    <Asterisk />
+                                                </label>
+                                                <input v-model="form.phone_number"
+                                                    placeholder="Masukan Nomor Telepon" id="current_password"
+                                                    name="current_password" type="text" required=""
+                                                    class="appearance-none block w-full h-[44px] py-[14px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary text-[14px]" />
+                                                <div class="text-[12px] mt-[8px] text-[#F56565] errors_current_password"
+                                                    ref="phone_number">
+                                                </div>
                                             </div>
+
+                                            <div class="flex flex-col py-1">
+                                                <label for="current_password"
+                                                    class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]">E-Mail
+                                                    Sekolah
+                                                    <Asterisk />
+                                                </label>
+                                                <input v-model="form.email" placeholder="Masukan E-Mail Sekolah"
+                                                    id="current_password" name="current_password" type="text"
+                                                    required=""
+                                                    class="appearance-none block w-full h-[44px] py-[14px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary text-[14px]" />
+                                                <div class="text-[12px] mt-[8px] text-[#F56565] errors_current_password"
+                                                    ref="email">
+                                                </div>
+                                            </div>
+
                                         </div>
 
-                                        <div class="flex flex-col py-1">
-                                            <label for="current_password"
-                                                class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]">Website Sekolah
-                                                <Asterisk />
-                                            </label>
-                                            <input placeholder="Website Sekolah" id="current_password"
-                                                name="current_password" type="text" required=""
-                                                class="appearance-none block w-full h-[44px] py-[14px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary text-[14px]" />
-                                            <div
-                                                class="text-[12px] mt-[8px] text-[#F56565] errors_current_password">
+                                        <div>
+                                            <div class="flex flex-col py-1">
+                                                <label for="current_password"
+                                                    class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]">Nomor
+                                                    Fax
+                                                </label>
+                                                <input v-model="form.fax_number" placeholder="Masukan Nomor Fax"
+                                                    id="current_password" name="current_password" type="text"
+                                                    required=""
+                                                    class="appearance-none block w-full h-[44px] py-[14px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary text-[14px]" />
+                                                <div class="text-[12px] mt-[8px] text-[#F56565] errors_current_password"
+                                                    ref="fax_number">
+                                                </div>
+                                            </div>
+
+                                            <div class="flex flex-col py-1">
+                                                <label for="current_password"
+                                                    class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]">Website
+                                                    Sekolah
+                                                </label>
+                                                <input v-model="form.website" placeholder="Masukan Website Sekolah"
+                                                    id="current_password" name="current_password" type="text"
+                                                    required=""
+                                                    class="appearance-none block w-full h-[44px] py-[14px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary text-[14px]" />
+                                                <div class="text-[12px] mt-[8px] text-[#F56565] errors_current_password"
+                                                    ref="website">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div
+                                    class="grid grid-cols-1 gap-[20px] p-[20px] bg-white rounded-[8px] border border-[#CBD5E0] w-full">
+                                    <div class="text-[18px] text-[#6E6B7B]">
+                                        Kontak Admin
+                                    </div>
+                                    <div class="grid lg:grid-cols-1 lg:gap-[20px] text-[#6E6B7B] text-[14px]">
+                                        <div v-for="index in form.admin" :key="index"
+                                            class="grid lg:grid-cols-2 lg:gap-[24px]">
+                                            <div class="flex flex-col py-1">
+                                                <label for="current_password"
+                                                    class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]">Nama
+                                                    Lengkap
+                                                    <Asterisk />
+                                                </label>
+                                                <input v-model="index.name" placeholder="Masukan Nama Lengkap"
+                                                    id="current_password" name="current_password" type="text"
+                                                    required=""
+                                                    class="appearance-none block w-full h-[44px] py-[14px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary text-[14px]" />
+                                                <div
+                                                    class="text-[12px] mt-[8px] text-[#F56565] errors_current_password" ref="admin_name">
+                                                </div>
+                                            </div>
+                                            <div class="flex flex-col py-1">
+                                                <label for="current_password"
+                                                    class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]">E-Mail
+                                                    <Asterisk />
+                                                </label>
+                                                <input v-model="index.email" placeholder="Masukan Email"
+                                                    id="current_password" name="current_password" type="email"
+                                                    required=""
+                                                    class="appearance-none block w-full h-[44px] py-[14px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary text-[14px]" />
+                                                <div
+                                                    class="text-[12px] mt-[8px] text-[#F56565] errors_current_password" ref="admin_email">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="flex flex-row-reverse items-end gap-[6px]">
+                                                <button
+                                                    class="bg-[#4299E1] hover:bg-blue-700 py-[4px] px-[8px] rounded text-white text-[14px]"
+                                                    @click.prevent="adminField()">
+                                                    <Icon set="teamui" name="plus"></Icon>
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
@@ -373,482 +443,21 @@
                             </div>
                         </div>
                         <div class="flex flex-row-reverse items-end gap-[7px]">
-                            <button
+                            <button v-if=" step != 3"
                                 class="bg-[#4299E1] hover:bg-blue-700 py-[0.5rem] px-[0.25rem] rounded text-white w-[110px] h-[36px] text-[14px]"
                                 @click.prevent="nextPage()">Selanjutnya</button>
-                            <button
+                            <button v-if=" step == 3"
+                                class="bg-[#4299E1] hover:bg-blue-700 py-[0.5rem] px-[0.25rem] rounded text-white w-[110px] h-[36px] text-[14px]"
+                                @click.prevent="storeSchool()">Simpan</button>
+                            <button v-if="step != 1"
                                 class="border border-[#4299E1] p-[4px] rounded-[4px] text-[#4299E1] w-[78px] w-[110px] h-[36px] text-[14px]"
-                                @click.prevent="previousPage()">Kembali</button>
+                                @click.prevent="previousPage()">Sebelumnya</button>
                         </div>
                     </div>
-                </div>
-            </div>
+                </template>
+            </StepperLayout>
         </template>
     </v-container>
-=======
-<template>
-    <layout>
-        <BaseContent>
-            <template #title>Tambah Sekolah</template>
-            <template #content>
-                <StepperLayout>
-                    <template #indicators>
-                        <StepIndicators :step="step"></StepIndicators>
-                    </template>
-                    <template #label>
-                        <StepLabel></StepLabel>
-                    </template>
-                    <template #content>
-                        <div class="grid grid-cols-1 gap-[20px]">
-                            <div v-if="step === 1" id="step-1">
-                                <div
-                                    class="grid grid-cols-1 gap-[20px] p-[20px] bg-white rounded-[8px] border border-[#CBD5E0] w-full">
-                                    <div class="text-[18px] text-[#6E6B7B]">Data Sekolah</div>
-                                    <div class="grid lg:grid-cols-2 lg:gap-[24px] text-[#6E6B7B] text-[14px]">
-                                        <div>
-                                            <div class="flex flex-col py-1">
-                                                <label for="current_password"
-                                                    class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]">NPSN
-                                                    <Asterisk />
-                                                </label>
-                                                <input v-model="form.npsn" placeholder="Masukan NPSN"
-                                                    id="current_password" name="current_password" type="text"
-                                                    required=""
-                                                    class="appearance-none block w-full h-[44px] py-[14px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary text-[14px]" />
-                                                <div class="text-[12px] mt-[8px] text-[#F56565] errors_npsn" ref="npsn">
-                                                </div>
-                                            </div>
-
-                                            <div class="flex flex-col py-1">
-                                                <label for="current_password"
-                                                    class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]">Status
-                                                    Sekolah
-                                                    <Asterisk />
-                                                </label>
-                                                <select v-model="form.status"
-                                                    class="bg-white appearance-none block w-full h-[44px] py-[10px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary sm:text-[14px]">
-                                                    <option value="" selected>-- Pilih Status --</option>
-                                                    <option value="0">Negeri</option>
-                                                    <option value="1">Swasta</option>
-                                                </select>
-                                                <div class="text-[12px] mt-[8px] text-[#F56565] errors_current_password"
-                                                    ref="status">
-                                                </div>
-                                            </div>
-
-                                            <div class="flex flex-col py-1">
-                                                <label for="current_password"
-                                                    class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]">Status
-                                                    Kepemilikan
-                                                    <Asterisk />
-                                                </label>
-                                                <select v-model="form.ownership_status"
-                                                    class="bg-white appearance-none block w-full h-[44px] py-[10px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary sm:text-[14px]">
-                                                    <option value="" selected>-- Pilih Status Kepemilikan --</option>
-                                                    <option value="f">Yayasan</option>
-                                                    <option value="g">Pemerintah</option>
-                                                    <option value="e">BUMN</option>
-                                                </select>
-                                                <div class="text-[12px] mt-[8px] text-[#F56565] errors_current_password"
-                                                    ref="ownership_status">
-                                                </div>
-                                            </div>
-
-                                            <div class="flex flex-col py-1">
-                                                <label for="current_password"
-                                                    class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]">Tanggal
-                                                    SK
-                                                    Izin Operasional
-                                                    <Asterisk />
-                                                </label>
-                                                <input v-model="form.operational_date"
-                                                    placeholder="Masukan Tanggal SK Izin Operasional"
-                                                    id="current_password" name="current_password" type="date"
-                                                    required=""
-                                                    class="appearance-none block w-full h-[44px] py-[14px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary text-[14px]" />
-                                                <div class="text-[12px] mt-[8px] text-[#F56565] errors_current_password"
-                                                    ref="operational_date">
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div>
-                                            <div class="flex flex-col py-1">
-                                                <label for="current_password"
-                                                    class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]">Nama
-                                                    Sekolah
-                                                    <Asterisk />
-                                                </label>
-                                                <input v-model="form.name" placeholder="Masukan Nama Sekolah"
-                                                    id="current_password" name="current_password" type="text"
-                                                    required=""
-                                                    class="appearance-none block w-full h-[44px] py-[14px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary text-[14px]" />
-                                                <div class="text-[12px] mt-[8px] text-[#F56565] errors_current_password"
-                                                    ref="name">
-                                                </div>
-                                            </div>
-
-                                            <div class="flex flex-col py-1">
-                                                <label for="current_password"
-                                                    class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]">Jenjang
-                                                    Pendidikan
-                                                    <Asterisk />
-                                                </label>
-                                                <select v-model="form.study_type"
-                                                    class="bg-white appearance-none block w-full h-[44px] py-[10px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary sm:text-[14px]"
-                                                    ref="study_type">
-                                                    <option value="" selected>-- Pilih Jenjang Pendidikan --</option>
-                                                    <option value="sd">SD</option>
-                                                    <option value="smp">SMP</option>
-                                                    <option value="sma">SMA</option>
-                                                    <option value="mi">MI</option>
-                                                    <option value="mts">MTS</option>
-                                                    <option value="ma">MA</option>
-                                                </select>
-                                                <div class="text-[12px] mt-[8px] text-[#F56565] errors_current_password"
-                                                    ref="study_type">
-                                                </div>
-                                            </div>
-
-                                            <div class="flex flex-col py-1">
-                                                <label for="current_password"
-                                                    class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]">No. SK
-                                                    Pendirian
-                                                    Sekolah
-                                                    <Asterisk />
-                                                </label>
-                                                <input v-model="form.establishment_letter"
-                                                    placeholder="Masukan No. SK Pendirian" id="current_password"
-                                                    name="current_password" type="text" required=""
-                                                    class="appearance-none block w-full h-[44px] py-[14px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary text-[14px]" />
-                                                <div class="text-[12px] mt-[8px] text-[#F56565] errors_current_password"
-                                                    ref="establishment_letter">
-                                                </div>
-                                            </div>
-
-                                            <div class="flex flex-col py-1">
-                                                <label for="current_password"
-                                                    class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]">Waktu
-                                                    Kegiatan
-                                                    Mengajar (KBM)
-                                                    <Asterisk />
-                                                </label>
-                                                <input v-model="form.teaching_learning_time"
-                                                    placeholder="Masukan Waktu Kegiatan Mengajar (KBM)"
-                                                    id="current_password" name="current_password" type="number"
-                                                    required=""
-                                                    class="appearance-none block w-full h-[44px] py-[14px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary text-[14px]" />
-                                                <div class="text-[12px] mt-[8px] text-[#F56565] errors_current_password"
-                                                    ref="teaching_learning_time">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div v-if="step === 2" id="step-2">
-                                <div class="grid grid-cols-1 gap-[20px]">
-                                    <div
-                                        class="grid grid-cols-1 gap-[20px] p-[20px] bg-white rounded-[8px] border border-[#CBD5E0] w-full">
-                                        <div class="text-[18px] text-[#6E6B7B]">
-                                            Identitas Sekolah
-                                        </div>
-                                        <div>
-                                            <div class="grid lg:grid-cols-1 lg:gap-[24px] text-[#6E6B7B] text-[14px]">
-                                                <div>
-                                                    <div class="flex flex-col py-1">
-                                                        <label for="current_password"
-                                                            class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]">Alamat
-                                                            <Asterisk />
-                                                        </label>
-                                                        <input v-model="form.address" placeholder="Masukan Alamat"
-                                                            id="current_password" name="current_password" type="text"
-                                                            required=""
-                                                            class="appearance-none block w-full h-[44px] py-[14px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary text-[14px]" />
-                                                        <div class="text-[12px] mt-[8px] text-[#F56565] errors_current_password"
-                                                            ref="address">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="grid lg:grid-cols-2 lg:gap-[24px] text-[#6E6B7B] text-[14px]">
-                                                <div>
-                                                    <div class="flex flex-col py-1">
-                                                        <label for="current_password"
-                                                            class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]">Provinsi
-                                                            <Asterisk />
-                                                        </label>
-                                                        <select v-model="form.province_id" @change="getCity"
-                                                            class="bg-white appearance-none block w-full h-[44px] py-[10px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary sm:text-[14px]">
-                                                            <option value="" selected>-- Pilih Provinsi --</option>
-                                                            <option v-for="province in provinces" :key="province"
-                                                                v-bind:value="province.id">
-                                                                {{ province.name }}
-                                                            </option>
-                                                        </select>
-                                                        <div class="text-[12px] mt-[8px] text-[#F56565] errors_current_password"
-                                                            ref="province_id">
-                                                        </div>
-                                                    </div>
-
-                                                    <div>
-                                                        <div class="flex flex-col py-1">
-                                                            <label for="current_password"
-                                                                class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]">Kecamatan
-                                                                <Asterisk />
-                                                            </label>
-                                                            <select v-model="form.district_id" @change="getSubDistrict"
-                                                                class="bg-white appearance-none block w-full h-[44px] py-[10px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary sm:text-[14px]">
-                                                                <option value="" selected>-- Pilih Kecamatan --</option>
-                                                                <option v-for="district in districts" :key="district"
-                                                                    :value="district.id">
-                                                                    {{ district.name }}
-                                                                </option>
-                                                            </select>
-                                                            <div class="text-[12px] mt-[8px] text-[#F56565] errors_current_password"
-                                                                ref="district_id">
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="flex flex-col py-1">
-                                                            <label for="current_password"
-                                                                class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]">RT/RW
-                                                                <Asterisk />
-                                                            </label>
-                                                            <span
-                                                                class="flex flex-col-3 block w-full border border-gray-300 rounded-[4px] focus:ring-secondary focus:border-secondary text-[14px]">
-                                                                <input v-model="form.rt" placeholder="RT" type="text"
-                                                                    required="" min="1"
-                                                                    class="appearance-none w-full h-[44px] py-[14px] px-[12px] shadow-sm placeholder-gray-400 focus:outline-none" />
-                                                                <span
-                                                                    class="flex items-center h-[44px] text-gray-400">/</span>
-                                                                <input v-model="form.rw" placeholder="RW" type="text"
-                                                                    required="" min="1"
-                                                                    class="appearance-none w-full h-[44px] py-[14px] px-[12px] shadow-sm placeholder-gray-400 focus:outline-none" />
-                                                            </span>
-                                                            <div class="text-[12px] mt-[8px] text-[#F56565] errors_current_password"
-                                                                ref="rw">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-
-                                                <div>
-                                                    <div class="flex flex-col py-1">
-                                                        <label for="current_password"
-                                                            class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]">Kota/Kabupaten
-                                                            <Asterisk />
-                                                        </label>
-                                                        <select v-model="form.city_id" @change="getDistrict"
-                                                            class="bg-white appearance-none block w-full h-[44px] py-[10px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary sm:text-[14px]">
-                                                            <option value="" selected>-- Pilih Kota/Kabupaten --
-                                                            </option>
-                                                            <option v-for="city in cities" :key="city"
-                                                                v-bind:value="city.id">
-                                                                {{ city.name }}
-                                                            </option>
-                                                        </select>
-                                                        <div class="text-[12px] mt-[8px] text-[#F56565] errors_current_password"
-                                                            ref="city_id">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="flex flex-col py-1">
-                                                        <label for="current_password"
-                                                            class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]">Desa/Kelurahan
-                                                            <Asterisk />
-                                                        </label>
-                                                        <select v-model="form.sub_district_id" @change="getPostalCode"
-                                                            class="bg-white appearance-none block w-full h-[44px] py-[10px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary sm:text-[14px]">
-                                                            <option value="" selected>-- Pilih Desa/Kelurahan --
-                                                            </option>
-                                                            <option v-for="sub_district in sub_districts"
-                                                                :key="sub_district" v-bind:value="sub_district.id">
-                                                                {{ sub_district.name }}
-                                                            </option>
-                                                        </select>
-                                                        <div class="text-[12px] mt-[8px] text-[#F56565] errors_current_password"
-                                                            ref="sub_district_id">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="flex flex-col py-1">
-                                                        <label for="current_password"
-                                                            class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]">Kode
-                                                            Pos
-                                                            <Asterisk />
-                                                        </label>
-                                                        <select v-model="form.postal_code_id"
-                                                            class="bg-white appearance-none block w-full h-[44px] py-[10px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary sm:text-[14px]">
-                                                            <option value="" selected>-- Pilih Kode Pos --
-                                                            </option>
-                                                            <option v-for="postal_code in postal_codes"
-                                                                :key="postal_code" v-bind:value="postal_code.id">
-                                                                {{ postal_code.code }}
-                                                            </option>
-                                                        </select>
-                                                        <div class="text-[12px] mt-[8px] text-[#F56565] errors_current_password"
-                                                            ref="postal_code_id">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="flex flex-col py-1">
-                                        <label for="current_password"
-                                            class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]">Peta
-                                            Lokasi
-                                            <Asterisk />
-                                        </label>
-                                        <GoogleMaps :location="{lat: form.latitude, lng: form.longitude}"
-                                            :getLocation="getLocation" :center="center" :zoom="13" />
-                                        <div class="text-[12px] mt-[8px] text-[#F56565] errors_current_password"
-                                            ref="gmaps">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div v-if="step === 3" id="step-3">
-                                <div class="grid grid-cols-1 gap-[20px]">
-                                    <div
-                                        class="grid grid-cols-1 gap-[20px] p-[20px] bg-white rounded-[8px] border border-[#CBD5E0] w-full">
-                                        <div class="text-[18px] text-[#6E6B7B]">
-                                            Kontak Sekolah
-                                        </div>
-                                        <div class="grid lg:grid-cols-2 lg:gap-[24px] text-[#6E6B7B] text-[14px]">
-                                            <div>
-                                                <div class="flex flex-col py-1">
-                                                    <label for="current_password"
-                                                        class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]">Nomor
-                                                        Telepon
-                                                        <Asterisk />
-                                                    </label>
-                                                    <input v-model="form.phone_number"
-                                                        placeholder="Masukan Nomor Telepon" id="current_password"
-                                                        name="current_password" type="text" required=""
-                                                        class="appearance-none block w-full h-[44px] py-[14px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary text-[14px]" />
-                                                    <div class="text-[12px] mt-[8px] text-[#F56565] errors_current_password"
-                                                        ref="phone_number">
-                                                    </div>
-                                                </div>
-
-                                                <div class="flex flex-col py-1">
-                                                    <label for="current_password"
-                                                        class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]">E-Mail
-                                                        Sekolah
-                                                        <Asterisk />
-                                                    </label>
-                                                    <input v-model="form.email" placeholder="Masukan E-Mail Sekolah"
-                                                        id="current_password" name="current_password" type="text"
-                                                        required=""
-                                                        class="appearance-none block w-full h-[44px] py-[14px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary text-[14px]" />
-                                                    <div class="text-[12px] mt-[8px] text-[#F56565] errors_current_password"
-                                                        ref="email">
-                                                    </div>
-                                                </div>
-
-                                            </div>
-
-                                            <div>
-                                                <div class="flex flex-col py-1">
-                                                    <label for="current_password"
-                                                        class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]">Nomor
-                                                        Fax
-                                                    </label>
-                                                    <input v-model="form.fax_number" placeholder="Masukan Nomor Fax"
-                                                        id="current_password" name="current_password" type="text"
-                                                        required=""
-                                                        class="appearance-none block w-full h-[44px] py-[14px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary text-[14px]" />
-                                                    <div class="text-[12px] mt-[8px] text-[#F56565] errors_current_password"
-                                                        ref="fax_number">
-                                                    </div>
-                                                </div>
-
-                                                <div class="flex flex-col py-1">
-                                                    <label for="current_password"
-                                                        class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]">Website
-                                                        Sekolah
-                                                    </label>
-                                                    <input v-model="form.website" placeholder="Masukan Website Sekolah"
-                                                        id="current_password" name="current_password" type="text"
-                                                        required=""
-                                                        class="appearance-none block w-full h-[44px] py-[14px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary text-[14px]" />
-                                                    <div class="text-[12px] mt-[8px] text-[#F56565] errors_current_password"
-                                                        ref="website">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div
-                                        class="grid grid-cols-1 gap-[20px] p-[20px] bg-white rounded-[8px] border border-[#CBD5E0] w-full">
-                                        <div class="text-[18px] text-[#6E6B7B]">
-                                            Kontak Admin
-                                        </div>
-                                        <div class="grid lg:grid-cols-1 lg:gap-[20px] text-[#6E6B7B] text-[14px]">
-                                            <div v-for="index in form.admin" :key="index"
-                                                class="grid lg:grid-cols-2 lg:gap-[24px]">
-                                                <div class="flex flex-col py-1">
-                                                    <label for="current_password"
-                                                        class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]">Nama
-                                                        Lengkap
-                                                        <Asterisk />
-                                                    </label>
-                                                    <input v-model="index.name" placeholder="Masukan Nama Lengkap"
-                                                        id="current_password" name="current_password" type="text"
-                                                        required=""
-                                                        class="appearance-none block w-full h-[44px] py-[14px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary text-[14px]" />
-                                                    <div
-                                                        class="text-[12px] mt-[8px] text-[#F56565] errors_current_password" ref="admin_name">
-                                                    </div>
-                                                </div>
-                                                <div class="flex flex-col py-1">
-                                                    <label for="current_password"
-                                                        class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]">E-Mail
-                                                        <Asterisk />
-                                                    </label>
-                                                    <input v-model="index.email" placeholder="Masukan Email"
-                                                        id="current_password" name="current_password" type="email"
-                                                        required=""
-                                                        class="appearance-none block w-full h-[44px] py-[14px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary text-[14px]" />
-                                                    <div
-                                                        class="text-[12px] mt-[8px] text-[#F56565] errors_current_password" ref="admin_email">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div>
-                                                <div class="flex flex-row-reverse items-end gap-[6px]">
-                                                    <button
-                                                        class="bg-[#4299E1] hover:bg-blue-700 py-[4px] px-[8px] rounded text-white text-[14px]"
-                                                        @click.prevent="adminField()">
-                                                        <Icon set="teamui" name="plus"></Icon>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="flex flex-row-reverse items-end gap-[7px]">
-                                <button v-if=" step != 3"
-                                    class="bg-[#4299E1] hover:bg-blue-700 py-[0.5rem] px-[0.25rem] rounded text-white w-[110px] h-[36px] text-[14px]"
-                                    @click.prevent="nextPage()">Selanjutnya</button>
-                                <button v-if=" step == 3"
-                                    class="bg-[#4299E1] hover:bg-blue-700 py-[0.5rem] px-[0.25rem] rounded text-white w-[110px] h-[36px] text-[14px]"
-                                    @click.prevent="storeSchool()">Simpan</button>
-                                <button v-if="step != 1"
-                                    class="border border-[#4299E1] p-[4px] rounded-[4px] text-[#4299E1] w-[78px] w-[110px] h-[36px] text-[14px]"
-                                    @click.prevent="previousPage()">Sebelumnya</button>
-                            </div>
-                        </div>
-                    </template>
-                </StepperLayout>
-            </template>
-        </BaseContent>
-    </layout>
->>>>>>> 4b23a1f2cf47110c8e6f6aebb8e0b3115ae91d74
 </template>
 <script>
 import Asterisk from '@/components/Asterisk.vue'
@@ -860,18 +469,12 @@ import Cookies from "js-cookie";
 
 export default {
     name: "SchoolCreate",
-<<<<<<< HEAD
-    components: {    
-        Asterisk
-=======
-    components: {
-        BaseContent,
+    components: {        
         Asterisk,
         StepIndicators,
         StepLabel,
         StepperLayout,
         GoogleMaps
->>>>>>> 4b23a1f2cf47110c8e6f6aebb8e0b3115ae91d74
     },
     data() {
         return {
