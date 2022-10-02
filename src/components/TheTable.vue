@@ -5,7 +5,7 @@
         <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
             <Icon name="search" class="h-3.5 w-4 stroke-primary"></Icon>
         </div>
-        <input v-model="keyword" class="w-['229px'] h-9 py-2.5 pl-9 mr-3 bg-white border border-gray-300 text-gray-900 text-sm rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500" :placeholder="`Cari ${title}`" type="search">
+        <input v-model="keyword" @keyup.enter="getDataSearch()" class="w-['229px'] h-9 py-2.5 pl-9 pr-2 mr-3 bg-white border border-gray-300 text-gray-900 text-sm rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500" :placeholder="`Cari ${title}`" type="search">
     </div>
     <div>
       <Button @click="getDataSearch()">Cari</Button>
@@ -60,9 +60,7 @@
                       {{item[elm.key]}}
                     </td>
                     <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900" v-if="typeof(elm.key) !== 'undefined' && elm?.key === 'action'">
-                      <Button class="mx-0.5" action>Detail</Button>
-                      <Button class="mx-0.5" set-color="warning" action>Edit</Button>
-                      <Button class="mx-0.5" set-color="error" action>Delete</Button>
+                      <slot :id="item.id" />
                     </td>
                   </template>
                 </tr>
@@ -180,23 +178,18 @@ export default {
         const config = {
           headers: { Authorization: `Bearer ${this.$store.getters.getToken}` }
         }
-        // console.log(config);
+        
         this.axios.post(this.url , param, config).then((response) => {
           this.fulldata = response.data
-          // console.log(this.fulldata);
           this.items = response.data.data
-          this.links = response.data.links
-          // Object.keys(this.items.data)
-          // this.headers = Object.keys(this.items[0]).map((r) => {
-          //   r = r.replace("_", " ");
-          //   return r.toUpperCase()
-          // })
-          
+          this.links = response.data.links          
         }).catch(console.log)
       },
+
       getDataSearch(){
         this.getData(this.url)
       },
+      
       getDataSort(index){
         const sortOrder = this.headers[index].sort == 'ASC' ? 'DESC' : 'ASC'
         this.headers[index].sort = sortOrder

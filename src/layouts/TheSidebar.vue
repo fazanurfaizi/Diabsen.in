@@ -1,25 +1,25 @@
 <template>
-  <div class="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0">
-    <div class="flex flex-col flex-grow shadow-xl pt-5 bg-white overflow-y-auto">
-      <div class="flex items-center justify-center text-primary">
-          <div class="text-3xl">
+  <div class="hidden md:flex md:w-[200px] md:flex-col md:fixed md:inset-y-0 text-[13px]">
+    <div class="flex flex-col flex-grow shadow-xl bg-white overflow-y-auto">
+      <div class="flex items-center justify-center py-[20px] text-primary">
+          <div class="text-3xl font-extrabold">
               LOGO
           </div>
       </div>
-      <div class="mt-5 flex-grow flex flex-col">
-        <nav class="flex-1 px-2 pb-4">
+      <div class="flex-grow flex flex-col">
+        <nav class="flex-1 px-[12px] pb-4">
           <div v-for="item in menu" :key="item">
             <div v-if="typeof(item.title) !== 'undefined'">
-              <div class=" text-black uppercase">
+              <div class=" text-text-navbar uppercase mb-[4px]">
                 {{item.title}}
               </div>
-              <div v-for="element in item.items" :key="element" >
-                <Menu :data="element" />
-              </div>
+              <template v-for="element in item.items" :key="element" >
+                <Menu :data="element" class="mb-[4px]" />
+              </template>
             </div>
-            <div v-else>
-              <Menu :data="item" />
-            </div>
+            <template v-else>
+              <Menu :data="item" class="mb-[20px]" />
+            </template>
           </div>
         </nav>
       </div>
@@ -29,103 +29,17 @@
 
 <script>
 import Menu from '@/components/Menu.vue';
-
+import menu from '../menu'
 export default {
     name: "TheSidebar",
     data() {
         return {
-            menu: [
-                {
-                    name: "Beranda",
-                    icon: "home",
-                    path: "/dashboard"
-                },
-                {
-                    title: "Pengelolaan",
-                    items: [
-                        {
-                            name: "Foobar",
-                            icon: "play",
-                            path: "#",
-                            child: [
-                                {
-                                    name: "Foobar List",
-                                    path: "/foobar/list"
-                                },
-                                {
-                                    name: "Foobar Create",
-                                    path: "/foobar/create"
-                                },
-                            ]
-                        },
-                        {
-                            name: "Menu",
-                            icon: "menu",
-                            path: "/forgot-password",
-                        }
-                    ]
-                },
-                {
-                    title: "Kategori",
-                    items: [
-                        {
-                            name: "Menu",
-                            icon: "menu",
-                            path: "#",
-                            child: [
-                                {
-                                    name: "Sub Menu",
-                                    path: "#"
-                                },
-                                {
-                                    name: "Sub Menu",
-                                    path: "#"
-                                },
-                                {
-                                    name: "Sub Menu",
-                                    path: "#"
-                                },
-                            ]
-                        },
-                        {
-                            name: "Menu",
-                            icon: "menu",
-                            path: "#",
-                        }
-                    ]
-                },
-                {
-                    title: "Kategori",
-                    items: [
-                        {
-                            name: "Menu",
-                            icon: "menu",
-                            path: "#",
-                            child: [
-                                {
-                                    name: "Sub Menu",
-                                    path: "#"
-                                },
-                                {
-                                    name: "Sub Menu",
-                                    path: "#"
-                                },
-                                {
-                                    name: "Sub Menu",
-                                    path: "#"
-                                },
-                            ]
-                        },
-                        {
-                            name: "Menu",
-                            icon: "menu",
-                            path: "#",
-                        }
-                    ]
-                }
-            ]
+            menu: []
         };
     },
-    components: { Menu }
+    components: { Menu },
+    created() {
+        this.menu = menu;
+    },
 }
 </script>

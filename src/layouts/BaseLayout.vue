@@ -2,17 +2,15 @@
   <div>
       <SidebarMobile />
       <Sidebar />
-      <div class="md:pl-64 flex flex-col flex-1">
+      <div class="md:pl-[200px] flex flex-col flex-1">
         <Header />
         <main class="flex-1">
-          <div class="py-10 bg-gray-50">
-            <div class="md:mx-8">
-              <BreadCrumb />
-              <slot />
-            </div>
+          <div class="py-10 md:mx-8">
+            <BreadCrumb />
+            <slot />
           </div>
         </main>
-        <Footer color-text="black" />
+        <Footer color-text="footer" />
       </div>
   </div>
 </template>

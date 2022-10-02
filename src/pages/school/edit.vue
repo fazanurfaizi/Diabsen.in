@@ -85,7 +85,7 @@ import TheModal from '@/components/TheModal.vue';
 // import Button from '@/components/TheButton.vue';
 // import TheTable from '@/components/TheTable.vue';
 export default {
-  name: "DashboardPage",
+  name: "SchoolEdit",
   components: { TheModal },
   data() {
     return {
