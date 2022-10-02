@@ -24,7 +24,7 @@
 
         <form>
           <div class="grid gap-6 lg:grid-cols-2">
-            <div>
+            <v-form-control :model="v$.name">
               <VLabel id="name" label="Nama Lengkap" required />
               <VInput
                 id="name"
@@ -33,10 +33,12 @@
                 type="text"
                 v-model="formData.name"
                 required
+                @blur="v$.name.$touch"
+                :error="v$.name.$error"       
               />
-            </div>
+            </v-form-control>            
 
-            <div>                
+            <v-form-control :model="v$.gender">                
               <VLabel id="gender" label="Jenis Kelamin" required />
               <VSelect 
                 v-model="formData.gender"
@@ -45,9 +47,9 @@
                 optionLabel="text"
                 label="Pilih Jenis Kelamin"
               />
-            </div>
+            </v-form-control>
 
-            <div>
+            <v-form-control :model="v$.phone">
               <VLabel id="phone" label="No. WhatsApps" required />
               <VInput
                 id="phone"
@@ -56,10 +58,12 @@
                 type="text"
                 v-model="formData.phone"
                 required
+                @blur="v$.phone.$touch"   
+                :error="v$.phone.$error"
               />               
-            </div>
+            </v-form-control>
 
-            <div>
+            <v-form-control :model="v$.birthdate">
               <VLabel id="birthday" label="Tanggal Lahir" required />
               <VInput
                 id="birthday"
@@ -69,9 +73,9 @@
                 v-model="formData.birthdate"
                 required
               />
-            </div>
+            </v-form-control>
 
-            <div>
+            <v-form-control :model="v$.email">
               <VLabel id="email" label="E-Mail" required />
               <VInput
                 id="email"
@@ -80,8 +84,10 @@
                 type="email"
                 v-model="formData.email"
                 required
-              />                
-            </div>
+                @blur="v$.email.$touch"
+                :error="v$.email.$error"
+              />
+            </v-form-control>
 
             <div>
               <VLabel id="role" label="Jabatan" required />
@@ -113,18 +119,22 @@
 
 <script>
 import { defineComponent, onMounted, reactive, ref, computed } from "vue";
+import { useStore } from 'vuex'
+import { useRouter } from "vue-router";
+import { useVuelidate } from '@vuelidate/core' 
+import { required, email, helpers } from '@vuelidate/validators'
+import VFormControl from '@/components/form/form-control.vue'
 import VInput from "@/components/form/input.vue";
 import VLabel from '@/components/form/label.vue'
 import VSelect from '@/components/form/select.vue'
 import VButton from '@/components/ui/button/index.vue'
-import { useStore } from 'vuex'
-import { useRouter } from "vue-router";
 import ProfileLayout from "./layouts/ProfileLayout.vue";
 import Link from '@/components/ui/link/index.vue'
 
 export default defineComponent({
   name: 'ProfileEdit',
   components: {
+    VFormControl,
     VInput,
     VLabel,
     VSelect,
@@ -147,7 +157,28 @@ export default defineComponent({
       gender: user.value.gender,
       birthdate: user.value.birthdate,
       role: user.value.role,      
-    })    
+    })
+
+    const rules = {
+      name: {
+        required: helpers.withMessage('Nama tidak boleh kosong', required)
+      },
+      email: { 
+        required: helpers.withMessage('E-Mail tidak boleh kosong', required), 
+        email: helpers.withMessage('E-Mail tidak valid', email)
+      },
+      phone: {
+        required: helpers.withMessage('No. WhatsApps tidak boleh kosong', required)
+      },
+      gender: {
+        required: helpers.withMessage('Jenis kelamin tidak boleh kosong', required)
+      },
+      birthdate: {
+        required: helpers.withMessage('Tanggal lahir tidak boleh kosong', required)
+      },
+    }
+
+    const v$ = useVuelidate(rules, formData)
 
     const genderOptions = ref([
       {
@@ -176,7 +207,8 @@ export default defineComponent({
       formData,
       genderOptions,
       updateProfile,
-      handleOnBack,      
+      handleOnBack, 
+      v$     
     }
   }
 })

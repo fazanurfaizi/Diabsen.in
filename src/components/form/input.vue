@@ -31,11 +31,12 @@
             rounded-md
             shadow-sm
             placeholder-gray-400
-            focus:outline-none focus:ring-secondary focus:border-secondary
+            focus:outline-none
             sm:text-sm
         "
         :class="[
-            readonly ? 'bg-gray-100' : 'bg-clip-padding'
+            readonly ? 'bg-gray-100' : 'bg-clip-padding',
+            error ? 'border border-red-600' : 'focus:ring-secondary focus:border-secondary'
         ]"  
     />
 </template>
@@ -119,6 +120,11 @@ export default defineComponent({
             required: false,
             default: null
         },
+        error: {
+            type: Boolean,
+            required: false,
+            default: false
+        }
     },
     emits: ['input', 'change', 'focus', 'blur', 'escape', 'update:modelValue'],
     setup(props, { emit }) {
