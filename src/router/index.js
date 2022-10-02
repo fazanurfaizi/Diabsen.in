@@ -22,13 +22,12 @@ import FoobarEdit from '../pages/foobar/index.vue';
 
 import store from '../store/index';
 
-import tes from "../menu";
-
 
 let routes = [
     {
         path: "/",
-        component: LoginPage
+        component: LoginPage,
+        meta: { isLogin: true }
     },
     {
         path: "/magic-link",
@@ -61,7 +60,8 @@ let routes = [
     {
         path: '/schools',
         component: SchoolList,
-        meta: { requiresAuth: true }
+        meta: { requiresAuth: true },
+        name: "schools"
     },
     {
         path: '/schools/:id/detail',
@@ -76,7 +76,8 @@ let routes = [
     {
         path: '/schools/create',
         component: SchoolCreate,
-        meta: { requiresAuth: true }
+        meta: { requiresAuth: true },
+        name: "schools.create"
     },
     {
         path: '/foobar/list',
@@ -101,16 +102,14 @@ const router = createRouter({
 });
 
 router.beforeEach((to) => {
-    console.log(tes);
-    console.log(store);
     if (to.meta.requiresAuth && !store.getters.isAuthenticated) {
         return {
             path: '/',
             query: { redirect: to.fullPath },
         }
-    }else if (!to.meta.requiresAuth && store.getters.isAuthenticated) {
+    } else if (!to.meta.requiresAuth && store.getters.isAuthenticated) {
         return {
-          path: '/dashboard'
+            path: '/dashboard'
         }
     }
 })
