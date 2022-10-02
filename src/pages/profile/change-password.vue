@@ -3,6 +3,25 @@
         <template #title>Profile</template>
         <template #content>
             <profile-layout>
+                <template #nav>
+                    <ul class="flex flex-col w-full gap-2">
+                        <li class="my-px">
+                        <Link                     
+                            title="Profile Saya"
+                            path="profile-edit"
+                            icon="user-circle"                    
+                        />
+                        </li>
+                        <li class="my-px">
+                        <Link                     
+                            title="Ubah Kata Sandi"
+                            path="profile-change-password"
+                            icon="key"                    
+                        />
+                        </li>                        
+                    </ul>
+                </template>
+
                 <form>
                     <div>
                         <VLabel id="current_password" label="Kata Sandi Lama" required />
@@ -56,12 +75,13 @@
 
 <script>
 import { defineComponent, reactive } from "vue";
+import { useStore } from 'vuex'
+import { useRouter } from "vue-router";
 import VInput from "@/components/form/input.vue";
 import VLabel from '@/components/form/label.vue'
 import VButton from '@/components/ui/button/index.vue'
 import ProfileLayout from "./layouts/ProfileLayout.vue";
-import { useStore } from 'vuex'
-import { useRouter } from "vue-router";
+import Link from '@/components/ui/link/index.vue'
 
 export default defineComponent({
     name: 'ChangePassword',
@@ -70,6 +90,7 @@ export default defineComponent({
         VInput,
         VLabel,          
         VButton,
+        Link
     },
     setup() {
         const store = useStore()
@@ -91,7 +112,7 @@ export default defineComponent({
         }
 
         const handleOnBack = () => {
-            router.back()
+            router.push({ name: 'profile-user' })
         }
 
         return {

@@ -1,6 +1,6 @@
 <template>
     <div class="block md:flex">
-        <div class="w-full md:w-3/12 h-screen p-4 sm:p-6 lg:p-4 bg-white rounded-2xl border-2">
+        <div class="w-full md:w-3/12 h-screen p-4 sm:p-6 lg:p-4 bg-white rounded-2xl border">
             <div class="grid grid-cols-1 gap-5">
                 <div class="flex flex-col items-center">
                     <div
@@ -15,27 +15,12 @@
                     <span class="text-xs font-normal">{{ user.role }}</span>
                 </div>
                 <nav>
-                    <ul class="flex flex-col w-full gap-2">
-                        <li class="my-px">
-                            <Link                     
-                                title="Profile Saya"
-                                path="profile-edit"
-                                icon="user-circle"                    
-                            />
-                        </li>
-                        <li class="my-px">
-                            <Link                     
-                                title="Ubah Kata Sandi"
-                                path="profile-change-password"
-                                icon="key"                    
-                            />
-                        </li>
-                    </ul>
+                    <slot name="nav"></slot>
                 </nav>
             </div>            
         </div>
 
-        <div class="w-full md:w-9/12 p-8 h-fit bg-white lg:ml-4 rounded-2xl border-2">
+        <div class="w-full md:w-9/12 p-8 h-fit bg-white lg:ml-4 rounded-2xl border">
             <slot></slot>
         </div>
     </div>
@@ -43,14 +28,10 @@
 
 <script>
 import { computed, defineComponent } from 'vue';
-import Link from '@/components/ui/link/index.vue'
 import { useStore } from 'vuex';
 
 export default defineComponent({
-    name: 'ProfileLayout',
-    components: {
-        Link
-    },
+    name: 'ProfileLayout',    
     setup() {
         const store = useStore()
 

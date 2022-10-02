@@ -3,8 +3,27 @@
     <template #title>Profile</template>
     <template #content>
       <profile-layout>
+        <template #nav>
+          <ul class="flex flex-col w-full gap-2">
+            <li class="my-px">
+              <Link                     
+                title="Profile Saya"
+                path="profile-edit"
+                icon="user-circle"                    
+              />
+            </li>
+            <li class="my-px">
+              <Link                     
+                title="Ubah Kata Sandi"
+                path="profile-change-password"
+                icon="key"                    
+              />
+            </li>                        
+          </ul>
+        </template>
+
         <form>
-          <div class="grid gap-[24px] lg:grid-cols-2">
+          <div class="grid gap-6 lg:grid-cols-2">
             <div>
               <VLabel id="name" label="Nama Lengkap" required />
               <VInput
@@ -101,6 +120,7 @@ import VButton from '@/components/ui/button/index.vue'
 import { useStore } from 'vuex'
 import { useRouter } from "vue-router";
 import ProfileLayout from "./layouts/ProfileLayout.vue";
+import Link from '@/components/ui/link/index.vue'
 
 export default defineComponent({
   name: 'ProfileEdit',
@@ -109,6 +129,7 @@ export default defineComponent({
     VLabel,
     VSelect,
     VButton,
+    Link,
     ProfileLayout
 },
   setup() {
@@ -144,7 +165,7 @@ export default defineComponent({
     }
 
     const handleOnBack = () => {
-      router.back()
+      router.push({ name: 'profile-user' })
     }
 
     onMounted(() => {
@@ -155,7 +176,7 @@ export default defineComponent({
       formData,
       genderOptions,
       updateProfile,
-      handleOnBack      
+      handleOnBack,      
     }
   }
 })
