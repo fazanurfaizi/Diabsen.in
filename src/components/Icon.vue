@@ -9,33 +9,33 @@
   import heroIconsOutline from './icons/heroicons-outline.vue';
   import heroIconsSolid from './icons/heroicons-solid.vue';
   import zondIcons from './icons/zondicons.vue';
-  import TeamUi from './icons/team-ui.vue';
+  import teamUi from './icons/team-ui.vue';
 
-  export default {
-    name: "IconItem",
-    props: {
-      name: {
-        type: String,
-        required: true,
-      },
-
-      set: {
-        type: String,
-        default: "outline"
-      },
+export default {
+  name: "IconItem",
+  props: {
+    name: {
+      type: String,
+      required: true,
     },
 
-    components: {
+    set: {
+      type: String,
+      default: "outline"
+    },
+  },
+
+  components: {
     heroIconsOutline,
     heroIconsSolid,
     zondIcons,
-    TeamUi
-},
+    teamUi
+  },
 
-    computed: {
-      iconSet() {
-        return this.set;
-      },
-    }
-  };
+  computed: {
+    iconSet() {
+      return this.set;
+    },
+  }
+};
 </script>

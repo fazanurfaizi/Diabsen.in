@@ -13,12 +13,16 @@ import ChangePassword from '../pages/profile/change-password.vue';
 
 import SchoolList from "../pages/school/index"
 import SchoolCreate from '../pages/school/create.vue';
+import SchoolDetail from '../pages/school/detail.vue';
+import SchoolEdit from '../pages/school/edit.vue';
 
 import FoobarList from '../pages/foobar/index.vue';
 import FoobarCreate from '../pages/foobar/index.vue';
 import FoobarEdit from '../pages/foobar/index.vue';
 
-import store from '../store/index'
+import store from '../store/index';
+
+import tes from "../menu";
 
 
 let routes = [
@@ -60,6 +64,16 @@ let routes = [
         meta: { requiresAuth: true }
     },
     {
+        path: '/schools/:id/detail',
+        component: SchoolDetail,
+        meta: { requiresAuth: true }
+    },
+    {
+        path: '/schools/:id/edit',
+        component: SchoolEdit,
+        meta: { requiresAuth: true }
+    },
+    {
         path: '/schools/create',
         component: SchoolCreate,
         meta: { requiresAuth: true }
@@ -87,6 +101,8 @@ const router = createRouter({
 });
 
 router.beforeEach((to) => {
+    console.log(tes);
+    console.log(store);
     if (to.meta.requiresAuth && !store.getters.isAuthenticated) {
         return {
             path: '/',

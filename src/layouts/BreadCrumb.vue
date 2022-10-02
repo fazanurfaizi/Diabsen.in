@@ -4,7 +4,7 @@
         <ol role="list" class="flex items-center space-x-4">
           <li>
             <div class="flex items-center">
-              <Icon name="home" class="h-5 w-5 text-gray-400" />
+              <Icon name="home" set="teamui" class="h-5 w-5 text-gray-400" />
               <div class="ml-4 text-sm font-medium text-gray-500">Beranda</div>
             </div>
           </li>
