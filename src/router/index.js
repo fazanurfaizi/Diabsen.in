@@ -81,7 +81,7 @@ let routes = [
                         meta: { requiresAuth: true }
                     },
                 ]
-            },
+            },            
             {            
                 path: '/schools',   
                 name: 'schools',
@@ -106,6 +106,16 @@ let routes = [
                             requiresAuth: true,
                             breadCrumb: 'Tambah Sekolah'
                         },                        
+                    },
+                    {
+                        path: ':id/detail',
+                        component: () => import('@/pages/school/detail.vue'),
+                        meta: { requiresAuth: true }
+                    },
+                    {
+                        path: ':id/edit',
+                        component: () => import('@/pages/school/edit.vue'),
+                        meta: { requiresAuth: true }
                     },
                 ]
             },

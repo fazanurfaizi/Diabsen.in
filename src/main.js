@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import '@/assets/css/tailwind.css'; 
+import '@/assets/css/tailwind.css';
 import router from './router'
 import Icon from '@/components/Icon.vue'
 import BaseLayout from '@/layouts/BaseLayout.vue'
@@ -11,6 +11,15 @@ import store from './store/index'
 import { setupAxiosInterceptors } from './core/services/api.service';
 
 setupAxiosInterceptors(store)
+
+// axios config
+axios.defaults.headers.post['Content-Type'] = 'application/json';
+axios.interceptors.request.use(function (config) {
+    // Do something before request is sent
+    return config;
+}, function (error) {
+    return Promise.reject(error);
+});
 
 createApp(App)
     .use(router)

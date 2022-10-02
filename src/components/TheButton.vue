@@ -1,5 +1,5 @@
 <template>
-  <button class="text-white rounded" :class="[getAction, getColor]">
+  <button class="rounded" :class="[getAction, getColor]">
     <slot>Button</slot>
   </button>
 </template>
@@ -13,6 +13,7 @@ export default {
       type: String,
       default: "primary"
     },
+    outline: Boolean,
   },
   computed: {
     getAction () {
@@ -22,18 +23,25 @@ export default {
       let result;
       switch (this.setColor) {
         case "primary":
-          result = "bg-btn-primary"
+          result = "btn-primary"
           break;
         case "warning":
-          result = "bg-btn-warning"
+          result = "btn-warning"
           break;
         case "error":
-          result = "bg-btn-error"
+          result = "btn-error"
           break;        
         default:
-          result = "bg-btn-primary"
+          result = "btn-primary"
           break;
       }
+
+      if (this.outline) {
+        result = "text-"+result+ " border-2 border-"+result
+      }else{
+        result = "text-white bg-"+result
+      }
+      // console.log(result);
       return result
     },
   }

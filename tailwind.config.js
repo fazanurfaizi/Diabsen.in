@@ -33,6 +33,8 @@ module.exports = {
           DEFAULT: '#EB7714',
           dark: 'red'
         },
+        'text-navbar': '#5E5873',
+        'footer': '#6E6B7B',
         'title-content': '#6E6B7B',
         'button': '#4299E1',
         'btn': {
@@ -40,10 +42,15 @@ module.exports = {
           DEFAULT: '#4299E1',
           warning: '#FAB215',
           error: '#E53E3E',
-        },        
+        },  
+        'base-page': '#EDF2F7',      
         'text-table': '#5E5873',
-        'thead': '#F3F2F7'
-      },
+        'thead': '#F3F2F7',
+        'color-tabs': {
+          active: '#EB7714',
+          DEFAULT: '#B9B9C3',
+        },
+      }
     },
   },
   plugins: [
