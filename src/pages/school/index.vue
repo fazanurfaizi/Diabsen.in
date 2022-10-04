@@ -1,27 +1,25 @@
 <template>
-  <Layout>
-    <Content>
-      <template v-slot:title>Daftar Sekolah</template>
-      <template v-slot:content>
-        <TheTable 
-          :rows="dataTable"
-          :column="headerTable"
-          ref="table"
-          >
-          <template #nav-right>
-            <router-link to="/schools/create">
-              <Button>Tambah Sekolah</Button>
-            </router-link>
-          </template>
-          <template v-slot="slotProps">
-            <Button @click="goTo('detail',slotProps.id)" class="mx-0.5" action>Detail</Button>
-            <Button @click="goTo('edit',slotProps.id)" class="mx-0.5" set-color="warning" action>Edit</Button>
-            <Button @click="goTo('delete',slotProps.id)" class="mx-0.5" set-color="error" action>Delete</Button>
-          </template>
-        </TheTable>
-      </template>
-    </Content>
-  </Layout>
+  <v-container>
+    <template v-slot:title>Daftar Sekolah</template>
+    <template v-slot:content>
+      <TheTable 
+        :rows="dataTable"
+        :column="headerTable"
+        ref="table"
+        >
+        <template #nav-right>
+          <router-link to="/schools/create">
+            <Button>Tambah Sekolah</Button>
+          </router-link>
+        </template>
+        <template v-slot="slotProps">
+          <Button @click="goTo('detail',slotProps.id)" class="mx-0.5" action>Detail</Button>
+          <Button @click="goTo('edit',slotProps.id)" class="mx-0.5" set-color="warning" action>Edit</Button>
+          <Button @click="goTo('delete',slotProps.id)" class="mx-0.5" set-color="error" action>Delete</Button>
+        </template>
+      </TheTable>
+    </template>
+  </v-container>
   <TheModal set-type="confirm" class="w-[425px]" @confirm="confirmHandle" v-show="isShowModal" />
 </template>
 <script>

@@ -1,3 +1,6 @@
+const plugin = require('tailwindcss/plugin')
+const colors = require('tailwindcss/colors')
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -17,7 +20,8 @@ module.exports = {
       },
       padding: {
         '5px': '5px',
-      },
+      },    
+
       colors: {
         'primary': {
           light: '#3a5c9d',
@@ -49,5 +53,12 @@ module.exports = {
       }
     },
   },
-  plugins: [],
+  plugins: [
+    require('tailwind-scrollbar'),
+    plugin(({ addVariant, e }) => {
+      addVariant('sidebar-expanded', ({ modifySelectors, separator }) => {
+        modifySelectors(({ className }) => `.sidebar-expanded .${e(`sidebar-expanded${separator}${className}`)}`)
+      })
+    })
+  ],
 }

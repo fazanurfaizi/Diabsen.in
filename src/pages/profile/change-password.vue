@@ -1,93 +1,161 @@
 <template>
-    <form>
-        <EditLayout>
-            <div class="grid grid-cols-1 gap-[12px]">
-                <div>
-                    <label for="current_password" class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]">Kata Sandi
-                        Lama
-                        <Asterisk />
-                    </label>
-                    <input v-model="current_password" placeholder="Kata Sandi Lama" id="current_password"
-                        name="current_password" type="password" required=""
-                        class="appearance-none block w-full h-[44px] py-[14px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary text-[14px]" />
-                    <div class="text-[12px] mt-[8px] text-[#F56565] errors_current_password"></div>
-                </div>
-    
-                <div class="lg:flex gap-[8px] lg:flex-col-2">
-                    <div class="lg:w-1/2">
-                        <label for="new_password" class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]">Kata Sandi Baru
-                            <Asterisk />
-                        </label>
-                        <input v-model="new_password" placeholder="Kata Sandi Baru" id="new_password" name="new_password"
-                            type="password" required=""
-                            class="appearance-none block w-full h-[44px] py-[14px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary text-[14px]" />
-                        <div class="text-[12px] mt-[8px] text-[#F56565] errors_new_password"></div>
-                    </div>
-                    <div class="lg:flex-grow">
-                        <label for="confirm_password" class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]">Ketik Ulang
-                            Kata
-                            Sandi
-                            <Asterisk />
-                        </label>
-                        <input v-model="confirm_password" placeholder="Ketik Ulang Kata Sandi" id="confirm_password"
-                            name="confirm_password" type="password" required=""
-                            class="appearance-none block w-full h-[44px] py-[14px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary text-[14px]" />
-                        <div class="text-[12px] mt-[8px] text-[#F56565] errors_confirm_password"></div>
-                    </div>
-                </div>
-                <div class="flex flex-row-reverse items-end gap-[7px]">
-                    <button @click.prevent="changePassword()"
-                        class="bg-[#4299E1] hover:bg-blue-700 p-[4px] rounded-[4px] text-white w-[78px] h-[36px] text-[14px]">Simpan</button>
-                    <TheBackButton />
-                </div>
+    <v-container>
+        <template #title>Profile</template>
+        <template #content>
+            <profile-layout>
+                <template #nav>
+                    <ul class="flex flex-col w-full gap-2">
+                        <li class="my-px">
+                            <Link                     
+                                title="Profile Saya"
+                                path="profile-edit"
+                                icon="user-circle"                    
+                            />
+                        </li>
+                        <li class="my-px">
+                            <Link                     
+                                title="Ubah Kata Sandi"
+                                path="profile-change-password"
+                                icon="key"                    
+                            />
+                        </li>                        
+                    </ul>
+                </template>
 
-            </div>
-        </EditLayout>
-    </form>
+                <form>
+                    <v-form-control :model="v$.current_password">
+                        <VLabel id="current_password" label="Kata Sandi Lama" required />
+                        <VInput
+                            id="current_password"
+                            name="current_password"
+                            placeholder="Kata Sandi Lama"
+                            type="password"
+                            v-model="formData.current_password"
+                            required
+                            @blur="v$.current_password.$touch"
+                            :error="v$.current_password.$error"
+                        />
+                    </v-form-control>
+                    <div class="grid gap-6 lg:grid-cols-2 my-4">
+                        <v-form-control :model="v$.new_password">
+                            <VLabel id="new_password" label="Kata Sandi Baru" required />
+                            <VInput
+                                id="new_password"
+                                name="new_password"
+                                placeholder="Kata Sandi Baru"
+                                type="password"
+                                v-model="formData.new_password"
+                                required
+                                @blur="v$.new_password.$touch"
+                                :error="v$.new_password.$error"
+                            />
+                        </v-form-control>
+
+                        <v-form-control :model="v$.confirm_password">
+                            <VLabel id="confirm_password" label="Ketik Ulang Kata Sandi" required />
+                            <VInput
+                                id="confirm_password"
+                                name="confirm_password"
+                                placeholder="Ketik Ulang Kata Sandi"
+                                type="password"
+                                v-model="formData.confirm_password"
+                                required
+                                @blur="v$.confirm_password.$touch"
+                                :error="v$.confirm_password.$error"
+                            />
+                        </v-form-control>
+                    </div>
+                    <div class="flex flex-row-reverse items-end gap-2 mt-2">             
+                        <v-button size="md" color="primary" @click.prevent="changePassword">
+                            Simpan
+                        </v-button>
+                        <v-button size="md" color="info" outline @click="handleOnBack">
+                            Batal
+                        </v-button>
+                    </div>
+                </form>
+            </profile-layout> 
+        </template>
+    </v-container>
 </template>
 
 <script>
-import EditLayout from '@/pages/profile/layouts/EditLayout.vue'
-import Asterisk from '@/components/Asterisk.vue'
-import TheBackButton from './components/TheBackButton.vue'
-export default {
+import { computed, defineComponent, onMounted, reactive } from "vue";
+import { useStore } from 'vuex'
+import { useRouter } from "vue-router";
+import { useVuelidate } from '@vuelidate/core' 
+import { required, sameAs, helpers } from '@vuelidate/validators'
+import VFormControl from '@/components/form/form-control.vue'
+import VInput from "@/components/form/input.vue";
+import VLabel from '@/components/form/label.vue'
+import VButton from '@/components/ui/button/index.vue'
+import ProfileLayout from "./layouts/ProfileLayout.vue";
+import Link from '@/components/ui/link/index.vue'
+
+export default defineComponent({
     name: 'ChangePassword',
-    components: { EditLayout, Asterisk, TheBackButton },
-    data() {
-        return {
-            current_password: null,
-            new_password: null,
-            confirm_password: null
-        }
+    components: {    
+        ProfileLayout,
+        VInput,
+        VLabel,          
+        VButton,
+        VFormControl,
+        Link
     },
-    methods: {
-        changePassword() {
-            const token = this.$store.state.auth.token;
+    setup() {
+        const store = useStore()
+        const router = useRouter()
 
-            let params = {
-                current_password: this.current_password,
-                new_password: this.new_password,
-                confirm_password: this.confirm_password
-            };
+        const formData = reactive({
+            current_password: '',
+            new_password: '',
+            confirm_password: ''
+        })
 
-            this.axios.put(process.env.VUE_APP_API_URL_AUTH + '/user/change-password', params, {
-                headers: {
-                    'Accept': 'application/json',
-                    'Authorization': 'Bearer ' + token
-                },
-            }).catch((e) => {
-                if (e.response.status === 422) {
-                    let errors = e.response.data.errors;
-                    for (let field of Object.keys(errors)) {
-                        const element = document.querySelector('.errors_' + field);
-                        element.innerHTML = errors[field][0];
-                    }
-                } else {
-                    console.error(e.message);
-                }
-            });
-        },
+        const newPasswordRef = computed(() => formData.new_password);
 
+        const rules = {
+            current_password: {
+                required: helpers.withMessage('Password tidak boleh kosong', required),
+                containsPasswordRequirement: helpers.withMessage(
+                    () => `The password requires an uppercase, lowercase, number and special character`, 
+                    (value) => /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#*])/.test(value)
+                ),
+            },
+            new_password: { 
+                required: helpers.withMessage('Password baru tidak boleh kosong', required),                
+            },
+            confirm_password: {
+                required: helpers.withMessage('Konfirmasi password tidak boleh kosong', required),
+                sameAs: helpers.withMessage('Konfirmasi password tidak sesuai', sameAs(newPasswordRef))
+            },            
+        }
+
+        const v$ = useVuelidate(rules, formData, { $lazy: true })
+
+        const changePassword = () => {            
+            store.dispatch('profile/changePassword', formData)
+                .then(() => Object.assign(formData, {
+                    current_password: '',
+                    new_password: '',
+                    confirm_password: ''
+                }))
+        }
+
+        const handleOnBack = () => {
+            router.push({ name: 'profile-user' })
+        }
+
+        onMounted(() => {
+            v$.value.$reset()
+        })
+
+        return {
+            formData,
+            changePassword,
+            handleOnBack,
+            v$
+        }
     }
-}
+})
 </script>

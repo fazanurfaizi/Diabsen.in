@@ -1,361 +1,215 @@
 <template>
-  <form>
-    <EditLayout>
-      <div class="grid grid-cols-1 gap-[20px]">
-        <div class="grid gap-[24px] lg:grid-cols-2">
-          <div>
-            <label
-              for="first_name"
-              class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]"
-              >Nama Lengkap
-              <Asterisk />
-            </label>
-            <input
-              placeholder="Nama Lengkap"
-              type="text"
-              required=""
-              v-model="user.name"
-              class="
-                appearance-none
-                block
-                w-full
-                h-[44px]
-                py-[14px]
-                px-[12px]
-                border border-gray-300
-                rounded-[4px]
-                shadow-sm
-                placeholder-gray-400
-                focus:outline-none focus:ring-secondary focus:border-secondary
-                sm:text-[14px]
-              "
-            />
-            <div
-              class="
-                text-sm
-                mt-2
-                text-[12px]
-                mt-[8px]
-                text-[#F56565]
-                errors_name
-              "
-            ></div>
+  <v-container>
+    <template #title>Profile</template>
+    <template #content>
+      <profile-layout>
+        <template #nav>
+          <ul class="flex flex-col w-full gap-2">
+            <li class="my-px">
+              <Link                     
+                title="Profile Saya"
+                path="profile-edit"
+                icon="user-circle"                    
+              />
+            </li>
+            <li class="my-px">
+              <Link                     
+                title="Ubah Kata Sandi"
+                path="profile-change-password"
+                icon="key"                    
+              />
+            </li>                        
+          </ul>
+        </template>
+
+        <form>
+          <div class="grid gap-6 lg:grid-cols-2">
+            <v-form-control :model="v$.name">
+              <VLabel id="name" label="Nama Lengkap" required />
+              <VInput
+                id="name"
+                name="name"
+                placeholder="Nama Lengkap"
+                type="text"
+                v-model="formData.name"
+                required
+                @blur="v$.name.$touch"
+                :error="v$.name.$error"       
+              />
+            </v-form-control>            
+
+            <v-form-control :model="v$.gender">                
+              <VLabel id="gender" label="Jenis Kelamin" required />
+              <VSelect 
+                v-model="formData.gender"
+                :options="genderOptions"
+                optionValue="value"
+                optionLabel="text"
+                label="Pilih Jenis Kelamin"
+              />
+            </v-form-control>
+
+            <v-form-control :model="v$.phone">
+              <VLabel id="phone" label="No. WhatsApps" required />
+              <VInput
+                id="phone"
+                name="phone"
+                placeholder="No. WhatsApps"
+                type="text"
+                v-model="formData.phone"
+                required
+                @blur="v$.phone.$touch"   
+                :error="v$.phone.$error"
+              />               
+            </v-form-control>
+
+            <v-form-control :model="v$.birthdate">
+              <VLabel id="birthday" label="Tanggal Lahir" required />
+              <VInput
+                id="birthday"
+                name="birthday"
+                placeholder="Tanggal Lahir"
+                type="date"
+                v-model="formData.birthdate"
+                required
+              />
+            </v-form-control>
+
+            <v-form-control :model="v$.email">
+              <VLabel id="email" label="E-Mail" required />
+              <VInput
+                id="email"
+                name="email"
+                placeholder="E-Mail"
+                type="email"
+                v-model="formData.email"
+                required
+                @blur="v$.email.$touch"
+                :error="v$.email.$error"
+              />
+            </v-form-control>
+
+            <div>
+              <VLabel id="role" label="Jabatan" required />
+              <VInput
+                id="role"
+                name="role"
+                placeholder="Jabatan"
+                type="text"
+                v-model="formData.role"
+                required
+                readonly
+                />                     
+                <!-- class="bg-[#E53E3E1A] border-red-500" -->
+            </div>
           </div>
-          <div>
-            <label
-              for="gender"
-              class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]"
-              >Jenis Kelamin
-              <Asterisk />
-            </label>
-            <select
-              v-model="user.gender"
-              class="
-                bg-white
-                appearance-none
-                block
-                w-full
-                h-[44px]
-                py-[10px]
-                px-[12px]
-                border border-gray-300
-                rounded-[4px]
-                shadow-sm
-                placeholder-gray-400
-                focus:outline-none focus:ring-secondary focus:border-secondary
-                sm:text-[14px]
-              "
-            >
-              <option disabled>-- Pilih Jenis Kelamin --</option>
-              <option
-                v-for="gen in gender"
-                :key="gen"
-                :selected="gen[1] === user.gender"
-                v-bind:value="gen[1]"
-              >
-                {{ gen[0] }}
-              </option>
-            </select>
-            <div
-              class="
-                text-sm
-                mt-2
-                text-[12px]
-                mt-[8px]
-                text-[#F56565]
-                errors_gender
-              "
-            ></div>
+          <div class="flex flex-row-reverse items-end gap-2 mt-2">             
+            <v-button size="md" color="primary" @click="updateProfile">
+              Simpan
+            </v-button>
+            <v-button size="md" color="info" outline @click="handleOnBack">
+              Batal
+            </v-button>
           </div>
-          <div>
-            <label
-              for="first_name"
-              class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]"
-              >No. WhatsApps
-              <Asterisk />
-            </label>
-            <input
-              placeholder="No. WhatsApps"
-              id="phone_num"
-              type="text"
-              required=""
-              v-model="user.phone"
-              class="
-                appearance-none
-                block
-                w-full
-                h-[44px]
-                py-[14px]
-                px-[12px]
-                border border-gray-300
-                rounded-[4px]
-                shadow-sm
-                placeholder-gray-400
-                focus:outline-none focus:ring-secondary focus:border-secondary
-                sm:text-[14px]
-              "
-            />
-            <div
-              class="
-                text-sm
-                mt-2
-                text-[12px]
-                mt-[8px]
-                text-[#F56565]
-                errors_phone_num
-              "
-            ></div>
-          </div>
-          <div>
-            <label
-              for="first_name"
-              class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]"
-              >Tanggal Lahir
-              <Asterisk />
-            </label>
-            <input
-              placeholder="Tanggal lahir"
-              id="birthdate"
-              type="date"
-              required
-              v-model="user.birthdate"
-              class="
-                bg-clip-padding
-                appearance-none
-                block
-                w-full
-                h-[44px]
-                py-[14px]
-                px-[12px]
-                border border-gray-300
-                rounded-[4px]
-                shadow-sm
-                placeholder-gray-400
-                focus:outline-none focus:ring-secondary focus:border-secondary
-                sm:text-[14px]
-              "
-            />
-            <div
-              class="
-                text-sm
-                mt-2
-                text-[12px]
-                mt-[8px]
-                text-[#F56565]
-                errors_birthdate
-              "
-            ></div>
-          </div>
-          <div>
-            <label
-              for="first_name"
-              class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]"
-              >E-Mail
-              <Asterisk />
-            </label>
-            <input
-              placeholder="E-Mail"
-              id="email"
-              type="text"
-              required=""
-              v-model="user.email"
-              class="
-                appearance-none
-                block
-                w-full
-                h-[44px]
-                py-[14px]
-                px-[12px]
-                border border-gray-300
-                rounded-[4px]
-                shadow-sm
-                placeholder-gray-400
-                focus:outline-none focus:ring-secondary focus:border-secondary
-                sm:text-[14px]
-              "
-            />
-            <div
-              class="
-                text-sm
-                mt-2
-                text-[12px]
-                mt-[8px]
-                text-[#F56565]
-                errors_email
-              "
-            ></div>
-          </div>
-          <div>
-            <label
-              for="first_name"
-              class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]"
-              >Jabatan
-              <Asterisk />
-            </label>
-            <input
-              placeholder="Jabatan"
-              type="text"
-              readonly
-              :value="user.role"
-              class="
-                bg-gray-100
-                appearance-none
-                block
-                w-full
-                h-[44px]
-                py-[14px]
-                px-[12px]
-                border border-gray-300
-                rounded-[4px]
-                shadow-sm
-                placeholder-gray-400
-                focus:outline-none focus:ring-secondary focus:border-secondary
-                sm:text-[14px]
-              "
-            />
-          </div>
-        </div>
-        <div class="flex flex-row-reverse items-end gap-[7px]">
-          <button
-            @click.prevent="updateProfile()"
-            class="
-              bg-[#4299E1]
-              hover:bg-blue-700
-              p-[4px]
-              rounded-[4px]
-              text-white
-              w-[78px]
-              h-[36px]
-              text-[14px]
-            "
-          >
-            Simpan
-          </button>
-          <TheBackButton />
-        </div>
-      </div>
-    </EditLayout>
-  </form>
+        </form>
+      </profile-layout>      
+    </template>
+  </v-container>
 </template>
 
 <script>
-import EditLayout from "@/pages/profile/layouts/EditLayout.vue";
-import TheBackButton from "./components/TheBackButton.vue";
-import Asterisk from "@/components/Asterisk.vue";
-import { DateTime } from "luxon";
+import { defineComponent, onMounted, reactive, ref, computed } from "vue";
+import { useStore } from 'vuex'
+import { useRouter } from "vue-router";
+import { useVuelidate } from '@vuelidate/core' 
+import { required, email, helpers } from '@vuelidate/validators'
+import VFormControl from '@/components/form/form-control.vue'
+import VInput from "@/components/form/input.vue";
+import VLabel from '@/components/form/label.vue'
+import VSelect from '@/components/form/select.vue'
+import VButton from '@/components/ui/button/index.vue'
+import ProfileLayout from "./layouts/ProfileLayout.vue";
+import Link from '@/components/ui/link/index.vue'
 
-export default {
-  name: "ProfileEdit",
+export default defineComponent({
+  name: 'ProfileEdit',
   components: {
-    EditLayout,
-    Asterisk,
-    TheBackButton,
-  },
-  data() {
-    return {
-      user: {
-        name: null,
-        email: null,
-        phone: null,
-        gender: null,
-        birthdate: null,
-        role: null,
+    VFormControl,
+    VInput,
+    VLabel,
+    VSelect,
+    VButton,
+    Link,
+    ProfileLayout
+},
+  setup() {
+    const store = useStore()
+    const router = useRouter()
+
+    const user = computed(
+      () => store.getters['profile/getUser']
+    )
+    
+    const formData = reactive({
+      name: user.value.name,
+      email: user.value.email,
+      phone: user.value.phone,
+      gender: user.value.gender,
+      birthdate: user.value.birthdate,
+      role: user.value.role,      
+    })
+
+    const rules = {
+      name: {
+        required: helpers.withMessage('Nama tidak boleh kosong', required)
       },
-      gender: [
-        ["Pria", "m"],
-        ["Perempuan", "f"],
-      ],
-    };
-  },
-  methods: {
-    getProfile() {
-      const token = this.$store.state.auth.token;
-      this.axios
-        .get(`${process.env.VUE_APP_API_URL_AUTH}/user/profile`, {
-          headers: {
-            Accept: "application/json",
-            Authorization: "Bearer " + token,
-          },
-        })
-        .then((response) => {
-          const { name, email, phone, gender, birthdate, role } = response.data;
+      email: { 
+        required: helpers.withMessage('E-Mail tidak boleh kosong', required), 
+        email: helpers.withMessage('E-Mail tidak valid', email)
+      },
+      phone: {
+        required: helpers.withMessage('No. WhatsApps tidak boleh kosong', required)
+      },
+      gender: {
+        required: helpers.withMessage('Jenis kelamin tidak boleh kosong', required)
+      },
+      birthdate: {
+        required: helpers.withMessage('Tanggal lahir tidak boleh kosong', required)
+      },
+    }
 
-          this.user.name = name;
-          this.user.email = email;
-          this.user.phone = phone;
-          this.user.gender = gender;
-          this.user.birthdate = birthdate;
-          this.user.role = role;
+    const v$ = useVuelidate(rules, formData)
 
-          this.user.profile = name
-            .split(" ")
-            .map((word) => word[0])
-            .join("");
-        });
-    },
+    const genderOptions = ref([
+      {
+        text: 'Pria',
+        value: 'm'
+      },
+      {
+        text: 'Perempuan',
+        value: 'f'
+      }
+    ])
 
-    updateProfile() {
-      const token = this.$store.state.auth.token;
+    const updateProfile = () => {
+      store.dispatch('profile/updateProfile', formData)        
+    }
 
-      let params = {
-        name: this.user.name,
-        phone_num: this.user.phone,
-        gender: this.user.gender,
-        birthdate: this.user.birthdate,
-        email: this.user.email,
-      };
+    const handleOnBack = () => {
+      router.push({ name: 'profile-user' })
+    }
 
-      this.axios
-        .put(process.env.VUE_APP_API_URL_AUTH + "/user/profile", params, {
-          headers: {
-            Accept: "application/json",
-            Authorization: "Bearer " + token,
-          },
-        })
-        .catch((e) => {
-          if (e.response.status === 422) {
-            let errors = e.response.data.errors;
-            for (let field of Object.keys(errors)) {
-              const element = document.querySelector(".errors_" + field);
-              const id = document.querySelector("#" + field);
+    onMounted(() => {
+      store.dispatch('profile/getProfile')      
+    })
 
-              element.innerHTML = errors[field][0];
-              id.classList.remove("border-gray-300");
-              id.classList.add("bg-[#E53E3E1A]", "border-red-500");
-            }
-          } else {
-            console.error(e.message);
-          }
-        });
-    },
-  },
-  created() {
-    this.getProfile();
-  },
-  mounted() {
-    let today = DateTime.now().setLocale("id").toFormat("yyyy-LL-dd");
-
-    document.getElementById("birthdate").max = today;
-  },
-};
+    return {      
+      formData,
+      genderOptions,
+      updateProfile,
+      handleOnBack, 
+      v$     
+    }
+  }
+})
 </script>
