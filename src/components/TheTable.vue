@@ -134,6 +134,7 @@
 <script>
 import Button from './TheButton.vue';
 import Icon from './Icon.vue';
+import { useStore } from 'vuex'; 
 export default {
     name: "TheTable",
     data() {
@@ -146,6 +147,7 @@ export default {
           last_page: 0,
           first_page_url: null,
         },
+        token: useStore().getters['auth/getToken'],
         title: this.rows.title,
         items: [],
         headers: this.column,
@@ -176,7 +178,7 @@ export default {
         }
         
         const config = {
-          headers: { Authorization: `Bearer ${this.$store.getters.getToken}` }
+          headers: { Authorization: `Bearer ${this.token}` }
         }
         
         this.axios.post(this.url , param, config).then((response) => {

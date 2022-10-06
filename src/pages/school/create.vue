@@ -465,7 +465,7 @@ import StepIndicators from './components/StepIndicators.vue';
 import StepLabel from './components/StepLabel.vue';
 import StepperLayout from './layouts/StepperLayout.vue';
 import GoogleMaps from '@/components/GoogleMaps.vue';
-import Cookies from "js-cookie";
+import { useStore } from 'vuex'; 
 
 export default {
     name: "SchoolCreate",
@@ -481,6 +481,7 @@ export default {
             step: 1,
             total_page: 3,
             center: { lat: -6.905977, lng: 107.613144 },
+            token: useStore().getters['auth/getToken'],
             provinces: null,
             districts: null,
             sub_districts: null,
@@ -576,7 +577,7 @@ export default {
             console.log(this.form.latitude, this.form.longitude)
         },
         async getProvince() {
-            const token = Cookies.get("access_token");
+            const token = this.token;
             await this.axios
                 .get(`${process.env.VUE_APP_API_URL_MASTER_DATA}/provinces`, {
                     headers: {
@@ -589,7 +590,7 @@ export default {
                 });
         },
         async getCity() {
-            const token = Cookies.get("access_token");
+            const token = this.token;
             await this.axios
                 .get(`${process.env.VUE_APP_API_URL_MASTER_DATA}/cities?province_id=${this.form.province_id}`, {
                     headers: {
@@ -602,7 +603,7 @@ export default {
                 });
         },
         async getDistrict() {
-            const token = Cookies.get("access_token");
+            const token = this.token;
             await this.axios
                 .get(`${process.env.VUE_APP_API_URL_MASTER_DATA}/districts?city_id=${this.form.city_id}`, {
                     headers: {
@@ -615,7 +616,7 @@ export default {
                 });
         },
         async getSubDistrict() {
-            const token = Cookies.get("access_token");
+            const token = this.token;
             await this.axios
                 .get(`${process.env.VUE_APP_API_URL_MASTER_DATA}/sub-districts?district_id=${this.form.district_id}`, {
                     headers: {
@@ -628,7 +629,7 @@ export default {
                 });
         },
         async getPostalCode() {
-            const token = Cookies.get("access_token");
+            const token = this.token;
             await this.axios
                 .get(`${process.env.VUE_APP_API_URL_MASTER_DATA}/postal_codes?province_id=${this.form.province_id}&city_id=${this.form.city_id}&district_id=${this.form.district_id}&sub_district_id=${this.form.sub_district_id}`, {
                     headers: {
@@ -667,7 +668,7 @@ export default {
 
             }
 
-            const token = Cookies.get("access_token");
+            const token = this.token;
             this.axios.post(process.env.VUE_APP_API_URL_MASTER_DATA + '/school', this.form, {
                 headers: {
                     'Accept': 'application/json',
@@ -691,7 +692,6 @@ export default {
         this.getProvince();
         this.getCity();
         this.getDistrict();
-        console.log(this.form.province_id)
     }
 
 }
