@@ -16,7 +16,8 @@
                             <Link                     
                                 title="Ubah Kata Sandi"
                                 path="profile-change-password"
-                                icon="key"                    
+                                icon="key"
+                                iconSet="teamui"              
                             />
                         </li>                        
                     </ul>
