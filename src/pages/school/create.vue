@@ -22,9 +22,8 @@
                                                 class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]">NPSN
                                                 <Asterisk />
                                             </label>
-                                            <input v-model="form.npsn" placeholder="Masukan NPSN"
-                                                id="current_password" name="current_password" type="text"
-                                                required=""
+                                            <input v-model="form.npsn" placeholder="Masukan NPSN" id="current_password"
+                                                name="current_password" type="text" required=""
                                                 class="appearance-none block w-full h-[44px] py-[14px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary text-[14px]" />
                                             <div class="text-[12px] mt-[8px] text-[#F56565] errors_npsn" ref="npsn">
                                             </div>
@@ -73,9 +72,8 @@
                                                 <Asterisk />
                                             </label>
                                             <input v-model="form.operational_date"
-                                                placeholder="Masukan Tanggal SK Izin Operasional"
-                                                id="current_password" name="current_password" type="date"
-                                                required=""
+                                                placeholder="Masukan Tanggal SK Izin Operasional" id="current_password"
+                                                name="current_password" type="date" required=""
                                                 class="appearance-none block w-full h-[44px] py-[14px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary text-[14px]" />
                                             <div class="text-[12px] mt-[8px] text-[#F56565] errors_current_password"
                                                 ref="operational_date">
@@ -91,8 +89,7 @@
                                                 <Asterisk />
                                             </label>
                                             <input v-model="form.name" placeholder="Masukan Nama Sekolah"
-                                                id="current_password" name="current_password" type="text"
-                                                required=""
+                                                id="current_password" name="current_password" type="text" required=""
                                                 class="appearance-none block w-full h-[44px] py-[14px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary text-[14px]" />
                                             <div class="text-[12px] mt-[8px] text-[#F56565] errors_current_password"
                                                 ref="name">
@@ -146,8 +143,7 @@
                                             </label>
                                             <input v-model="form.teaching_learning_time"
                                                 placeholder="Masukan Waktu Kegiatan Mengajar (KBM)"
-                                                id="current_password" name="current_password" type="number"
-                                                required=""
+                                                id="current_password" name="current_password" type="number" required=""
                                                 class="appearance-none block w-full h-[44px] py-[14px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary text-[14px]" />
                                             <div class="text-[12px] mt-[8px] text-[#F56565] errors_current_password"
                                                 ref="teaching_learning_time">
@@ -294,8 +290,8 @@
                                                         class="bg-white appearance-none block w-full h-[44px] py-[10px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary sm:text-[14px]">
                                                         <option value="" selected>-- Pilih Kode Pos --
                                                         </option>
-                                                        <option v-for="postal_code in postal_codes"
-                                                            :key="postal_code" v-bind:value="postal_code.id">
+                                                        <option v-for="postal_code in postal_codes" :key="postal_code"
+                                                            v-bind:value="postal_code.id">
                                                             {{ postal_code.code }}
                                                         </option>
                                                     </select>
@@ -336,9 +332,9 @@
                                                     Telepon
                                                     <Asterisk />
                                                 </label>
-                                                <input v-model="form.phone_number"
-                                                    placeholder="Masukan Nomor Telepon" id="current_password"
-                                                    name="current_password" type="text" required=""
+                                                <input v-model="form.phone_number" placeholder="Masukan Nomor Telepon"
+                                                    id="current_password" name="current_password" type="text"
+                                                    required=""
                                                     class="appearance-none block w-full h-[44px] py-[14px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary text-[14px]" />
                                                 <div class="text-[12px] mt-[8px] text-[#F56565] errors_current_password"
                                                     ref="phone_number">
@@ -411,8 +407,8 @@
                                                     id="current_password" name="current_password" type="text"
                                                     required=""
                                                     class="appearance-none block w-full h-[44px] py-[14px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary text-[14px]" />
-                                                <div
-                                                    class="text-[12px] mt-[8px] text-[#F56565] errors_current_password" ref="admin_name">
+                                                <div class="text-[12px] mt-[8px] text-[#F56565] errors_current_password"
+                                                    ref="admin_name">
                                                 </div>
                                             </div>
                                             <div class="flex flex-col py-1">
@@ -424,8 +420,8 @@
                                                     id="current_password" name="current_password" type="email"
                                                     required=""
                                                     class="appearance-none block w-full h-[44px] py-[14px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary text-[14px]" />
-                                                <div
-                                                    class="text-[12px] mt-[8px] text-[#F56565] errors_current_password" ref="admin_email">
+                                                <div class="text-[12px] mt-[8px] text-[#F56565] errors_current_password"
+                                                    ref="admin_email">
                                                 </div>
                                             </div>
                                         </div>
@@ -465,11 +461,12 @@ import StepIndicators from './components/StepIndicators.vue';
 import StepLabel from './components/StepLabel.vue';
 import StepperLayout from './layouts/StepperLayout.vue';
 import GoogleMaps from '@/components/GoogleMaps.vue';
-import { useStore } from 'vuex'; 
+import { useStore } from 'vuex';
+import { useRouter } from "vue-router";
 
 export default {
     name: "SchoolCreate",
-    components: {        
+    components: {
         Asterisk,
         StepIndicators,
         StepLabel,
@@ -482,6 +479,7 @@ export default {
             total_page: 3,
             center: { lat: -6.905977, lng: 107.613144 },
             token: useStore().getters['auth/getToken'],
+            router: useRouter(),
             provinces: null,
             districts: null,
             sub_districts: null,
@@ -550,14 +548,14 @@ export default {
                     }
                 }
 
-                if (!this.form.rt && !this.form.rw){
+                if (!this.form.rt && !this.form.rw) {
                     this.$refs['rw'].innerHTML = `The RT/RW field is required.`;
                     return false;
                 }
 
                 if (!this.form.latitude && !this.form.latitude) {
                     this.$refs['gmaps'].innerHTML = `The location field is required.`;
-                        return false;
+                    return false;
                 }
 
             }
@@ -656,12 +654,12 @@ export default {
                     }
                 }
 
-                if (!this.form.admin[0].name){
+                if (!this.form.admin[0].name) {
                     this.$refs['admin_name'][0].innerHTML = `The Name field is required.`;
                     return false;
                 }
 
-                if (!this.form.admin[0].email){
+                if (!this.form.admin[0].email) {
                     this.$refs['admin_email'][0].innerHTML = `The Email field is required.`;
                     return false;
                 }
@@ -674,17 +672,9 @@ export default {
                     'Accept': 'application/json',
                     'Authorization': 'Bearer ' + token
                 },
-            }).catch((e) => {
-                if (e.response.status === 422) {
-                    let errors = e.response.data.errors;
-                    for (let field of Object.keys(errors)) {
-                        const element = document.querySelector('.errors_' + field);
-                        element.innerHTML = errors[field][0];
-                    }
-                } else {
-                    console.error(e.message);
-                }
-            });
+            })
+            .catch((error) => console.log(error))
+            .finally(() => this.router.push({ name: 'school-list' }))
         },
 
     },
