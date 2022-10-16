@@ -14,7 +14,7 @@
   <div class="sm:flex sm:items-center justify-between px-1">
     <div class="flex justify-center items-center space-x-2">
       <div>Show</div>
-      <select @click="getData()" v-model="perPage" id="countries" class="bg-gray-50 border w-16 py-2 px-1 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+      <select @click="getData()" v-model="perPage" id="countries" class="bg-gray-50 border w-16 py-2 px-1 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block">
         <option value="10">10</option>
         <option value="20">20</option>
         <option value="50">50</option>
