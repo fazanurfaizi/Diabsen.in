@@ -32,7 +32,9 @@
           </div>         
 
           <div>
-            <button @click.prevent="handleLogin()" type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-secondary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secodary-dark">Sign in</button>
+            <Vbutton @click.prevent="handleLogin()" type="submit" variant="secondary" size="sm" class="w-full">
+              Sign in
+            </Vbutton>
           </div>
 
           <div class="grid place-content-center">  
@@ -47,31 +49,28 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import { defineComponent, ref } from 'vue';
 import { useStore } from 'vuex'
+import Vbutton from '@/components/ui/button/index.vue'
 
-export default defineComponent({
+defineComponent({
   name: 'login-page',
-  setup() {
-    const store = useStore()    
-
-    const form = ref({
-      email: '',
-      password: ''
-    })
-
-    const isShowPassword = ref(false)
-
-    const handleLogin = () => {
-      store.dispatch('auth/login', form.value)       
-    }
-
-    return {
-      form,
-      isShowPassword,
-      handleLogin
-    }
+  components: {
+    Vbutton
   }
 })
+
+const store = useStore()    
+
+const form = ref({
+  email: '',
+  password: ''
+})
+
+const isShowPassword = ref(false)
+
+const handleLogin = () => {
+  store.dispatch('auth/login', form.value)       
+}
 </script>

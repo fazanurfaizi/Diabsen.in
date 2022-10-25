@@ -4,7 +4,7 @@
             <div class="grid grid-cols-1 gap-5">
                 <div class="flex flex-col items-center">
                     <div
-                        class="max-w-xs h-24 w-24 mt-3 bg-secondary-light text-white text-3xl flex items-center justify-center font-bold rounded-full"
+                        class="max-w-xs h-24 w-24 mt-3 bg-secondary text-white text-3xl flex items-center justify-center font-bold rounded-full"
                     >
                         {{ profile }}
                     </div>

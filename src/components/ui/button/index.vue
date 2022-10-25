@@ -2,13 +2,13 @@
 	<button		
 		:class="[
 			classes,
-			'inline-block font-medium border-2 leading-tight uppercase rounded focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out',
+			'inline-block font-medium border-2 leading-tight rounded focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out',
 			{
 				'shadow-md hover:shadow-lg focus:shadow-lg': !outline,				
 				'rounded-full': rounded,
-				'px-4 py-1.5 text-xs': size === 'sm',
-				'px-6 py-2.5 text-xs': size === 'md',
-				'px-7 py-3 text-sm': size === 'lg',
+				'px-4 py-2 text-base': size === 'sm',
+				'px-6 py-2.5 text-base': size === 'md',
+				'px-7 py-3.5 text-lg': size === 'lg',
 				'not-allowed': disabled
 			}
 		]"
@@ -36,11 +36,11 @@ export default defineComponent({
             required: false,
         },
         /**
-         * Sets the color context of the component to one of CoreUI’s themed colors.
+         * Sets the variant context of the component to one of Tailwind’s themed colors.
          *
          * @values 'primary', 'secondary', 'success', 'danger', 'warning', 'info', 'dark', 'light'
          */
-        color: {
+        variant: {
             type: String,
             default: 'primary',
             required: false,
@@ -134,8 +134,8 @@ export default defineComponent({
         }
         
         const getClasses = () => {
-            const color = props.color
-            switch (color) {
+            const variant = props.variant
+            switch (variant) {
                 case 'primary':
                     return !props.outline
                         ? 'border-primary bg-primary text-white hover:bg-hover-primary focus:bg-focus-primary active:bg-active-primary'
