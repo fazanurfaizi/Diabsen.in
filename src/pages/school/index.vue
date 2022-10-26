@@ -18,6 +18,7 @@
           <Button @click="goTo('delete',slotProps.id)" class="mx-0.5" set-color="error" action>Delete</Button>
         </template>
       </TheTable>
+      <page-info :current-page="1" :total-records="100" :current-per-page="20" />
     </template>
   </v-container>
   <TheModal set-type="confirm" class="w-[425px]" @confirm="confirmHandle" v-show="isShowModal" />
@@ -26,6 +27,7 @@
 import TheTable from '@/components/TheTable.vue';
 import Button from '@/components/TheButton.vue';
 import TheModal from '@/components/TheModal.vue';
+import PageInfo from '@/components/pagination/page-info.vue';
 export default {
   name: "SchoolList",
   data(){
@@ -77,7 +79,7 @@ export default {
     }
   },
   components: {
-    TheTable, Button, TheModal
+    TheTable, Button, TheModal, PageInfo
   },
   methods: {
     confirmHandle(conf){
