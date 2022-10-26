@@ -13,12 +13,9 @@
           />
         </div>
 
-        <button 
-          type="submit" 
-          class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-secondary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secodary-dark"
-        >
+        <Vbutton type="submit" variant="secondary" class="w-full">
           Reset Password
-        </button>
+        </Vbutton>
 
         <div class="grid place-content-center">  
             <div class="text-sm">
@@ -32,10 +29,14 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { defineComponent } from 'vue';
+import Vbutton from '@/components/ui/button/index.vue'
 
-export default defineComponent({
-  name: 'forgot-password-page'
+defineComponent({
+  name: 'forgot-password-page',
+  components: {
+    Vbutton
+  }
 })
 </script>

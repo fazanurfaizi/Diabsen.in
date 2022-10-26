@@ -13,7 +13,7 @@
 }
 
 .active-link {
-    @apply bg-secondary-light;
+    @apply bg-secondary;
 }
 
 .exact-active-link {

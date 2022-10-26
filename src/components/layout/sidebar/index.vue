@@ -15,7 +15,7 @@
         <!-- Expand / collapse button -->
         <button 
             @click.prevent="sidebarExpanded = !sidebarExpanded" 
-            class="hidden lg:inline-flex absolute cursor-pointer sidebar-expanded:left-60 left-20 top-5 rounded-full bg-secondary-light z-50 transition duration-150"
+            class="hidden lg:inline-flex absolute cursor-pointer sidebar-expanded:left-60 left-20 top-5 rounded-full bg-secondary z-50 transition duration-150"
         >        
             <div class="px-1.5 py-1.5 transition duration-150">
                 <span class="sr-only">Expand / collapse sidebar</span>

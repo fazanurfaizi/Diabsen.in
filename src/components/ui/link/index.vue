@@ -11,8 +11,9 @@
             @click="navigate"
         >
             <div class="flex items-center pl-1">                
-                <heroicons-outline-vue 
+                <icon
                     :name="icon" 
+                    :set="iconSet"
                     class="shrink-0 h-6 w-6 text-primary" 
                     :class="isExactActive && '!text-white'"
                 />
@@ -26,12 +27,12 @@
 
 <script>
 import { defineComponent } from 'vue';
-import heroiconsOutlineVue from '@/components/icons/heroicons-outline.vue'
+import icon from '@/components/Icon.vue'
 
 export default defineComponent({
     name: 'v-link',
     components: {
-        heroiconsOutlineVue
+        icon
     },
     props: {
         title: {
@@ -45,6 +46,10 @@ export default defineComponent({
         icon: {
             type: String,
             required: true
+        },
+        iconSet: {
+            type: String,
+            default: "outline"
         },
     },    
 })

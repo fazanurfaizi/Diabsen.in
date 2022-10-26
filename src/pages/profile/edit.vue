@@ -16,7 +16,8 @@
               <Link                     
                 title="Ubah Kata Sandi"
                 path="profile-change-password"
-                icon="key"                    
+                icon="key"
+                iconSet="teamui"
               />
             </li>                        
           </ul>
@@ -104,7 +105,7 @@
             </div>
           </div>
           <div class="flex flex-row-reverse items-end gap-2 mt-2">             
-            <v-button size="md" color="primary" @click="updateProfile">
+            <v-button size="md" color="danger" @click="updateProfile">
               Simpan
             </v-button>
             <v-button size="md" color="info" outline @click="handleOnBack">
