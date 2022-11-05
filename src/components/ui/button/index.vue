@@ -6,6 +6,7 @@
 			{
 				'shadow-md hover:shadow-lg focus:shadow-lg': !outline,				
 				'rounded-full': rounded,
+				'px-1.5 py-1.5 text-base': size === 'xs',
 				'px-4 py-2 text-base': size === 'sm',
 				'px-6 py-2.5 text-base': size === 'md',
 				'px-7 py-3.5 text-lg': size === 'lg',

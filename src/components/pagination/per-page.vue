@@ -45,7 +45,7 @@ defineProps({
     }
 })
 
-const emits = defineEmits(['update:modelValue'])
+const emits = defineEmits(['update:modelValue', 'handlePageSizeChange'])
 
 const getId = () => `per-page-${Math.floor(Math.random() * Date.now())}`;
 

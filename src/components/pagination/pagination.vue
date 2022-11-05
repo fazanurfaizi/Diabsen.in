@@ -2,13 +2,22 @@
     <nav class="isolate inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
         <button 
             type="button" 
-            class="relative inline-flex items-center rounded-l-md border border-gray-300 bg-white px-2 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20"
+            class="relative inline-flex items-center rounded-l-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20"
+            aria-controls="datatable"
+            @click.prevent.stop="moveToFirst"
+        >
+            <span class="sr-only">First</span>
+            <Icon name="chevron-double-left" class="h-4 w-4" />
+        </button>
+        <button 
+            type="button" 
+            class="relative items-center border px-4 py-2 border-gray-300 bg-white text-gray-500 hover:bg-gray-50 text-sm font-medium focus:z-20 z-10 inline-flex"
             aria-controls="datatable"
             @click.prevent.stop="previousPage"
         >
             <span class="sr-only">Previous</span>
-            <Icon name="chevron-double-left" class="h-4 w-4" />
-        </button>
+            <Icon name="chevron-left" class="h-4 w-4" />
+        </button>        
 
         <!-- Current: "z-10 bg-indigo-50 border-indigo-500 text-indigo-600", Default: "bg-white border-gray-300 text-gray-500 hover:bg-gray-50" -->
         <!-- aria-current="page" -->
@@ -20,6 +29,7 @@
                 :class="[
                     isActive(page.name) && 'border-indigo-500 bg-indigo-50 text-indigo-600'
                 ]"
+                @click.prevent.stop="changePage(page.name)"
             >
                 {{ page.name }}
             </button>
@@ -28,13 +38,22 @@
 
         <button 
             type="button" 
-            class="relative inline-flex items-center rounded-r-md border border-gray-300 bg-white px-2 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20"
+            class="relative items-center border px-4 py-2 border-gray-300 bg-white text-gray-500 hover:bg-gray-50 text-sm font-medium focus:z-20 z-10 inline-flex"
             aria-controls="datatable"
             @click.prevent.stop="nextPage" 
         >
-            <span class="sr-only">Previous</span>
-            <Icon name="chevron-double-right" class="h-4 w-4" />
+            <span class="sr-only">Next</span>
+            <Icon name="chevron-right" class="h-4 w-4" />
         </button>
+        <button 
+            type="button" 
+            class="relative inline-flex items-center rounded-r-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20"
+            aria-controls="datatable"
+            @click.prevent.stop="moveToLast" 
+        >
+            <span class="sr-only">Last</span>
+            <Icon name="chevron-double-right" class="h-4 w-4" />
+        </button>        
     </nav>
 </template>
 
@@ -102,14 +121,32 @@ const startPage = computed(() => {
     return props.modelValue - 1
 })
 
+const maxPage = computed(() => {
+    if (props.totalRecords <= 0) {
+        return 0;
+    }
+
+    let maxPage = Math.floor(props.totalRecords / props.currentPerPage);
+    let mod = props.totalRecords % props.currentPerPage;
+    
+    if (mod > 0) {
+        maxPage++;
+    }
+    return maxPage;
+})
+
 const pages = computed(() => {
     const range = []
 
-    for (let index = startPage.value; index < Math.min(startPage.value + props.maxVisibleButtons -1, props.totalRecords); index++) {
-        range.push({
-            name: index,
-            isDisabled: index === props.modelValue
-        })
+    let max = Math.min(startPage.value + props.maxVisibleButtons - 1, props.totalRecords)
+
+    for (let index = startPage.value; index <= max; index++) {
+        if(index <= maxPage.value) {            
+            range.push({
+                name: index,
+                isDisabled: index === props.modelValue
+            })
+        }
     }
 
     return range
@@ -127,16 +164,22 @@ const pageChanged = (emit = true) => {
     emits('page-changed', payload)
 }
 
-// const changePage = (page, emit = true) => {
-//     if(page> 0 && props.total > props.currentPerPage * (page - 1)) {
-//         prevPage.value = currentPage.value
-//         currentPage.value = page
-//         pageChanged(emit)
-//     }
-// }
+const changePage = (targetPage, emit = true) => {
+    if(targetPage >= 1 && targetPage <= maxPage.value) {
+        prevPage.value = targetPage - 1
+        const page = currentPage.value = targetPage
+        emits('update:modelValue', page)
+        pageChanged(emit)
+    }
+}
+
+const moveToFirst = () => {
+    if(maxPage.value > 0 && currentPage.value > 1) {
+        changePage(1)
+    }
+}
 
 const nextPage = () => {
-    console.log('test')
     if(nextIsPossible.value) {
         prevPage.value = props.modelValue
         const page = ++currentPage.value
@@ -151,6 +194,12 @@ const previousPage = () => {
         const page = --currentPage.value
         emits('update:modelValue', page)
         pageChanged()
+    }
+}
+
+const moveToLast = () => {
+    if(maxPage.value > 0 && currentPage.value <= maxPage.value) {
+        changePage(maxPage.value)
     }
 }
 

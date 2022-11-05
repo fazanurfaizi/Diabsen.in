@@ -24,8 +24,8 @@
             appearance-none
             block
             w-full
-            h-11
-            py-3
+            h-10
+            py-2
             px-3
             border border-gray-300
             rounded-md
@@ -52,7 +52,7 @@ export default defineComponent({
             required: false,
             default: 'text',
             validator: (value) => {
-                return ['text', 'number', 'url', 'email', 'password', 'date'].includes(value);
+                return ['text', 'number', 'url', 'email', 'password', 'date', 'search'].includes(value);
             }
         },
         modelValue: {

@@ -109,6 +109,7 @@ let routes = [
                     },
                     {
                         path: ':id/detail',
+                        name: 'school-detail',
                         component: () => import('@/pages/school/detail.vue'),
                         meta: { requiresAuth: true }
                     },
@@ -119,7 +120,6 @@ let routes = [
                     },
                 ]
             },
-        
             {
                 path: '/foobar',
                 name: 'foobar',
@@ -153,6 +153,78 @@ let routes = [
                         // meta: { requiresAuth: true }
                     },
                 ]
+            },
+            {
+                path: '/academic-years',
+                name: 'academic-years',
+                component: RouterView,
+                meta: {
+                    breadCrumb: 'Tahun Ajaran'
+                },
+                children: [
+                    {
+                        path: '',
+                        name: 'academic-year-list',
+                        component: () => import('@/pages/academic-year/index.vue'),
+                        meta: { 
+                            requiresAuth: true 
+                        }
+                    },
+                    {
+                        path: '/create',
+                        name: 'academic-year-create',
+                        component: () => import('@/pages/academic-year/create.vue'),
+                        meta: {
+                            breadCrumb: 'Tambah',
+                            requiresAuth: true 
+                        },
+                    },
+                    {
+                        path: '/edit',
+                        name: 'foobar-edit',
+                        component: () => import('@/pages/foobar/edit.vue'),
+                        meta: {
+                            breadCrumb: 'Ubah',
+                            requiresAuth: true 
+                        },
+                    },
+                ]
+            },
+            {
+                path: '/users',
+                name: 'users',
+                component: RouterView,
+                meta: {
+                    breadCrumb: 'Pengguna'
+                },
+                children: [
+                    {
+                        path: '',
+                        name: 'user-list',
+                        component: () => import('@/pages/users/index.vue'),
+                        meta: { 
+                            requiresAuth: true 
+                        }
+                    },
+                    {
+                        path: '/create',
+                        name: 'user-create',
+                        component: () => import('@/pages/users/create.vue'),
+                        meta: {
+                            breadCrumb: 'Tambah',
+                            requiresAuth: true 
+                        },
+                    },
+                    {
+                        path: '/edit',
+                        name: 'foobar-edit',
+                        component: () => import('@/pages/foobar/edit.vue'),
+                        meta: {
+                            breadCrumb: 'Ubah',
+                            requiresAuth: true 
+                        },
+                    },
+                ]
             }
         ]
     }
@@ -163,17 +235,21 @@ const router = createRouter({
     routes,    
 });
 
-router.beforeEach((to) => {
+router.beforeEach((to, from, next) => {
     if (to.meta.requiresAuth && !store.getters['auth/isAuthenticated']) {        
-        return {
+        next({
             path: '/auth/login',
-            query: { redirect: to.fullPath },
-        }
+            query: {
+                redirect: to.fullPath
+            }
+        })        
     } else if (!to.meta.requiresAuth && store.getters['auth/isAuthenticated']) {
-        return {
-            path: '/dashboard'
-        }
+        next({
+            name: 'dashboard'
+        })
     }
+
+    next()
 })
 
 export default router;
