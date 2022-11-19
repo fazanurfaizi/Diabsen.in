@@ -19,7 +19,7 @@ let routes = [
         children: [
             {
                 path: "login",
-                name: 'login',        
+                name: 'login',
                 component: () => import('@/pages/auth/login.vue')
             },
             {
@@ -56,7 +56,7 @@ let routes = [
             },
             {
                 path: '/profile',
-                name: 'profile',                
+                name: 'profile',
                 component: RouterView,
                 meta: {
                     breadCrumb: 'Profil'
@@ -81,9 +81,9 @@ let routes = [
                         meta: { requiresAuth: true }
                     },
                 ]
-            },            
-            {            
-                path: '/schools',   
+            },
+            {
+                path: '/schools',
                 name: 'schools',
                 component: RouterView,
                 meta: {
@@ -95,8 +95,8 @@ let routes = [
                         name: 'school-list',
                         component: () => import('@/pages/school/index.vue'),
                         meta: {
-                            requiresAuth: true,                            
-                        },                            
+                            requiresAuth: true,
+                        },
                     },
                     {
                         path: 'create',
@@ -105,7 +105,7 @@ let routes = [
                         meta: {
                             requiresAuth: true,
                             breadCrumb: 'Tambah Sekolah'
-                        },                        
+                        },
                     },
                     {
                         path: ':id/detail',
@@ -166,8 +166,8 @@ let routes = [
                         path: '',
                         name: 'academic-year-list',
                         component: () => import('@/pages/academic-year/index.vue'),
-                        meta: { 
-                            requiresAuth: true 
+                        meta: {
+                            requiresAuth: true
                         }
                     },
                     {
@@ -176,7 +176,7 @@ let routes = [
                         component: () => import('@/pages/academic-year/create.vue'),
                         meta: {
                             breadCrumb: 'Tambah',
-                            requiresAuth: true 
+                            requiresAuth: true
                         },
                     },
                     {
@@ -185,7 +185,7 @@ let routes = [
                         component: () => import('@/pages/foobar/edit.vue'),
                         meta: {
                             breadCrumb: 'Ubah',
-                            requiresAuth: true 
+                            requiresAuth: true
                         },
                     },
                 ]
@@ -202,8 +202,8 @@ let routes = [
                         path: '',
                         name: 'user-list',
                         component: () => import('@/pages/users/index.vue'),
-                        meta: { 
-                            requiresAuth: true 
+                        meta: {
+                            requiresAuth: true
                         }
                     },
                     {
@@ -212,7 +212,7 @@ let routes = [
                         component: () => import('@/pages/users/create.vue'),
                         meta: {
                             breadCrumb: 'Tambah',
-                            requiresAuth: true 
+                            requiresAuth: true
                         },
                     },
                     {
@@ -221,7 +221,7 @@ let routes = [
                         component: () => import('@/pages/foobar/edit.vue'),
                         meta: {
                             breadCrumb: 'Ubah',
-                            requiresAuth: true 
+                            requiresAuth: true
                         },
                     },
                 ]
@@ -232,17 +232,17 @@ let routes = [
 
 const router = createRouter({
     history: createWebHistory(),
-    routes,    
+    routes,
 });
 
 router.beforeEach((to, from, next) => {
-    if (to.meta.requiresAuth && !store.getters['auth/isAuthenticated']) {        
+    if (to.meta.requiresAuth && !store.getters['auth/isAuthenticated']) {
         next({
             path: '/auth/login',
             query: {
                 redirect: to.fullPath
             }
-        })        
+        })
     } else if (!to.meta.requiresAuth && store.getters['auth/isAuthenticated']) {
         next({
             name: 'dashboard'

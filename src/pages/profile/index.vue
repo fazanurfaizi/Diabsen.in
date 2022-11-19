@@ -4,8 +4,8 @@
     <template #content>
       <profile-layout>
         <template #nav>
-          <div class="flex flex-col items-center">                
-            <router-link 
+          <div class="flex flex-col items-center">
+            <router-link
             :to="{ name: 'profile-edit' }"
             class="bg-[#4299E1] hover:bg-blue-700 py-[0.5rem] px-[0.25rem] rounded text-white w-[78px] h-[36px] text-[14px]"
           >
@@ -56,7 +56,7 @@
 
 <script>
 import { defineComponent, computed, onMounted } from 'vue';
-import { useStore } from 'vuex';  
+import { useStore } from 'vuex';
 import ProfileLayout from "./layouts/ProfileLayout.vue";
 import { genderFormatter } from '@/core/utils/formatter'
 
@@ -66,15 +66,15 @@ export default defineComponent({
     ProfileLayout
   },
   setup() {
-    const store = useStore()    
+    const store = useStore()
 
     const user = computed(
-      () => store.getters['profile/getUser']
+      () => store.getters['profile/getUserProfile']
     )
 
     const profile = computed(
       () => user.value.name.split(' ').map((name) => name[0]).join('')
-    )    
+    )
 
     onMounted(() => {
       store.dispatch('profile/getProfile')
@@ -82,8 +82,8 @@ export default defineComponent({
 
     return {
       user,
-      profile,   
-      genderFormatter   
+      profile,
+      genderFormatter
     }
   }
 })

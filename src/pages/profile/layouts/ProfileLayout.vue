@@ -9,7 +9,7 @@
                         {{ profile }}
                     </div>
 
-                </div>        
+                </div>
                 <div class="flex flex-col items-center text-gray-500">
                     <span class="font-bold text-sm ">{{ user.name }}</span>
                     <span class="text-xs font-normal">{{ user.role }}</span>
@@ -17,7 +17,7 @@
                 <nav>
                     <slot name="nav"></slot>
                 </nav>
-            </div>            
+            </div>
         </div>
 
         <div class="w-full md:w-9/12 p-8 h-fit bg-white lg:ml-4 rounded-2xl border">
@@ -31,12 +31,12 @@ import { computed, defineComponent } from 'vue';
 import { useStore } from 'vuex';
 
 export default defineComponent({
-    name: 'ProfileLayout',    
+    name: 'ProfileLayout',
     setup() {
         const store = useStore()
 
         const user = computed(
-            () => store.getters['profile/getUser']
+            () => store.getters['profile/getUserProfile']
         )
 
         const profile = computed(

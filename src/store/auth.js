@@ -20,34 +20,30 @@ export default {
     },
     setRefreshToken (state, token) {
       state.refreshToken = token
-    },    
+    },
   },
   actions: {
-    async login({ commit, dispatch }, payload) {      
+    async login({ commit }, payload) {
       authService.login(payload.email, payload.password)
         .then((response) => {
-          commit('setToken', response.data.access_token)                    
+			console.log(response)
+			commit('setToken', response.data.data.access_token)
+			commit('setRefreshToken', response.data.data.refresh_token)
+			commit('profile/setUserProfile', response.data.data.user, { root: true })
+        })
+        .catch((error) => console.log(error))
+    },
+
+    async refresh({ commit }, payload) {
+      authService.refresh(payload)
+        .then((response) => {
+          commit('setToken', response.data.access_token)
           commit('setRefreshToken', response.data.refresh_token)
-          dispatch('profile/getProfile', null, { root: true })
         })
         .catch((error) => console.log(error))
         .finally(
-          () => router.push({ 
-            path: router.currentRoute.value.query.redirect || '/dashboard', force: true 
-          })
-        )
-    },
-    
-    async refresh({ commit }, payload) {      
-      authService.refresh(payload)
-        .then((response) => {
-          commit('setToken', response.data.access_token)                    
-          commit('setRefreshToken', response.data.refresh_token)          
-        })
-        .catch((error) => console.log(error))      
-        .finally(
-          () => router.push({ 
-            path: router.currentRoute.value.query.redirect || router.currentRoute.value.path, force: true 
+          () => router.push({
+            path: router.currentRoute.value.query.redirect || router.currentRoute.value.path, force: true
           })
         )
     },

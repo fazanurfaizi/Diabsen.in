@@ -1,45 +1,11 @@
-export const superAdminRoutes = [    
-    {
-        title: 'Pengelolaan',
-        icon: 'play',
-        items: [                        
-            {
-                name: 'Tahun Ajaran',
-                icon: 'calendar',                
-                child: [
-                    {
-                        title: 'Daftar Tahun Ajaran',
-                        path: 'academic-year-list'
-                    },
-                    {
-                        title: 'Tambah Tahun Ajaran',
-                        path: 'academic-year-create'
-                    },
-                ]
-            },
-            {
-                name: 'Gedung',
-                icon: 'users',                
-                child: [
-                    {
-                        title: 'Daftar Pengguna',
-                        path: 'user-list'
-                    },
-                    {
-                        title: 'Tambah Pengguna',
-                        path: 'user-create'
-                    },
-                ]
-            },
-        ]   
-    },
-    {
+export const superAdminRoutes = [
+	{
         title: 'Sekolah',
         icon: 'building-library',
-        items: [            
+        items: [
             {
-                name: 'Kelas',
-                icon: 'building-library',                
+                name: 'Sekolah',
+                icon: 'building-library',
                 child: [
                     {
                         title: 'Daftar Sekolah',
@@ -51,34 +17,6 @@ export const superAdminRoutes = [
                     },
                 ]
             },
-            {
-                name: 'Tahun Ajaran',
-                icon: 'calendar',                
-                child: [
-                    {
-                        title: 'Daftar Tahun Ajaran',
-                        path: 'academic-year-list'
-                    },
-                    {
-                        title: 'Tambah Tahun Ajaran',
-                        path: 'academic-year-create'
-                    },
-                ]
-            },
-            {
-                name: 'Pengguna',
-                icon: 'users',                
-                child: [
-                    {
-                        title: 'Daftar Pengguna',
-                        path: 'user-list'
-                    },
-                    {
-                        title: 'Tambah Pengguna',
-                        path: 'user-create'
-                    },
-                ]
-            },
-        ]   
-    }     
+        ]
+    }
 ]

@@ -7,6 +7,6 @@ const routes = {
     'Admin': schoolAdminRoutes
 }
 
-const user = store.getters['profile/getUser']
+const user = store.getters['profile/getUserProfile']
 
 export const appRoutes = routes[user?.role]

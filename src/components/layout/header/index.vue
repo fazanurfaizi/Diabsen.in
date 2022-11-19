@@ -40,12 +40,12 @@
                   <Icon name="chevron-down" set="solid" class="w-5 h-5" @click="isShow = !isShow" />
                 </button>
               </div>
-              <div v-show="isShow" class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">            
-                <router-link 
-                  :to="{ name: 'profile-user' }" 
-                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-secondary hover:text-white" 
-                  role="menuitem" 
-                  tabindex="-1" 
+              <div v-show="isShow" class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
+                <router-link
+                  :to="{ name: 'profile-user' }"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-secondary hover:text-white"
+                  role="menuitem"
+                  tabindex="-1"
                   id="user-menu-item-0"
                 >
                   <div class="inline-flex items-center">
@@ -54,11 +54,11 @@
                   </div>
                 </router-link>
 
-                <router-link 
-                  :to="{ name: 'profile-change-password' }" 
-                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-secondary hover:text-white" 
-                  role="menuitem" 
-                  tabindex="-1" 
+                <router-link
+                  :to="{ name: 'profile-change-password' }"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-secondary hover:text-white"
+                  role="menuitem"
+                  tabindex="-1"
                   id="user-menu-item-0"
                 >
                   <div class="inline-flex items-center">
@@ -67,11 +67,11 @@
                   </div>
                 </router-link>
 
-                <a href="#" 
-                  @click.prevent="logout()" 
-                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-secondary hover:text-white" 
-                  role="menuitem" 
-                  tabindex="-1" 
+                <a href="#"
+                  @click.prevent="logout()"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-secondary hover:text-white"
+                  role="menuitem"
+                  tabindex="-1"
                   id="user-menu-item-2"
                 >
                   <div class="inline-flex items-center">
@@ -105,7 +105,7 @@ export default defineComponent({
     },
   },
   setup() {
-    const store = useStore()    
+    const store = useStore()
 
     const dropdown = ref(null)
 
@@ -116,25 +116,25 @@ export default defineComponent({
       if (!dropdown.value) return
       if (
           !isShow.value ||
-          dropdown.value.contains(target)      
+          dropdown.value.contains(target)
       ) return
 
       isShow.value = !isShow.value
       // emit('close-dropdown')
     }
 
-    const user = store.getters['profile/getUser']
+    const user = store.getters['profile/getUserProfile']
 
     const logout = () => {
       store.dispatch('auth/logout')
     }
 
-    onMounted(() => {        
-      document.addEventListener('click', clickHandler)      
+    onMounted(() => {
+      document.addEventListener('click', clickHandler)
     })
-    
-    onUnmounted(() => {      
-      document.removeEventListener('click', clickHandler)      
+
+    onUnmounted(() => {
+      document.removeEventListener('click', clickHandler)
     })
 
     return {

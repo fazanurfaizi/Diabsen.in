@@ -8,18 +8,18 @@ export default {
     }
   },
   getters: {
-    getUser: state => state.user,    
+    getUserProfile: state => state.user,
   },
   mutations: {
-    setUser (state, user) {
+    setUserProfile (state, user) {
       state.user = user
-    },    
+    },
   },
   actions: {
-    async getProfile({ commit }) {      
+    async getProfile({ commit }) {
       profileService.getProfile()
         .then((response) => {
-          commit('setUser', response.data.data)          
+          commit('setUserProfile', response.data.data)
         })
         .catch((error) => console.log(error))
     },

@@ -6,20 +6,20 @@
         <template #nav>
           <ul class="flex flex-col w-full gap-2">
             <li class="my-px">
-              <Link                     
+              <Link
                 title="Profile Saya"
                 path="profile-edit"
-                icon="user-circle"                    
+                icon="user-circle"
               />
             </li>
             <li class="my-px">
-              <Link                     
+              <Link
                 title="Ubah Kata Sandi"
                 path="profile-change-password"
                 icon="key"
                 iconSet="teamui"
               />
-            </li>                        
+            </li>
           </ul>
         </template>
 
@@ -35,13 +35,13 @@
                 v-model="formData.name"
                 required
                 @blur="v$.name.$touch"
-                :error="v$.name.$error"       
+                :error="v$.name.$error"
               />
-            </v-form-control>            
+            </v-form-control>
 
-            <v-form-control :model="v$.gender">                
+            <v-form-control :model="v$.gender">
               <VLabel id="gender" label="Jenis Kelamin" required />
-              <VSelect 
+              <VSelect
                 v-model="formData.gender"
                 :options="genderOptions"
                 optionValue="value"
@@ -59,9 +59,9 @@
                 type="text"
                 v-model="formData.phone"
                 required
-                @blur="v$.phone.$touch"   
+                @blur="v$.phone.$touch"
                 :error="v$.phone.$error"
-              />               
+              />
             </v-form-control>
 
             <v-form-control :model="v$.birthdate">
@@ -100,11 +100,11 @@
                 v-model="formData.role"
                 required
                 readonly
-                />                     
+                />
                 <!-- class="bg-[#E53E3E1A] border-red-500" -->
             </div>
           </div>
-          <div class="flex flex-row-reverse items-end gap-2 mt-2">             
+          <div class="flex flex-row-reverse items-end gap-2 mt-2">
             <v-button size="md" color="danger" @click="updateProfile">
               Simpan
             </v-button>
@@ -113,7 +113,7 @@
             </v-button>
           </div>
         </form>
-      </profile-layout>      
+      </profile-layout>
     </template>
   </v-container>
 </template>
@@ -122,7 +122,7 @@
 import { defineComponent, onMounted, reactive, ref, computed } from "vue";
 import { useStore } from 'vuex'
 import { useRouter } from "vue-router";
-import { useVuelidate } from '@vuelidate/core' 
+import { useVuelidate } from '@vuelidate/core'
 import { required, email, helpers } from '@vuelidate/validators'
 import VFormControl from '@/components/form/form-control.vue'
 import VInput from "@/components/form/input.vue";
@@ -148,24 +148,24 @@ export default defineComponent({
     const router = useRouter()
 
     const user = computed(
-      () => store.getters['profile/getUser']
+      () => store.getters['profile/getUserProfile']
     )
-    
+
     const formData = reactive({
       name: user.value.name,
       email: user.value.email,
       phone: user.value.phone,
       gender: user.value.gender,
       birthdate: user.value.birthdate,
-      role: user.value.role,      
+      role: user.value.role,
     })
 
     const rules = {
       name: {
         required: helpers.withMessage('Nama tidak boleh kosong', required)
       },
-      email: { 
-        required: helpers.withMessage('E-Mail tidak boleh kosong', required), 
+      email: {
+        required: helpers.withMessage('E-Mail tidak boleh kosong', required),
         email: helpers.withMessage('E-Mail tidak valid', email)
       },
       phone: {
@@ -193,7 +193,7 @@ export default defineComponent({
     ])
 
     const updateProfile = () => {
-      store.dispatch('profile/updateProfile', formData)        
+      store.dispatch('profile/updateProfile', formData)
     }
 
     const handleOnBack = () => {
@@ -201,15 +201,15 @@ export default defineComponent({
     }
 
     onMounted(() => {
-      store.dispatch('profile/getProfile')      
+      store.dispatch('profile/getProfile')
     })
 
-    return {      
+    return {
       formData,
       genderOptions,
       updateProfile,
-      handleOnBack, 
-      v$     
+      handleOnBack,
+      v$
     }
   }
 })
