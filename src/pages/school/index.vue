@@ -30,13 +30,13 @@
 					:header-item-class-name="headerItemClassNameFunction"
 					:body-item-class-name="bodyItemClassNameFunction"
 					:body-expand-row-class-name="bodyExpandRowClassNameFunction"
-					@click-row="showItem"
 					@update-sort="updateSort"
 					@update-filter="updateFilter"
 					multi-sort
 					body-text-direction="left"
 					header-text-direction="left"
 					click-event-type="double"
+					v-model:items-selected="itemsSelected"
 				>
 					<template #expand="item">
 						<div style="padding: 15px">
@@ -77,6 +77,21 @@
 					<template v-slot:[`body.append`]>
 						<span>body.append</span>
 					</template>
+
+					<template #item-operation="item">
+						<div class="operation-wrapper">
+							<Icon
+								name="pencil"
+								class="operation-icon"
+								@click="editItem(item)"
+							/>
+							<Icon
+								name="trash"
+								class="operation-icon"
+								@click="deleteItem(item)"
+							/>
+						</div>
+					</template>
 				</VDatatable>
 			</div>
 		</template>
@@ -86,9 +101,10 @@
 <script setup>
 import { defineComponent, computed, ref, onMounted } from 'vue'
 import VDatatable from '@/components/datatable/index.vue'
-import { mockClientNestedItems } from '@/mock';
+import { mockClientItems, headersMocked } from '@/mock';
 import VSearchFilter from '@/components/datatable/search-filter/index.vue'
 import useDebounce from '@/hooks/useDebounce';
+import Icon from '@/components/Icon.vue'
 
 defineComponent({
 	name: 'school-list',
@@ -101,13 +117,7 @@ const searchValue = useDebounce('', 400)
 const sortBy = ref(['indicator.weigth', 'number'])
 const sortType = ref(['desc', 'asc'])
 
-const switchToNested300 = () => {
-	items.value = mockClientNestedItems(300)
-}
-
-const switchToNested = () => {
-	items.value = mockClientNestedItems(100)
-}
+const itemsSelected = ref([])
 
 const filterOptions = [
 	{
@@ -118,29 +128,32 @@ const filterOptions = [
 ]
 
 const headers = [
-	{ text: "PLAYER", value: "player", searchable: true },
-	{ text: "TEAM", value: "team"},
-	{ text: "NUMBER", value: "number", sortable: true},
-	{ text: "POSITION", value: "position"},
-	{ text: "HEIGHT", value: "indicator.height"},
-	{ text: "WEIGHT (lbs)", value: "indicator.weight", sortable: true},
-	{ text: "LAST ATTENDED", value: "lastAttended", width: 200, searchable: true},
-	{ text: "COUNTRY", value: "country"},
+	{ text: "NAME", value: "name", searchable: true },
+	{ text: "ADDRESS", value: "address"},
+	{ text: "HEIGHT", value: "height", sortable: true},
+	{ text: "WEIGHT", value: "weight", sortable: true},
+	{ text: "AGE", value: "age", sortable: true},
+	{ text: "SPORT", value: "favouriteSport"},
+	{ text: "FRUITS", value: "favouriteFruits"},
+	{ text: "OPERATION", value: 'operation' }
 ]
 
 const updateFilter = (items) => {
 	console.log(JSON.stringify(items))
 }
 
-const items = ref([{ player: "Stephen Curry", firstName: "GSW", number: 30, position: 'G', indicator: {"height": '6-2', "weight": 185}, lastAttended: "Davidson", country: "USA"},
-	{ player: "Kevin Durant", firstName: "BKN", number: 7, position: 'F', indicator: {"height": '6-10', "weight": 240}, lastAttended: "Texas-Austin", country: "USA"},
-	{ player: "Lebron James", firstName: "LAL", number: 7, position: 'F', indicator: {"height": '6-9', "weight": 185}, lastAttended: "St. Vincent-St. Mary HS (OH)", country: "USA"},
-	{ player: "Giannis Antetokounmpo", firstName: "MIL", number: 34, position: 'F', indicator: {"height": '6-11', "weight": 242}, lastAttended: "Filathlitikos", country: "Greece"},
-	{ player: "HC", firstName: "MIL", number: 34, position: 'F', indicator: {"height": '6-11', "weight": 243}, lastAttended: "Filathlitikos", country: "Greece"},
-]);
+const items = ref([]);
 
 const showItem = (item) => {
 	alert(JSON.stringify(item))
+}
+
+const deleteItem = (item) => {
+	alert('delete item')
+}
+
+const editItem = (item) => {
+	alert('edit item')
 }
 
 const updateSort = (sortOption) => {
@@ -197,6 +210,13 @@ const updateRowsPerPageSelect = (e) => {
 };
 
 onMounted(() => {
-	// switchToNested300()
+	items.value = mockClientItems(10)
 })
 </script>
+
+<style scoped>
+.operation-wrapper .operation-icon {
+	width: 20px;
+	cursor: pointer;
+}
+</style>

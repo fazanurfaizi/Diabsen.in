@@ -1,5 +1,5 @@
 <template>
-	<div class="sm:flex sm:items-center justify-between px-1">
+	<div class="flex items-center justify-between px-1">
 		<div class="flex justify-center items-center space-x-2">
 			<span>{{rowsPerPageMessage}}</span>
 			<VRowsSelector
@@ -9,7 +9,7 @@
 			<span>{{rowsPerPageEndMessage}}</span>
 		</div>
 		<!-- Action button -->
-		<div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none"></div>
+		<div class="mt-4 sm:mt-0 sm:ml-16"></div>
 		<!-- Action button -->
 	</div>
 	<div class="mt-2 flex flex-col">
@@ -20,9 +20,8 @@
 		>
 			<div
 				ref="tableBody"
-				class="overflow-hidden ring-opacity-5 md:rounded-sm border"
 				:class="{
-					'fixed-header': fixedHeader,
+					'sticky top-0 z-20': fixedHeader,
 					'fixed-height': tableHeight,
 					'show-shadow': showShadow,
 					'table-fixed': fixedHeaders.length,
@@ -30,7 +29,7 @@
 					'border-cell': borderCell,
 				}"
 			>
-				<table class="min-w-full divide-y divide-gray-300">
+				<table class="ring-opacity-5 rounded-sm border min-w-full divide-gray-300">
 					<colgroup>
 						<col
 							v-for="(header, index) in headersForRender"
@@ -223,10 +222,10 @@
 				</table>
 				<div
 					v-if="loading"
-					class="data-table__loading"
+					class="z-10 absolute w-full h-full top-0 left-0 flex items-center justify-center"
 				>
-					<div class="data-table__loading-mask"></div>
-					<div class="loading-entity">
+					<div class="bg-green-50 absolute w-full h-full top-0 left-0 z-10"></div>
+					<div class="z-10">
 						<slot
 							v-if="ifHasLoadingSlot"
 							name="loading"
@@ -245,49 +244,49 @@
 						{{ emptyMessage }}
 					</span>
 				</div>
-			</div>
 
-			<div class="flex items-center justify-between bg-white py-3 px-1">
-				<div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
-					<p class="text-sm text-gray-700">
-						Showing
-						{{ `${currentPageFirstIndex} to ${currentPageLastIndex}` }}
-						{{ rowsOfPageSeparatorMessage }} {{ totalItemsLength }}
-						results
-					</p>
+				<div class="flex items-center justify-between bg-white py-3 px-1">
+					<div class="flex flex-1 items-center justify-between">
+						<p class="text-sm text-gray-700">
+							Showing
+							{{ `${currentPageFirstIndex} to ${currentPageLastIndex}` }}
+							{{ rowsOfPageSeparatorMessage }} {{ totalItemsLength }}
+							results
+						</p>
 
-					<slot
-						v-if="ifHasPaginationSlot"
-						name="pagination"
-						v-bind="{
-							isFirstPage,
-							isLastPage,
-							currentPaginationNumber,
-							maxPaginationNumber,
-							nextPage,
-							prevPage,
-						}"
-					></slot>
-					<VPaginationArrows
-						v-else
-						:is-first-page="isFirstPage"
-						:is-last-page="isLastPage"
-						:current-pagination-number="currentPaginationNumber"
-						:max-pagination-number="maxPaginationNumber"
-						@click-next-page="nextPage"
-						@click-prev-page="prevPage"
-					>
-						<template
-							v-if="paginationButtons"
-							v-slot:[`paginationButtons`]
+						<slot
+							v-if="ifHasPaginationSlot"
+							name="pagination"
+							v-bind="{
+								isFirstPage,
+								isLastPage,
+								currentPaginationNumber,
+								maxPaginationNumber,
+								nextPage,
+								prevPage,
+							}"
+						></slot>
+						<VPaginationArrows
+							v-else
+							:is-first-page="isFirstPage"
+							:is-last-page="isLastPage"
+							:current-pagination-number="currentPaginationNumber"
+							:max-pagination-number="maxPaginationNumber"
+							@click-next-page="nextPage"
+							@click-prev-page="prevPage"
 						>
-							<VPaginationButtons
-								:current-pagination-number="currentPaginationNumber"
-								:max-pagination-number="maxPaginationNumber"
-								@update-page="updatePage"
-							/>
-						</template>
-					</VPaginationArrows>
+							<template
+								v-if="paginationButtons"
+								v-slot:[`paginationButtons`]
+							>
+								<VPaginationButtons
+									:current-pagination-number="currentPaginationNumber"
+									:max-pagination-number="maxPaginationNumber"
+									@update-page="updatePage"
+								/>
+							</template>
+						</VPaginationArrows>
+					</div>
 				</div>
 			</div>
 		</div>

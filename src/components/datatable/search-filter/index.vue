@@ -1,9 +1,9 @@
 <template>
 	<div class="relative">
 		<label :for="searchText" class="hidden">{{ searchText }}</label>
-		<!-- <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+		<div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
 			<Icon name="search" class="h-3.5 w-4 stroke-primary"></Icon>
-		</div> -->
+		</div>
 		<input
 			v-model="searchComputed"
 			@keyup.enter="handleSetSearch"
@@ -11,6 +11,13 @@
 			:placeholder="placeholder"
 			type="search"
 		>
+		<button
+			v-if="!isNullable(searchComputed)"
+			class="absolute inset-y-0 right-5 flex items-center pl-3"
+			@click="handleClearSearch"
+		>
+			<Icon name="x" class="h-3.5 w-4 stroke-red-500"></Icon>
+		</button>
 	</div>
 	<div>
 		<button @click="handleSetSearch">{{ searchButtonText }}</button>
@@ -27,6 +34,8 @@ export default {
 
 <script setup>
 import { defineProps, defineEmits, computed } from 'vue'
+import Icon from '@/components/Icon.vue'
+import { isNullable } from '@/core/utils'
 
 const props = defineProps({
     searchText: {
@@ -63,6 +72,10 @@ const handleSetSearch = (event) => {
 	if(event.target.value) {
 		emits('update:modelValue', event.target.value)
 	}
+}
+
+const handleClearSearch = () => {
+	emits('update:modelValue', '')
 }
 
 </script>

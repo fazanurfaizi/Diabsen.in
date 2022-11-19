@@ -1,5 +1,5 @@
 <template>
-    <div class="mt-5 p-[25px] bg-white rounded-lg min-h-screen">
+    <div class="mt-5 p-6 bg-white rounded-lg">
         <div class="mb-1">
             <h1 class="text-xl font-normal text-title-content py-2.5">
                 <slot name="title"></slot>

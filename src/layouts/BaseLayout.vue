@@ -1,22 +1,22 @@
 <template>
-	<div class="flex h-screen overflow-hidden  scrollbar-thin">
+	<div class="flex h-screen overflow-hidden scrollbar-thin">
 		<!-- Sidebar -->
 		<Sidebar
 			:sidebar-open="sidebarOpen"
 			@close-sidebar="sidebarOpen = false"
 		/>
-		
+
 		<div
 			class="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden"
 		>
-			<Header 
+			<Header
 				:sidebar-open="sidebarOpen"
 				@toggle-sidebar="sidebarOpen = !sidebarOpen"
 			/>
 
-			<main>
-				<div class="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto bg-gray-100">          
-					<breadcrumb/>			
+			<main class="bg-gray-100">
+				<div class="px-4 sm:px-6 lg:px-8 py-8">
+					<breadcrumb/>
 
 					<router-view v-slot="{ Component }">
 						<transition name="fade" mode="out-in">
@@ -25,7 +25,7 @@
 							</keep-alive>
 						</transition>
 					</router-view>
-					
+
 					<Footer color-text="black" />
 				</div>
 			</main>
@@ -45,7 +45,7 @@ export default defineComponent({
   components: {
     Breadcrumb,
     Sidebar,
-    Header,    
+    Header,
     Footer
   },
   setup() {

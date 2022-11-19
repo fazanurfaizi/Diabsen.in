@@ -1,7 +1,7 @@
 <template>
 	<div
         class="md:block"
-        :class="sidebarOpen ? 'block' : 'hidden'"
+        :class="sidebarOpen ? 'sticky' : 'hidden'"
     >
 		<!-- Sidebar backdrop (mobile only) -->
 		<div
@@ -27,7 +27,7 @@
 		<div
 			id="sidebar"
 			ref="sidebar"
-			class="flex flex-col relative left-0 top-0 md:static md:left-auto md:top-auto md:translate-x-0 h-screen overflow-y-scroll md:overflow-y-auto no-scrollbar w-52 md:w-24 md:sidebar-expanded:!w-64 2xl:!w-64 shrink-0 p-4 scrollbar-thin scrollbar-thumb-gray-200 scrollbar-track-white transition-all duration-200 ease-in-out"
+			class="flex flex-col relative left-0 top-0 md:static md:left-auto md:top-auto md:translate-x-0 h-screen overflow-y-scroll md:overflow-y-auto no-scrollbar w-52 md:w-24 md:sidebar-expanded:!w-64 shrink-0 p-4 scrollbar-thin scrollbar-thumb-gray-200 scrollbar-track-white transition-all duration-200 ease-in-out"
 			:class="sidebarOpen ? 'translate-x-0' : '-translate-x-64'"
 		>
 			<!-- Sidebar header -->
@@ -60,7 +60,7 @@
                             ></span>
 
                             <span
-                                class="md:hidden md:sidebar-expanded:block 2xl:block pl-1"
+                                class="hidden sidebar-expanded:block pl-1"
                             >
                                 {{ route.title }}
                             </span>
@@ -86,7 +86,7 @@
                                             <div class="flex items-start pl-1 px-1">
                                                 <heroicons-outline-vue :name="menu.icon" class="flex shrink-0 h-6 w-6 text-primary" />
                                                 <span
-                                                    class="text-sm font-medium ml-3 mt-0.5 md:opacity-0 md:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                                                    class="hidden sidebar-expanded:block text-sm font-medium ml-3 mt-0.5 md:opacity-0 md:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
                                                     {{ menu.name }}
                                                 </span>
                                             </div>
