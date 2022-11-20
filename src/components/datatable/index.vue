@@ -1,6 +1,6 @@
 <template>
-	<div class="flex items-center justify-between px-1">
-		<div class="flex justify-center items-center space-x-2">
+	<div class="flex items-center justify-between">
+		<div class="flex justify-center items-center space-x-2 px-3">
 			<span>{{rowsPerPageMessage}}</span>
 			<VRowsSelector
 				v-model="rowsPerPageRef"
@@ -125,7 +125,9 @@
 									currentPaginationNumber,
 									maxPaginationNumber,
 									nextPage,
-									prevPage
+									prevPage,
+									firstPage,
+									lastPage
 								},
 								headers: headersForRender
 							}"
@@ -215,6 +217,8 @@
 									maxPaginationNumber,
 									nextPage,
 									prevPage,
+									firstPage,
+									lastPage,
 									updatePage
 								},
 								headers: headersForRender
@@ -266,6 +270,8 @@
 								maxPaginationNumber,
 								nextPage,
 								prevPage,
+								firstPage,
+								lastPage
 							}"
 						></slot>
 						<VPaginationArrows
@@ -276,6 +282,8 @@
 							:max-pagination-number="maxPaginationNumber"
 							@click-next-page="nextPage"
 							@click-prev-page="prevPage"
+							@click-first-page="firstPage"
+							@click-last-page="lastPage"
 						>
 							<template
 								v-if="paginationButtons"
@@ -307,11 +315,11 @@ export default {
 import { defineProps, defineEmits, defineExpose, useSlots, computed, toRefs, ref, watch, onMounted, provide } from "vue";
 
 // Components
-import VMultiCheckbox from './multi-checkbox/index.vue'
 import VPaginationArrows from './pagination-arrows/index.vue'
 import VPaginationButtons from './pagination-buttons/index.vue'
-import VSingleCheckbox from './single-checkbox/index.vue'
 import VRowsSelector from './rows-selector/index.vue'
+import VMultiCheckbox from '@/components/form/multi-checkbox/index.vue'
+import VSingleCheckbox from '@/components/form/single-checkbox/index.vue'
 import VLoadingCircle from '@/components/ui/loading-circle/index.vue'
 import VLoadingLine from '@/components/ui/loading-line/index.vue'
 
@@ -471,6 +479,8 @@ const {
 	isFirstPage,
 	nextPage,
 	prevPage,
+	firstPage,
+	lastPage,
 	updatePage,
 	updateCurrentPaginationNumber,
 } = usePagination(
@@ -584,6 +594,8 @@ defineExpose({
 	isFirstPage,
 	nextPage,
 	prevPage,
+	firstPage,
+	lastPage,
 	updatePage,
 	rowsPerPageOptions: rowsItemsComputed,
 	rowsPerPageActiveOption: rowsPerPageRef,

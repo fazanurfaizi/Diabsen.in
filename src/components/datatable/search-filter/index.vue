@@ -19,7 +19,7 @@
 			<Icon name="x" class="h-3.5 w-4 stroke-red-500"></Icon>
 		</button>
 	</div>
-	<div>
+	<div v-if="hasSubmitButton" class="mr-3">
 		<VButton size="sm" @click="handleSetSearch">{{ searchButtonText }}</VButton>
 	</div>
 </template>
@@ -58,6 +58,11 @@ const props = defineProps({
 		type: String,
 		required: true
 	},
+	hasSubmitButton: {
+		type: Boolean,
+		required: false,
+		default: false
+	}
 })
 
 const emits = defineEmits(['update:modelValue'])

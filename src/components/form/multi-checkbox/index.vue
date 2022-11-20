@@ -1,12 +1,10 @@
 <template>
-	<div
-		class="flex items-center"
-		@click.stop.prevent="toggleChecked"
-	>
+	<div class="flex items-center">
 		<input
 			id="checked-checkbox"
 			type="checkbox"
 			:checked="isChecked"
+			@click.stop.prevent="toggleChecked"
 			class="w-6 h-6 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
 		>
 		<label
@@ -19,23 +17,28 @@
 
 <script>
 export default {
-	name: 'v-single-checkbox'
+	name: 'v-multi-checkbox',
+	inheritAttrs: false,
+	customOptions: {}
 }
 </script>
 
 <script setup>
-import { defineComponent, defineProps, defineEmits, computed } from 'vue';
+import { defineProps, defineEmits, computed } from 'vue'
 
 const props = defineProps({
-	checked: {
-		type: Boolean,
+	status: {
+		type: String,
 		required: true,
-	},
-});
+		validator: (value) => {
+			return ['noneSelected', 'partSelected', 'allSelected'].includes(value);
+		}
+	}
+})
 
-const emits = defineEmits(['change']);
+const emits = defineEmits(['change'])
 
-const isChecked = computed(() => props.checked)
+const isChecked = computed(() => props.status === 'allSelected')
 
 const toggleChecked = () => {
 	emits('change', !isChecked.value)

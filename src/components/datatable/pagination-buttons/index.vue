@@ -5,7 +5,7 @@
 		type="button"
 		class="relative items-center border px-4 py-2 border-gray-300 bg-white text-gray-500 hover:bg-gray-50 text-sm"
 		:class="[
-			pagination.active && 'border-indigo-500 bg-indigo-50 text-indigo-600'
+			pagination.active && 'bg-indigo-100 text-indigo-600'
 		]"
 		@click.prevent="changePage(pagination)"
 	>
@@ -13,12 +13,16 @@
 	</button>
 </template>
 
-<script setup>
-import { defineComponent, defineProps, defineEmits, computed } from 'vue'
+<script>
+export default {
+	name: 'v-pagination-buttons',
+	inheritAttrs: false,
+	customOptions: {}
+}
+</script>
 
-defineComponent({
-    name: 'v-pagination-buttons'
-})
+<script setup>
+import { defineProps, defineEmits, computed } from 'vue'
 
 const props = defineProps({
     maxPaginationNumber: {

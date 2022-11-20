@@ -49,6 +49,28 @@ export default function usePagination(
 		}
 	}
 
+	const firstPage = () => {
+		if(totalItemsLength.value === 0) return
+		if(isFirstPage.value) return
+		if(loading.value) return
+		if(isServerSideMode.value) {
+			updateServerOptionPage(1)
+		} else {
+			currentPaginationNumber.value = 1
+		}
+	}
+
+	const lastPage = () => {
+		if(totalItemsLength.value === 0) return
+		if(isLastPage.value) return
+		if(loading.value) return
+		if(isServerSideMode.value) {
+			updateServerOptionPage(maxPaginationNumber.value)
+		} else {
+			currentPaginationNumber.value = maxPaginationNumber.value
+		}
+	}
+
 	const updatePage = (page) => {
 		if(loading.value) return
 		if(isServerSideMode.value) {
@@ -69,6 +91,8 @@ export default function usePagination(
 		isLastPage,
 		nextPage,
 		prevPage,
+		firstPage,
+		lastPage,
 		updatePage,
 		updateCurrentPaginationNumber
 	}

@@ -1,7 +1,7 @@
 <template>
 	<v-container>
 		<template v-slot:title>
-			<div class="flex justify-between">
+			<div class="flex justify-between mx-3">
 				<span>Daftar Sekolah</span>
 				<VButton size="sm" >Tambah Sekolah</VButton>
 			</div>
@@ -42,6 +42,7 @@
 							<VSearchFilter
 								v-model="searchValue"
 								search-button-text="Cari"
+								has-submit-button
 							/>
 							<!-- search -->
 						</div>
@@ -85,10 +86,9 @@
 <script setup>
 import { defineComponent, computed, ref, onMounted } from 'vue'
 import VDatatable from '@/components/datatable/index.vue'
-import { mockClientItems, headersMocked } from '@/mock';
+import { mockClientItems } from '@/mock';
 import VSearchFilter from '@/components/datatable/search-filter/index.vue'
 import useDebounce from '@/hooks/useDebounce';
-import Icon from '@/components/Icon.vue'
 import VButton from '@/components/ui/button/index.vue'
 
 defineComponent({
@@ -129,10 +129,6 @@ const updateFilter = (items) => {
 
 const items = ref([]);
 
-const showItem = (item) => {
-	alert(JSON.stringify(item))
-}
-
 const deleteItem = (item) => {
 	alert('delete item')
 }
@@ -144,13 +140,6 @@ const editItem = (item) => {
 const updateSort = (sortOption) => {
 	console.log(sortOption)
 }
-
-const ageCriteria = ref([1, 15])
-
-const favoriteSpotCriteria = ref('all')
-
-const showNameFilter = ref(false)
-const nameCriteria = ref('')
 
 const bodyRowClassNameFunction = (item, index) => (index === 0 ? 'first-row test-row' : '')
 const bodyExpandRowClassNameFunction = (item, index) => 'expand-row'
@@ -195,7 +184,7 @@ const updateRowsPerPageSelect = (e) => {
 };
 
 onMounted(() => {
-	items.value = mockClientItems(10)
+	items.value = mockClientItems(100)
 })
 </script>
 
