@@ -7,7 +7,7 @@
 		<input
 			v-model="searchComputed"
 			@keyup.enter="handleSetSearch"
-			class="w-['229px'] h-9 py-2.5 pl-9 pr-2 mr-3 bg-white border border-gray-300 text-gray-900 text-sm rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+			class="h-10 py-3 pl-9 pr-2 mr-3 bg-white border border-gray-300 text-gray-900 text-sm rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
 			:placeholder="placeholder"
 			type="search"
 		>
@@ -20,7 +20,7 @@
 		</button>
 	</div>
 	<div>
-		<button @click="handleSetSearch">{{ searchButtonText }}</button>
+		<VButton size="sm" @click="handleSetSearch">{{ searchButtonText }}</VButton>
 	</div>
 </template>
 
@@ -36,6 +36,7 @@ export default {
 import { defineProps, defineEmits, computed } from 'vue'
 import Icon from '@/components/Icon.vue'
 import { isNullable } from '@/core/utils'
+import VButton from '@/components/ui/button/index.vue'
 
 const props = defineProps({
     searchText: {

@@ -1,15 +1,13 @@
 <template>
 	<v-container>
-		<template v-slot:title>Daftar Sekolah</template>
+		<template v-slot:title>
+			<div class="flex justify-between">
+				<span>Daftar Sekolah</span>
+				<VButton size="sm" >Tambah Sekolah</VButton>
+			</div>
+		</template>
 		<template v-slot:content>
 			<div>
-				<div class="flex items-center my-2">
-					<!-- search -->
-					<VSearchFilter
-						v-model="searchValue"
-					/>
-					<!-- search -->
-				</div>
 				<VDatatable
 					click-row-to-expand
 					ref="dataTable"
@@ -33,32 +31,25 @@
 					@update-sort="updateSort"
 					@update-filter="updateFilter"
 					multi-sort
-					body-text-direction="left"
-					header-text-direction="left"
+					header-text-direction="center"
+					body-text-direction="center"
 					click-event-type="double"
 					v-model:items-selected="itemsSelected"
 				>
-					<template #expand="item">
-						<div style="padding: 15px">
-							{{ item.name }} won championships
+					<template #search>
+						<div class="flex items-center my-2">
+							<!-- search -->
+							<VSearchFilter
+								v-model="searchValue"
+								search-button-text="Cari"
+							/>
+							<!-- search -->
 						</div>
 					</template>
 
-					<template #header-name="header">
-						<div class="filter-column">
-							<span
-								class="filter-icon"
-								@click.stop="showNameFilter=!showNameFilter"
-							>
-								icon
-							</span>
-							{{ header.text }}
-							<div
-								v-if="showNameFilter"
-								class="filter-menu filter-age-menu"
-							>
-								<input v-model="nameCriteria">
-							</div>
+					<template #expand="item">
+						<div style="padding: 15px">
+							{{ item.name }} won championships
 						</div>
 					</template>
 
@@ -79,17 +70,10 @@
 					</template>
 
 					<template #item-operation="item">
-						<div class="operation-wrapper">
-							<Icon
-								name="pencil"
-								class="operation-icon"
-								@click="editItem(item)"
-							/>
-							<Icon
-								name="trash"
-								class="operation-icon"
-								@click="deleteItem(item)"
-							/>
+						<div class="flex text-center justify-evenly">
+							<VButton variant="primary" size="xs">Detail</VButton>
+							<VButton variant="warning" size="xs" @click="editItem(item)">Edit</VButton>
+							<VButton variant="danger" size="xs" @click="deleteItem(item)">Hapus</VButton>
 						</div>
 					</template>
 				</VDatatable>
@@ -105,6 +89,7 @@ import { mockClientItems, headersMocked } from '@/mock';
 import VSearchFilter from '@/components/datatable/search-filter/index.vue'
 import useDebounce from '@/hooks/useDebounce';
 import Icon from '@/components/Icon.vue'
+import VButton from '@/components/ui/button/index.vue'
 
 defineComponent({
 	name: 'school-list',

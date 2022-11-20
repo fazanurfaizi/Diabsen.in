@@ -9,7 +9,9 @@
 			<span>{{rowsPerPageEndMessage}}</span>
 		</div>
 		<!-- Action button -->
-		<div class="mt-4 sm:mt-0 sm:ml-16"></div>
+		<div class="mt-4 sm:mt-0 sm:ml-16" v-if="ifHasSearchSlot">
+			<slot name="search"></slot>
+		</div>
 		<!-- Action button -->
 	</div>
 	<div class="mt-2 flex flex-col">
@@ -29,7 +31,7 @@
 					'border-cell': borderCell,
 				}"
 			>
-				<table class="ring-opacity-5 rounded-sm border min-w-full divide-gray-300">
+				<table class="ring-opacity-5 rounded-sm border md:min-w-full table-auto divide-gray-300">
 					<colgroup>
 						<col
 							v-for="(header, index) in headersForRender"
@@ -46,9 +48,9 @@
 							<th
 								v-for="(header, index) in headersForRender"
 								:key="index"
-								class="px-4 py-3.5 text-left text-sm font-semibold text-gray-900"
+								class="px-4 py-3.5 text-center items-center text-sm font-semibold text-gray-900"
 								:class="[{
-									sortable: header.sortable,
+									'sortable': header.sortable,
 									'none': header.sortable && header.sortType === 'none',
 									'desc': header.sortable && header.sortType === 'desc',
 									'asc': header.sortable && header.sortType === 'asc',
@@ -65,8 +67,7 @@
 								/>
 								<span
 									v-else
-									class="flex space-x-2 items-center bg-center"
-									:class="`direction-${headerTextDirection}`"
+									:class="`text-${headerTextDirection}`"
 								>
 									<slot
 										v-if="slots[`header-${header.value}`]"
@@ -149,7 +150,7 @@
 									:class="[{
 										'shadow': column === lastFixedColumn,
 										'can-expand': column === 'expand'
-									}, typeof bodyItemClassName === 'string' ? bodyItemClassName : bodyItemClassName(column, i), `direction-${bodyTextDirection}`]"
+									}, typeof bodyItemClassName === 'string' ? bodyItemClassName : bodyItemClassName(column, i), `text-${bodyTextDirection}`]"
 									@click="column === 'expand' ? updateExpandingItemIndexList(index + prevPageEndIndex, item, $event) : null"
 								>
 									<slot
@@ -172,6 +173,7 @@
 									</template>
 									<template v-else-if="column === 'checkbox'">
 										<VSingleCheckbox
+											:key="randomId()"
 											:checked="item[column]"
 											@change="toggleSelectItem(item)"
 										/>
@@ -325,7 +327,7 @@ import useServerOptions from '@/hooks/useServerOptions';
 import useTotalItems from '@/hooks/useTotalItems';
 
 // utils
-import { generateColumnContent } from '@/core/utils'
+import { generateColumnContent, randomId } from '@/core/utils'
 import datatableProps from './props'
 
 const props = defineProps({
@@ -374,6 +376,7 @@ const emits = defineEmits([
 ])
 
 const slots = useSlots()
+const ifHasSearchSlot = computed(() => !!slots.search)
 const ifHasPaginationSlot = computed(() => !!slots.pagination)
 const ifHasLoadingSlot = computed(() => !!slots.loading)
 const ifHasExpandSlot = computed(() => !!slots.expand)
@@ -588,3 +591,53 @@ defineExpose({
 })
 
 </script>
+
+<style>
+.sortable {
+	cursor: pointer;
+}
+.sortable .sortType-icon {
+	border: 5px solid transparent;
+	margin-top: -3px;
+	margin-left: 4px;
+	display: inline-block;
+	height: 0;
+	width: 0;
+	position: relative;
+	border-bottom-color: grey;
+}
+.sortable .multi-sort__number {
+	border-radius: 50%;
+	height: 1.5em;
+	width: 1.5em;
+	line-height: 1.5em;
+	margin-left: 4px;
+	background-color: grey;
+	color: white;
+}
+/* .sortable.none:hover .sortType-icon {
+	opacity: 1;
+} */
+.sortable.none .sortType-icon {
+	opacity: 1;
+	transition: 0.5s ease;
+}
+.sortable.desc .sortType-icon {
+	margin-top: 5px;
+	transform: rotate(180deg);
+}
+
+.expand-icon {
+	border: solid;
+	border-color: grey;
+	border-width: 0 2px 2px 0;
+	display: inline-block;
+	padding: 3px;
+	transform: rotate(-45deg);
+	transition: 0.2s;
+}
+ .expand-icon.expanding {
+	transform: rotate(45deg);
+}
+
+</style>

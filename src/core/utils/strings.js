@@ -30,3 +30,11 @@ export function stringReplaceFromArray(target, searchValues, replacements) {
 	}
 	return target
 }
+
+/**
+ * create random id for component key
+ * @returns {String}
+ */
+export function randomId() {
+	return (Math.random() + 1).toString(36).substring(7)
+}
