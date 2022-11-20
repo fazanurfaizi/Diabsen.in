@@ -1,4 +1,4 @@
-import { computed, ref } from "vue";
+import { computed, ref } from 'vue'
 
 /**
  * use pagination hook
@@ -19,17 +19,25 @@ export default function usePagination(
 	serverOptions,
 	updateServerOptionPage
 ) {
-	const currentPaginationNumber = ref(serverOptions.value ? serverOptions.value.page : currentPage.value)
-	const maxPaginationNumber = computed(() => Math.ceil(totalItemsLength.value / rowsPerPage.value))
+	const currentPaginationNumber = ref(
+		serverOptions.value ? serverOptions.value.page : currentPage.value
+	)
+	const maxPaginationNumber = computed(() =>
+		Math.ceil(totalItemsLength.value / rowsPerPage.value)
+	)
 
-	const isLastPage = computed(() => maxPaginationNumber.value === 0 || (currentPaginationNumber.value === maxPaginationNumber.value))
+	const isLastPage = computed(
+		() =>
+			maxPaginationNumber.value === 0 ||
+			currentPaginationNumber.value === maxPaginationNumber.value
+	)
 	const isFirstPage = computed(() => currentPaginationNumber.value === 1)
 
 	const nextPage = () => {
-		if(totalItemsLength.value === 0) return
-		if(isLastPage.value) return
-		if(loading.value) return
-		if(isServerSideMode.value) {
+		if (totalItemsLength.value === 0) return
+		if (isLastPage.value) return
+		if (loading.value) return
+		if (isServerSideMode.value) {
 			const nextPaginationNumber = currentPaginationNumber.value + 1
 			updateServerOptionPage(nextPaginationNumber)
 		} else {
@@ -38,10 +46,10 @@ export default function usePagination(
 	}
 
 	const prevPage = () => {
-		if(totalItemsLength.value === 0) return
-		if(isFirstPage.value) return
-		if(loading.value) return
-		if(isServerSideMode.value) {
+		if (totalItemsLength.value === 0) return
+		if (isFirstPage.value) return
+		if (loading.value) return
+		if (isServerSideMode.value) {
 			const prevPaginationNumber = currentPaginationNumber.value - 1
 			updateServerOptionPage(prevPaginationNumber)
 		} else {
@@ -50,10 +58,10 @@ export default function usePagination(
 	}
 
 	const firstPage = () => {
-		if(totalItemsLength.value === 0) return
-		if(isFirstPage.value) return
-		if(loading.value) return
-		if(isServerSideMode.value) {
+		if (totalItemsLength.value === 0) return
+		if (isFirstPage.value) return
+		if (loading.value) return
+		if (isServerSideMode.value) {
 			updateServerOptionPage(1)
 		} else {
 			currentPaginationNumber.value = 1
@@ -61,10 +69,10 @@ export default function usePagination(
 	}
 
 	const lastPage = () => {
-		if(totalItemsLength.value === 0) return
-		if(isLastPage.value) return
-		if(loading.value) return
-		if(isServerSideMode.value) {
+		if (totalItemsLength.value === 0) return
+		if (isLastPage.value) return
+		if (loading.value) return
+		if (isServerSideMode.value) {
 			updateServerOptionPage(maxPaginationNumber.value)
 		} else {
 			currentPaginationNumber.value = maxPaginationNumber.value
@@ -72,8 +80,8 @@ export default function usePagination(
 	}
 
 	const updatePage = (page) => {
-		if(loading.value) return
-		if(isServerSideMode.value) {
+		if (loading.value) return
+		if (isServerSideMode.value) {
 			updateServerOptionPage(page)
 		} else {
 			currentPaginationNumber.value = page
@@ -94,6 +102,6 @@ export default function usePagination(
 		firstPage,
 		lastPage,
 		updatePage,
-		updateCurrentPaginationNumber
+		updateCurrentPaginationNumber,
 	}
 }

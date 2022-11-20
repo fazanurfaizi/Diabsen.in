@@ -3,7 +3,7 @@
 </template>
 
 <script>
-export default {
-	name: 'academic-years-index-page'
-}
+	export default {
+		name: 'academic-years-index-page',
+	}
 </script>

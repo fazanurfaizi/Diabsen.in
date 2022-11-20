@@ -1,4 +1,4 @@
-import { computed } from "vue";
+import { computed } from 'vue'
 
 /**
  * use server options hook
@@ -6,20 +6,12 @@ import { computed } from "vue";
  * @param {import("vue").Ref<Boolean>} multiSort
  * @param {void} emits
  */
-export default function useServerOptions(
-	serverOptions,
-	multiSort,
-	emits
-) {
+export default function useServerOptions(serverOptions, multiSort, emits) {
 	const serverOptionsComputed = computed({
 		get: () => {
-			if(serverOptions.value) {
-				const {
-					page,
-					rowsPerPage,
-					sortBy,
-					sortType
-				} = serverOptions.value
+			if (serverOptions.value) {
+				const { page, rowsPerPage, sortBy, sortType } =
+					serverOptions.value
 
 				return {
 					page,
@@ -32,42 +24,44 @@ export default function useServerOptions(
 		},
 		set: (value) => {
 			emits('update:serverOptions', value)
-		}
+		},
 	})
 
 	const updateServerOptionsPage = (page) => {
-		if(serverOptionsComputed.value) {
+		if (serverOptionsComputed.value) {
 			serverOptionsComputed.value = {
 				...serverOptionsComputed.value,
-				page
+				page,
 			}
 		}
 	}
 
 	const updateServerOptionsRowsPerPage = (rowsPerPage) => {
-		if(serverOptionsComputed.value) {
+		if (serverOptionsComputed.value) {
 			serverOptionsComputed.value = {
 				...serverOptionsComputed.value,
 				page: 1,
-				rowsPerPage
+				rowsPerPage,
 			}
 		}
 	}
 
 	const updateServerOptionsSort = (newSoryBy, newSortType) => {
-		if(serverOptionsComputed.value) {
-			if(
-				multiSort.value
-				&& Array.isArray(serverOptionsComputed.value.sortBy)
-				&& Array.isArray(serverOptionsComputed.value.sortType)
+		if (serverOptionsComputed.value) {
+			if (
+				multiSort.value &&
+				Array.isArray(serverOptionsComputed.value.sortBy) &&
+				Array.isArray(serverOptionsComputed.value.sortType)
 			) {
-				const index = serverOptionsComputed.value.sortBy.findIndex((val) => val === newSoryBy)
-				if(index === -1 && newSortType !== null) {
+				const index = serverOptionsComputed.value.sortBy.findIndex(
+					(val) => val === newSoryBy
+				)
+				if (index === -1 && newSortType !== null) {
 					serverOptionsComputed.value.sortBy.push(newSortType)
 					serverOptionsComputed.value.sortType.push(newSortType)
 				}
 
-				if(newSortType === null) {
+				if (newSortType === null) {
 					serverOptionsComputed.value.sortBy.splice(index, 1)
 					serverOptionsComputed.value.sortType.splice(index, 1)
 				} else {
@@ -77,7 +71,7 @@ export default function useServerOptions(
 				serverOptionsComputed.value = {
 					...serverOptionsComputed.value,
 					sortBy: newSortType !== null ? newSoryBy : null,
-					sortType: newSortType
+					sortType: newSortType,
 				}
 			}
 		}
@@ -87,6 +81,6 @@ export default function useServerOptions(
 		serverOptionsComputed,
 		updateServerOptionsPage,
 		updateServerOptionsSort,
-		updateServerOptionsRowsPerPage
+		updateServerOptionsRowsPerPage,
 	}
 }

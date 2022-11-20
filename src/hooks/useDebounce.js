@@ -9,7 +9,7 @@ import { ref, customRef } from 'vue'
 const debounce = (cb, delay = 0, immediate = false) => {
 	let timeout
 	return (...args) => {
-		if(immediate && !timeout) cb(...args)
+		if (immediate && !timeout) cb(...args)
 		clearTimeout(timeout)
 
 		timeout = setTimeout(() => {
@@ -32,7 +32,7 @@ export default function useDebounce(initialValue, delay, immediate) {
 			return state.value
 		},
 		set: debounce(
-			value => {
+			(value) => {
 				state.value = value
 				trigger()
 			},

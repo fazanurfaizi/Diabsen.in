@@ -3,7 +3,7 @@
 </template>
 
 <script>
-export default {
-	name: 'users-index-page'
-}
+	export default {
+		name: 'users-index-page',
+	}
 </script>

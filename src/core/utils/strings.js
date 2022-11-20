@@ -14,7 +14,7 @@ export function compareStrings(a, b) {
  * @returns {String}
  */
 export function toTitleCase(str) {
-	return str.charAt(0).toUpperCase() + str.slice(1).replace(/[-_]/gui, " ")
+	return str.charAt(0).toUpperCase() + str.slice(1).replace(/[-_]/giu, ' ')
 }
 
 /**

@@ -6,10 +6,10 @@
 export function getEventTargetValue(event) {
 	event = event || window.event
 	var target
-	if(event !== undefined) {
+	if (event !== undefined) {
 		target = event.target || event.srcElement
 	}
-	if(target !== undefined) {
+	if (target !== undefined) {
 		return target.value
 	}
 	return null

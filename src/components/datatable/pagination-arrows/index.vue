@@ -1,6 +1,11 @@
 <template>
-	<nav class="isolate inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
-		<div class="relative inline-flex items-center rounded-l-md border border-gray-300 bg-white px-2 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20">
+	<nav
+		class="isolate inline-flex -space-x-px rounded-md shadow-sm"
+		aria-label="Pagination"
+	>
+		<div
+			class="relative inline-flex items-center rounded-l-md border border-gray-300 bg-white px-2 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20"
+		>
 			Page {{ currentPaginationNumber }} of {{ maxPaginationNumber }}
 		</div>
 		<button
@@ -26,10 +31,7 @@
 
 		<!-- Current: "z-10 bg-indigo-50 border-indigo-500 text-indigo-600", Default: "bg-white border-gray-300 text-gray-500 hover:bg-gray-50" -->
 		<!-- aria-current="page" -->
-		<slot
-			v-if="slots.paginationButtons"
-			name="paginationButtons"
-		></slot>
+		<slot v-if="slots.paginationButtons" name="paginationButtons"></slot>
 
 		<!-- <span class="relative inline-flex items-center border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700">...</span> -->
 
@@ -57,48 +59,52 @@
 </template>
 
 <script>
-export default {
-	name: 'v-pagination-arrows',
-	inheritAttrs: false,
-	customOptions: {}
-}
+	export default {
+		name: 'v-pagination-arrows',
+		inheritAttrs: false,
+		customOptions: {},
+	}
 </script>
 
 <script setup>
-import { defineProps, defineEmits, useSlots } from 'vue';
-import Icon from '@/components/Icon.vue'
+	import { defineProps, defineEmits, useSlots } from 'vue'
+	import Icon from '@/components/Icon.vue'
 
-defineProps({
-	maxPaginationNumber: {
-		type: Number,
-		required: true
-	},
-	currentPaginationNumber: {
-		type: Number,
-		required: true
-	},
-	previousButtonText: {
-        type: String,
-        default: 'Previous',
-        required: false
-    },
-    nextButtonText: {
-        type: String,
-        default: 'Next',
-        required: false
-    },
-	isFirstPage: {
-		type: Boolean,
-		required: false
-	},
-	isLastPage: {
-		type: Boolean,
-		required: false
-	}
-})
+	defineProps({
+		maxPaginationNumber: {
+			type: Number,
+			required: true,
+		},
+		currentPaginationNumber: {
+			type: Number,
+			required: true,
+		},
+		previousButtonText: {
+			type: String,
+			default: 'Previous',
+			required: false,
+		},
+		nextButtonText: {
+			type: String,
+			default: 'Next',
+			required: false,
+		},
+		isFirstPage: {
+			type: Boolean,
+			required: false,
+		},
+		isLastPage: {
+			type: Boolean,
+			required: false,
+		},
+	})
 
-const emits = defineEmits(['clickPrevPage', 'clickNextPage', 'clickFirstPage', 'clickLastPage'])
+	const emits = defineEmits([
+		'clickPrevPage',
+		'clickNextPage',
+		'clickFirstPage',
+		'clickLastPage',
+	])
 
-const slots = useSlots()
-
+	const slots = useSlots()
 </script>

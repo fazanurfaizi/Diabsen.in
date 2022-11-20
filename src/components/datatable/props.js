@@ -5,7 +5,7 @@ export default {
 	},
 	headers: {
 		type: Array,
-		required: true
+		required: true,
 	},
 	alternating: {
 		type: Boolean,
@@ -97,7 +97,7 @@ export default {
 	},
 	rowsPerPageEndMessage: {
 		type: String,
-		default: 'Entries'
+		default: 'Entries',
 	},
 	searchValue: {
 		type: String,
@@ -120,7 +120,7 @@ export default {
 		default: '',
 	},
 	sortType: {
-		type: [String,  Array],
+		type: [String, Array],
 		default: 'asc',
 	},
 	multiSort: {

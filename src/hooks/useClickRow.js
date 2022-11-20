@@ -12,16 +12,16 @@ export default function useClickRow(
 	emits
 ) {
 	const clickRow = (item, clickType) => {
-		if(clickEventType.value !== clickType) return
+		if (clickEventType.value !== clickType) return
 
 		const clickRowArgs = { ...item }
-		if(isMultipleSelectable.value) {
+		if (isMultipleSelectable.value) {
 			const { checkbox } = item
 			delete clickRowArgs.checkbox
 			clickRowArgs.isSelected = checkbox
 		}
 
-		if(showIndex.value) {
+		if (showIndex.value) {
 			const { index } = item
 			delete clickRowArgs.index
 			clickRowArgs.indexInCurrentPage = index
@@ -31,6 +31,6 @@ export default function useClickRow(
 	}
 
 	return {
-		clickRow
+		clickRow,
 	}
 }

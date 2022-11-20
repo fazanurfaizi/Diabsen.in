@@ -1,4 +1,4 @@
-import { computed } from "vue";
+import { computed } from 'vue'
 
 /**
  * use page items hook
@@ -21,15 +21,18 @@ export default function usePageItems(
 	selectItemsComputed,
 	showIndex,
 	totalItems,
-	totalItemsLength,
+	totalItemsLength
 ) {
-	const currentPageFirstIndex = computed(() =>
-		(currentPaginationNumber.value - 1) * rowsPerPageRef.value + 1
+	const currentPageFirstIndex = computed(
+		() => (currentPaginationNumber.value - 1) * rowsPerPageRef.value + 1
 	)
 
 	const currentPageLastIndex = computed(() => {
-		if(isServerSideMode.value) {
-			return Math.min(totalItemsLength.value, currentPaginationNumber.value * rowsPerPageRef.value)
+		if (isServerSideMode.value) {
+			return Math.min(
+				totalItemsLength.value,
+				currentPaginationNumber.value * rowsPerPageRef.value
+			)
 		}
 
 		return Math.min(
@@ -40,15 +43,18 @@ export default function usePageItems(
 
 	// items in current page
 	const itemsInPage = computed(() => {
-		if(isServerSideMode.value) return items.value
-		return totalItems.value.slice(currentPageFirstIndex.value - 1, currentPageLastIndex.value)
+		if (isServerSideMode.value) return items.value
+		return totalItems.value.slice(
+			currentPageFirstIndex.value - 1,
+			currentPageLastIndex.value
+		)
 	})
 
 	const itemsWithIndex = computed(() => {
-		if(showIndex.value) {
+		if (showIndex.value) {
 			return itemsInPage.value.map((item, index) => ({
 				index: currentPageFirstIndex.value + index,
-				...item
+				...item,
 			}))
 		}
 
@@ -56,25 +62,41 @@ export default function usePageItems(
 	})
 
 	const multipleSelectStatus = computed(() => {
-		if(selectItemsComputed.value.length === 0) {
+		if (selectItemsComputed.value.length === 0) {
 			return 'noneSelected'
 		}
 
-		const isNoneSelected = selectItemsComputed.value.every((itemSelected) => {
-			if(totalItems.value.findIndex((item) => JSON.stringify(itemSelected) === JSON.stringify(item)) !== -1) {
-				return false
-			}
-			return true
-		})
-		if(isNoneSelected) return 'noneSelected'
-
-		if(selectItemsComputed.value.length === totalItems.value.length) {
-			const isAllSelected = selectItemsComputed.value.every((itemSelected) => {
-				if (totalItems.value.findIndex((item) => JSON.stringify(itemSelected) === JSON.stringify(item)) === -1) {
-					return false;
+		const isNoneSelected = selectItemsComputed.value.every(
+			(itemSelected) => {
+				if (
+					totalItems.value.findIndex(
+						(item) =>
+							JSON.stringify(itemSelected) ===
+							JSON.stringify(item)
+					) !== -1
+				) {
+					return false
 				}
-				return true;
-			})
+				return true
+			}
+		)
+		if (isNoneSelected) return 'noneSelected'
+
+		if (selectItemsComputed.value.length === totalItems.value.length) {
+			const isAllSelected = selectItemsComputed.value.every(
+				(itemSelected) => {
+					if (
+						totalItems.value.findIndex(
+							(item) =>
+								JSON.stringify(itemSelected) ===
+								JSON.stringify(item)
+						) === -1
+					) {
+						return false
+					}
+					return true
+				}
+			)
 			return isAllSelected ? 'allSelected' : 'partSelected'
 		}
 
@@ -83,30 +105,34 @@ export default function usePageItems(
 
 	// items for render
 	const pageItems = computed(() => {
-		if(!isMultipleSelectable.value) return itemsWithIndex.value
+		if (!isMultipleSelectable.value) return itemsWithIndex.value
 
 		// multi select
-		if(multipleSelectStatus.value === 'allSelected') {
+		if (multipleSelectStatus.value === 'allSelected') {
 			return itemsWithIndex.value.map((item) => ({
 				checkbox: true,
-				...item
+				...item,
 			}))
-		} else if(multipleSelectStatus.value === 'noneSelected') {
+		} else if (multipleSelectStatus.value === 'noneSelected') {
 			return itemsWithIndex.value.map((item) => ({
 				checkbox: false,
-				...item
+				...item,
 			}))
 		}
 
 		return itemsWithIndex.value.map((item) => {
-			const isSelected = selectItemsComputed.value.findIndex((selectItem) => {
-				const itemDeepCloned = { ...item }
-				delete itemDeepCloned.index
-				return JSON.stringify(selectItem) === JSON.stringify(itemDeepCloned)
-			}) !== -1
+			const isSelected =
+				selectItemsComputed.value.findIndex((selectItem) => {
+					const itemDeepCloned = { ...item }
+					delete itemDeepCloned.index
+					return (
+						JSON.stringify(selectItem) ===
+						JSON.stringify(itemDeepCloned)
+					)
+				}) !== -1
 			return {
 				checkbox: isSelected,
-				...item
+				...item,
 			}
 		})
 	})
@@ -115,6 +141,6 @@ export default function usePageItems(
 		currentPageFirstIndex,
 		currentPageLastIndex,
 		multipleSelectStatus,
-		pageItems
+		pageItems,
 	}
 }

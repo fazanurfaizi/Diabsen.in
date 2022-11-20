@@ -4,5 +4,5 @@
  * @returns {Boolean}
  */
 export function isNullable(variable) {
-	return variable === null || variable === "" || variable === undefined
+	return variable === null || variable === '' || variable === undefined
 }

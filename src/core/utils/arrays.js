@@ -1,4 +1,4 @@
-import { isNullable } from "./checkers"
+import { isNullable } from './checkers'
 
 /**
  * Get an array with the numbers in the specified range
@@ -22,5 +22,7 @@ export function range(min, max, step = 1) {
  * @returns {void}
  */
 export function arraySafeSort(array, compareFunction) {
-	array.sort((a, b) => isNullable(a) || isNullable(b) ? 0 : compareFunction(a, b))
+	array.sort((a, b) =>
+		isNullable(a) || isNullable(b) ? 0 : compareFunction(a, b)
+	)
 }

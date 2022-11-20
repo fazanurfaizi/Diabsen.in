@@ -1,4 +1,4 @@
-import { computed, ref } from "vue";
+import { computed, ref } from 'vue'
 
 /**
  * use rows hook
@@ -14,13 +14,21 @@ export default function useRows(
 	rowsPerPage
 ) {
 	const rowsItemsComputed = computed(() => {
-		if(!isServerSideMode.value && rowsItems.value.findIndex((item) => item === rowsPerPage.value) === -1) {
+		if (
+			!isServerSideMode.value &&
+			rowsItems.value.findIndex((item) => item === rowsPerPage.value) ===
+				-1
+		) {
 			return [rowsPerPage.value, ...rowsItems.value]
 		}
 		return rowsItems.value
 	})
 
-	const rowsPerPageRef = ref(serverOptions.value ? serverOptions.value.rowsPerPage : rowsPerPage.value)
+	const rowsPerPageRef = ref(
+		serverOptions.value
+			? serverOptions.value.rowsPerPage
+			: rowsPerPage.value
+	)
 
 	const updateRowsPerPage = (option) => {
 		rowsPerPageRef.value = option
@@ -29,6 +37,6 @@ export default function useRows(
 	return {
 		rowsItemsComputed,
 		rowsPerPageRef,
-		updateRowsPerPage
+		updateRowsPerPage,
 	}
 }

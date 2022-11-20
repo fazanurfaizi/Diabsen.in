@@ -3,7 +3,7 @@
 		<template v-slot:title>
 			<div class="flex justify-between mx-3">
 				<span>Daftar Sekolah</span>
-				<VButton size="sm" >Tambah Sekolah</VButton>
+				<VButton size="sm">Tambah Sekolah</VButton>
 			</div>
 		</template>
 		<template v-slot:content>
@@ -72,9 +72,21 @@
 
 					<template #item-operation="item">
 						<div class="flex text-center justify-evenly">
-							<VButton variant="primary" size="xs">Detail</VButton>
-							<VButton variant="warning" size="xs" @click="editItem(item)">Edit</VButton>
-							<VButton variant="danger" size="xs" @click="deleteItem(item)">Hapus</VButton>
+							<VButton variant="primary" size="xs"
+								>Detail</VButton
+							>
+							<VButton
+								variant="warning"
+								size="xs"
+								@click="editItem(item)"
+								>Edit</VButton
+							>
+							<VButton
+								variant="danger"
+								size="xs"
+								@click="deleteItem(item)"
+								>Hapus</VButton
+							>
 						</div>
 					</template>
 				</VDatatable>
@@ -83,114 +95,132 @@
 	</v-container>
 </template>
 
+<script>
+export default {
+	name: 'schools-index'
+}
+</script>
+
 <script setup>
-import { defineComponent, computed, ref, onMounted } from 'vue'
-import VDatatable from '@/components/datatable/index.vue'
-import { mockClientItems } from '@/mock';
-import VSearchFilter from '@/components/ui/search-filter/index.vue'
-import useDebounce from '@/hooks/useDebounce';
-import VButton from '@/components/ui/button/index.vue'
+	import { computed, ref, onMounted } from 'vue'
+	import VDatatable from '@/components/datatable/index.vue'
+	import { mockClientItems } from '@/mock'
+	import VSearchFilter from '@/components/ui/search-filter/index.vue'
+	import useDebounce from '@/hooks/useDebounce'
+	import VButton from '@/components/ui/button/index.vue'
 
-defineComponent({
-	name: 'school-list',
-	components: {
-		VDatatable
+	const searchValue = useDebounce('', 400)
+	const sortBy = ref(['indicator.weigth', 'number'])
+	const sortType = ref(['desc', 'asc'])
+
+	const itemsSelected = ref([])
+
+	const filterOptions = [
+		{
+			field: 'indicator.height',
+			comparison: (value, criteria) => value === criteria,
+			criteria: '6-9',
+		},
+	]
+
+	const headers = [
+		{ text: 'NAME', value: 'name', searchable: true },
+		{ text: 'ADDRESS', value: 'address' },
+		{ text: 'HEIGHT', value: 'height', sortable: true },
+		{ text: 'WEIGHT', value: 'weight', sortable: true },
+		{ text: 'AGE', value: 'age', sortable: true },
+		{ text: 'SPORT', value: 'favouriteSport' },
+		{ text: 'FRUITS', value: 'favouriteFruits' },
+		{ text: 'OPERATION', value: 'operation' },
+	]
+
+	const updateFilter = (items) => {
+		console.log(JSON.stringify(items))
 	}
-})
 
-const searchValue = useDebounce('', 400)
-const sortBy = ref(['indicator.weigth', 'number'])
-const sortType = ref(['desc', 'asc'])
+	const items = ref([])
 
-const itemsSelected = ref([])
-
-const filterOptions = [
-	{
-		field: 'indicator.height',
-		comparison: (value, criteria) => value === criteria,
-		criteria: '6-9'
+	const deleteItem = (item) => {
+		alert('delete item')
 	}
-]
 
-const headers = [
-	{ text: "NAME", value: "name", searchable: true },
-	{ text: "ADDRESS", value: "address"},
-	{ text: "HEIGHT", value: "height", sortable: true},
-	{ text: "WEIGHT", value: "weight", sortable: true},
-	{ text: "AGE", value: "age", sortable: true},
-	{ text: "SPORT", value: "favouriteSport"},
-	{ text: "FRUITS", value: "favouriteFruits"},
-	{ text: "OPERATION", value: 'operation' }
-]
+	const editItem = (item) => {
+		alert('edit item')
+	}
 
-const updateFilter = (items) => {
-	console.log(JSON.stringify(items))
-}
+	const updateSort = (sortOption) => {
+		console.log(sortOption)
+	}
 
-const items = ref([]);
+	const bodyRowClassNameFunction = (item, index) =>
+		index === 0 ? 'first-row test-row' : ''
+	const bodyExpandRowClassNameFunction = (item, index) => 'expand-row'
 
-const deleteItem = (item) => {
-	alert('delete item')
-}
+	const headerItemClassNameFunction = (header, index) =>
+		header.value === 'name' ? 'name-header' : ''
+	const bodyItemClassNameFunction = (column, index) =>
+		column === 'name' ? 'name-item' : ''
 
-const editItem = (item) => {
-	alert('edit item')
-}
+	const dataTable = ref()
 
-const updateSort = (sortOption) => {
-	console.log(sortOption)
-}
+	const currentPageFirstIndex = computed(
+		() => dataTable.value?.currentPageFirstIndex
+	)
+	const currentPageLastIndex = computed(
+		() => dataTable.value?.currentPageLastIndex
+	)
 
-const bodyRowClassNameFunction = (item, index) => (index === 0 ? 'first-row test-row' : '')
-const bodyExpandRowClassNameFunction = (item, index) => 'expand-row'
+	const totalItemsLength = computed(() => dataTable.value?.totalItemsLength)
 
-const headerItemClassNameFunction = (header, index) => (header.value === 'name' ? 'name-header' : '');
-const bodyItemClassNameFunction = (column, index) => (column === 'name' ? 'name-item' : '');
+	const maxPaginationNumber = computed(
+		() => dataTable.value?.maxPaginationNumber
+	)
+	const currentPaginationNumber = computed(
+		() => dataTable.value?.currentPaginationNumber
+	)
 
-const dataTable = ref()
+	const isFirstPage = computed(() => dataTable.value?.isFirstPage)
+	const isLastPage = computed(() => dataTable.value?.isLastPage)
 
-const currentPageFirstIndex = computed(() => dataTable.value?.currentPageFirstIndex)
-const currentPageLastIndex = computed(() => dataTable.value?.currentPageLastIndex)
+	const nextPage = () => {
+		dataTable.value.nextPage()
+	}
 
-const totalItemsLength = computed(() => dataTable.value?.totalItemsLength)
+	const prevPage = () => {
+		dataTable.value.prevPage()
+	}
 
-const maxPaginationNumber = computed(() => dataTable.value?.maxPaginationNumber)
-const currentPaginationNumber = computed(() => dataTable.value?.currentPaginationNumber)
+	const updatePage = (paginationNumber) => {
+		dataTable.value.updatePage(paginationNumber)
+	}
 
-const isFirstPage = computed(() => dataTable.value?.isFirstPage)
-const isLastPage = computed(() => dataTable.value?.isLastPage)
+	const isDataHeader = (header) => {
+		return !(
+			header.value === 'checkbox' ||
+			header.value === 'index' ||
+			header.value === 'expand'
+		)
+	}
+	// rows per page
+	const rowsPerPageOptions = computed(
+		() => dataTable.value?.rowsPerPageOptions
+	)
+	const rowsPerPageActiveOption = computed(
+		() => dataTable.value?.rowsPerPageActiveOption
+	)
 
-const nextPage = () => {
-	dataTable.value.nextPage()
-}
+	const updateRowsPerPageSelect = (e) => {
+		dataTable.value.updateRowsPerPageActiveOption(Number(e.target.value))
+	}
 
-const prevPage = () => {
-	dataTable.value.prevPage()
-}
-
-const updatePage = (paginationNumber) => {
-	dataTable.value.updatePage(paginationNumber);
-};
-
-const isDataHeader = (header) => {
-	return !(header.value === 'checkbox' || header.value === 'index' || header.value === 'expand')
-}
-// rows per page
-const rowsPerPageOptions = computed(() => dataTable.value?.rowsPerPageOptions);
-const rowsPerPageActiveOption = computed(() => dataTable.value?.rowsPerPageActiveOption);
-
-const updateRowsPerPageSelect = (e) => {
-	dataTable.value.updateRowsPerPageActiveOption(Number((e.target).value));
-};
-
-onMounted(() => {
-	items.value = mockClientItems(100)
-})
+	onMounted(() => {
+		items.value = mockClientItems(100)
+	})
 </script>
 
 <style scoped>
-.operation-wrapper .operation-icon {
-	width: 20px;
-	cursor: pointer;
-}
+	.operation-wrapper .operation-icon {
+		width: 20px;
+		cursor: pointer;
+	}
 </style>
