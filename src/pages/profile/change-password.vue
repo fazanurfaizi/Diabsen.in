@@ -6,20 +6,20 @@
                 <template #nav>
                     <ul class="flex flex-col w-full gap-2">
                         <li class="my-px">
-                            <Link                     
+                            <Link
                                 title="Profile Saya"
                                 path="profile-edit"
-                                icon="user-circle"                    
+                                icon="user-circle"
                             />
                         </li>
                         <li class="my-px">
-                            <Link                     
+                            <Link
                                 title="Ubah Kata Sandi"
                                 path="profile-change-password"
                                 icon="key"
-                                iconSet="teamui"              
+                                iconSet="teamui"
                             />
-                        </li>                        
+                        </li>
                     </ul>
                 </template>
 
@@ -66,7 +66,7 @@
                             />
                         </v-form-control>
                     </div>
-                    <div class="flex flex-row-reverse items-end gap-2 mt-2">             
+                    <div class="flex flex-row-reverse items-end gap-2 mt-2">
                         <v-button size="md" color="primary" @click.prevent="changePassword">
                             Simpan
                         </v-button>
@@ -75,7 +75,7 @@
                         </v-button>
                     </div>
                 </form>
-            </profile-layout> 
+            </profile-layout>
         </template>
     </v-container>
 </template>
@@ -84,21 +84,21 @@
 import { computed, defineComponent, onMounted, reactive } from "vue";
 import { useStore } from 'vuex'
 import { useRouter } from "vue-router";
-import { useVuelidate } from '@vuelidate/core' 
+import { useVuelidate } from '@vuelidate/core'
 import { required, sameAs, helpers } from '@vuelidate/validators'
-import VFormControl from '@/components/form/form-control.vue'
-import VInput from "@/components/form/input.vue";
-import VLabel from '@/components/form/label.vue'
+import VFormControl from '@/components/form/form-control/index.vue'
+import VInput from "@/components/form/input/index.vue";
+import VLabel from '@/components/form/label/index.vue'
 import VButton from '@/components/ui/button/index.vue'
 import ProfileLayout from "./layouts/ProfileLayout.vue";
 import Link from '@/components/ui/link/index.vue'
 
 export default defineComponent({
     name: 'ChangePassword',
-    components: {    
+    components: {
         ProfileLayout,
         VInput,
-        VLabel,          
+        VLabel,
         VButton,
         VFormControl,
         Link
@@ -119,22 +119,22 @@ export default defineComponent({
             current_password: {
                 required: helpers.withMessage('Password tidak boleh kosong', required),
                 containsPasswordRequirement: helpers.withMessage(
-                    () => `The password requires an uppercase, lowercase, number and special character`, 
+                    () => `The password requires an uppercase, lowercase, number and special character`,
                     (value) => /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#*])/.test(value)
                 ),
             },
-            new_password: { 
-                required: helpers.withMessage('Password baru tidak boleh kosong', required),                
+            new_password: {
+                required: helpers.withMessage('Password baru tidak boleh kosong', required),
             },
             confirm_password: {
                 required: helpers.withMessage('Konfirmasi password tidak boleh kosong', required),
                 sameAs: helpers.withMessage('Konfirmasi password tidak sesuai', sameAs(newPasswordRef))
-            },            
+            },
         }
 
         const v$ = useVuelidate(rules, formData, { $lazy: true })
 
-        const changePassword = () => {            
+        const changePassword = () => {
             store.dispatch('profile/changePassword', formData)
                 .then(() => Object.assign(formData, {
                     current_password: '',

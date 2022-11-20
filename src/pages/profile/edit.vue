@@ -124,10 +124,10 @@ import { useStore } from 'vuex'
 import { useRouter } from "vue-router";
 import { useVuelidate } from '@vuelidate/core'
 import { required, email, helpers } from '@vuelidate/validators'
-import VFormControl from '@/components/form/form-control.vue'
-import VInput from "@/components/form/input.vue";
-import VLabel from '@/components/form/label.vue'
-import VSelect from '@/components/form/select.vue'
+import VFormControl from '@/components/form/form-control/index.vue'
+import VInput from "@/components/form/input/index.vue";
+import VLabel from '@/components/form/label/index.vue'
+import VSelect from '@/components/form/select/index.vue'
 import VButton from '@/components/ui/button/index.vue'
 import ProfileLayout from "./layouts/ProfileLayout.vue";
 import Link from '@/components/ui/link/index.vue'

@@ -87,7 +87,7 @@
 import { defineComponent, computed, ref, onMounted } from 'vue'
 import VDatatable from '@/components/datatable/index.vue'
 import { mockClientItems } from '@/mock';
-import VSearchFilter from '@/components/datatable/search-filter/index.vue'
+import VSearchFilter from '@/components/ui/search-filter/index.vue'
 import useDebounce from '@/hooks/useDebounce';
 import VButton from '@/components/ui/button/index.vue'
 
