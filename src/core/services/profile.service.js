@@ -3,7 +3,7 @@ import { axiosInstance } from './api.service'
 class ProfileService {
 
     constructor() {
-        this.baseUrl = process.env.VUE_APP_API_URL_AUTH
+        this.baseUrl = import.meta.env.VITE_API_URL_AUTH
     }
 
     async getProfile() {
@@ -12,7 +12,7 @@ class ProfileService {
                 .then((response) => resolve(response))
                 .catch((error) => reject(error))
         })
-    } 
+    }
 
     async updateProfile(formData) {
         return await new Promise((resolve, reject) => {
@@ -23,7 +23,7 @@ class ProfileService {
                 gender: formData.gender,
                 birthdate: formData.birthdate,
             }
-            
+
             axiosInstance.put(`${this.baseUrl}/user/profile`, params)
                 .then((response) => resolve(response))
                 .catch((error) => reject(error))

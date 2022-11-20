@@ -34,16 +34,16 @@
             <thead class="bg-gray-50">
               <tr>
                 <template v-for="(item, index) in headers" :key="index">
-                  <th scope="col" class="px-4 py-3.5 text-left text-sm font-semibold text-gray-900" v-if="typeof(item.show) === 'undefined' || item?.show"> 
+                  <th scope="col" class="px-4 py-3.5 text-left text-sm font-semibold text-gray-900" v-if="typeof(item.show) === 'undefined' || item?.show">
                     <div class="flex space-x-2 items-center bg-center">
                       <span>
-                        {{item.title}} 
+                        {{item.title}}
                       </span>
                       <span v-if="item?.key !== 'action'">
-                        <Icon 
-                          @click="getDataSort(index, item.key)" 
-                          :name="headers[index].sort === 'ASC' ? 'chevron-down' : 'chevron-up'" 
-                          class="h-4 w-4 cursor-pointer" 
+                        <Icon
+                          @click="getDataSort(index, item.key)"
+                          :name="headers[index].sort === 'ASC' ? 'chevron-down' : 'chevron-up'"
+                          class="h-4 w-4 cursor-pointer"
                           v-if="typeof(item?.sort) !== 'undefined'" />
                       </span>
                     </div>
@@ -52,7 +52,7 @@
               </tr>
             </thead>
             <tbody class="divide-y divide-gray-200 bg-white" v-if="items.length > 0">
-              
+
               <template v-for="(item, index) in items" :key="index">
               <tr>
                   <template v-for="(elm, i) in headers" :key="i">
@@ -84,7 +84,7 @@
       <a href="#" class="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Previous</a>
       <a href="#" class="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Next</a>
     </div>
-    
+
     <div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
       <div>
         <p class="text-sm text-gray-700">
@@ -103,7 +103,7 @@
             Page {{fulldata.current_page}} of {{fulldata.last_page}}
             <!-- {{fulldata.current_page}} -->
           </div>
-        
+
           <a href="#" @click.prevent="getData(fulldata.first_page_url)" class="relative h-10 inline-flex items-center border border-gray-300 bg-white px-2 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20">
             <span class="sr-only">Previous</span>
             <Icon name="chevron-double-left" class="h-4 w-4" />
@@ -120,7 +120,7 @@
             </div>
             <div v-else-if="item.label == '...'" class="relative h-10 inline-flex items-center border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20 cursor-text">{{item.label}}</div>
             <div @click="getData(item.url)" v-else class="relative h-10 inline-flex items-center border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20 cursor-pointer">{{item.label}}</div>
-          </div>          
+          </div>
           <a href="#" @click.prevent="getData(fulldata.last_page_url)" class="relative inline-flex items-center rounded-r-md border border-gray-300 bg-white px-2 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 focus:z-20">
             <span class="sr-only">Last</span>
             <Icon name="chevron-double-right" class="h-4 w-4" />
@@ -130,11 +130,11 @@
     </div>
   </div>
 </template>
-  
+
 <script>
 import Button from './TheButton.vue';
 import Icon from './Icon.vue';
-import { useStore } from 'vuex'; 
+import { useStore } from 'vuex';
 export default {
     name: "TheTable",
     data() {
@@ -152,14 +152,14 @@ export default {
         items: [],
         headers: this.column,
         links: [],
-        
+
         perPage: 10,
         keyword: this.rows.keyword,
         sort: this.rows.sort,
         sortOrder: this.rows.sortOrder,
         url: this.rows.url,
       }
-    },  
+    },
     props: {
       rows: Object,
       column: Array,
@@ -176,34 +176,34 @@ export default {
           sort: this.sort,
           sortOrder: this.sortOrder,
         }
-        
+
         const config = {
           headers: { Authorization: `Bearer ${this.token}` }
         }
-        
+
         this.axios.post(this.url , param, config).then((response) => {
           this.fulldata = response.data
           this.items = response.data.data
-          this.links = response.data.links          
+          this.links = response.data.links
         }).catch(console.log)
       },
 
       getDataSearch(){
         this.getData(this.url)
       },
-      
+
       getDataSort(index){
         const sortOrder = this.headers[index].sort == 'ASC' ? 'DESC' : 'ASC'
         this.headers[index].sort = sortOrder
-        
+
         this.sort = this.headers[index].key
         this.sortOrder = sortOrder
-        
+
         this.getData()
       },
     },
     created() {
-      this.url = process.env.VUE_APP_API_URL_MASTER_DATA + this.rows.url;
+      this.url = import.meta.env.VITE_API_URL_MASTER_DATA + this.rows.url;
       this.getData()
     },
 };

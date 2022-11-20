@@ -1,9 +1,9 @@
-import { Ref, ComputedRef, ref } from "vue";
+import { ref } from "vue";
 
 /**
  * use expandable row hook
- * @param {Ref} items
- * @param {ComputedRef} prevPageEndIndex
+ * @param {import("vue").Ref} items
+ * @param {import("vue").ComputedRef} prevPageEndIndex
  * @param {void} emits
  */
 export default function useExpandableRow(

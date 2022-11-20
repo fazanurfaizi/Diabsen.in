@@ -161,7 +161,7 @@ export default {
       this.columnTabs = items
     },
     getData(){
-      const url = process.env.VUE_APP_API_URL_MASTER_DATA + '/school/' + this.$route.params.id
+      const url = import.meta.env.VITE_API_URL_MASTER_DATA + '/school/' + this.$route.params.id
       // console.log(this.$route.params.id);
       this.axios.get(url).then((r) => {
         console.log(r.data.data);

@@ -577,7 +577,7 @@ export default {
         async getProvince() {
             const token = this.token;
             await this.axios
-                .get(`${process.env.VUE_APP_API_URL_MASTER_DATA}/provinces`, {
+                .get(`${import.meta.env.VITE_API_URL_MASTER_DATA}/provinces`, {
                     headers: {
                         Accept: "application/json",
                         Authorization: "Bearer " + token,
@@ -590,7 +590,7 @@ export default {
         async getCity() {
             const token = this.token;
             await this.axios
-                .get(`${process.env.VUE_APP_API_URL_MASTER_DATA}/cities?province_id=${this.form.province_id}`, {
+                .get(`${import.meta.env.VITE_API_URL_MASTER_DATA}/cities?province_id=${this.form.province_id}`, {
                     headers: {
                         Accept: "application/json",
                         Authorization: "Bearer " + token,
@@ -603,7 +603,7 @@ export default {
         async getDistrict() {
             const token = this.token;
             await this.axios
-                .get(`${process.env.VUE_APP_API_URL_MASTER_DATA}/districts?city_id=${this.form.city_id}`, {
+                .get(`${import.meta.env.VITE_API_URL_MASTER_DATA}/districts?city_id=${this.form.city_id}`, {
                     headers: {
                         Accept: "application/json",
                         Authorization: "Bearer " + token,
@@ -616,7 +616,7 @@ export default {
         async getSubDistrict() {
             const token = this.token;
             await this.axios
-                .get(`${process.env.VUE_APP_API_URL_MASTER_DATA}/sub-districts?district_id=${this.form.district_id}`, {
+                .get(`${import.meta.env.VITE_API_URL_MASTER_DATA}/sub-districts?district_id=${this.form.district_id}`, {
                     headers: {
                         Accept: "application/json",
                         Authorization: "Bearer " + token,
@@ -629,7 +629,7 @@ export default {
         async getPostalCode() {
             const token = this.token;
             await this.axios
-                .get(`${process.env.VUE_APP_API_URL_MASTER_DATA}/postal_codes?province_id=${this.form.province_id}&city_id=${this.form.city_id}&district_id=${this.form.district_id}&sub_district_id=${this.form.sub_district_id}`, {
+                .get(`${import.meta.env.VITE_API_URL_MASTER_DATA}/postal_codes?province_id=${this.form.province_id}&city_id=${this.form.city_id}&district_id=${this.form.district_id}&sub_district_id=${this.form.sub_district_id}`, {
                     headers: {
                         Accept: "application/json",
                         Authorization: "Bearer " + token,
@@ -667,7 +667,7 @@ export default {
             }
 
             const token = this.token;
-            this.axios.post(process.env.VUE_APP_API_URL_MASTER_DATA + '/school', this.form, {
+            this.axios.post(import.meta.env.VITE_API_URL_MASTER_DATA + '/school', this.form, {
                 headers: {
                     'Accept': 'application/json',
                     'Authorization': 'Bearer ' + token

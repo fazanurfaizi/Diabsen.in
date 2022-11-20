@@ -4,15 +4,15 @@ class AuthService {
     async login(email, password) {
         return await new Promise((resolve, reject) => {
             let params = {
-                grant_type: process.env.VUE_APP_GRANT_TYPE,
-                client_id: process.env.VUE_APP_CLIENT_ID,
-                client_secret: process.env.VUE_APP_CLIENT_SECRET,
+                grant_type: import.meta.env.VITE_GRANT_TYPE,
+                client_id: import.meta.env.VITE_CLIENT_ID,
+                client_secret: import.meta.env.VITE_CLIENT_SECRET,
                 username: email,
                 password: password,
-                scope: process.env.VUE_APP_SCOPE
+                scope: import.meta.env.VITE_SCOPE
             }
-            
-            axiosInstance.post(`${process.env.VUE_APP_API_URL_AUTH}/oauth/token`, params)
+
+            axiosInstance.post(`${import.meta.env.VITE_API_URL_AUTH}/oauth/token`, params)
                 .then((response) => resolve(response))
                 .catch((error) => reject(error))
         })
@@ -22,13 +22,13 @@ class AuthService {
         return await new Promise((resolve, reject) => {
             let params = {
                 grant_type: 'refresh_token',
-                client_id: process.env.VUE_APP_CLIENT_ID,
-                client_secret: process.env.VUE_APP_CLIENT_SECRET,
-                refresh_token: token,                
-                scope: process.env.VUE_APP_SCOPE
+                client_id: import.meta.env.VITE_CLIENT_ID,
+                client_secret: import.meta.env.VITE_CLIENT_SECRET,
+                refresh_token: token,
+                scope: import.meta.env.VITE_SCOPE
             }
-            
-            axiosInstance.post(`${process.env.VUE_APP_API_URL_AUTH}/oauth/token`, params)
+
+            axiosInstance.post(`${import.meta.env.VITE_API_URL_AUTH}/oauth/token`, params)
                 .then((response) => resolve(response))
                 .catch((error) => reject(error))
         })

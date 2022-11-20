@@ -20,7 +20,7 @@ export default {
     },
     async mounted() {
         const loader = new Loader({
-            apiKey: process.env.VUE_APP_GOOGLE_MAPS,
+            apiKey: import.meta.env.VITE_GOOGLE_MAPS,
             version: "weekly",
             libraries: ["places"]
         });
