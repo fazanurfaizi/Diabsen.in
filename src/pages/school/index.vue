@@ -108,6 +108,7 @@ export default {
 	import VSearchFilter from '@/components/ui/search-filter/index.vue'
 	import useDebounce from '@/hooks/useDebounce'
 	import VButton from '@/components/ui/button/index.vue'
+	import SvgIcon from '@/components/ui/svg-icon/index.vue'
 
 	const searchValue = useDebounce('', 400)
 	const sortBy = ref(['indicator.weigth', 'number'])

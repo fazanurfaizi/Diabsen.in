@@ -1,11 +1,11 @@
 export const superAdminRoutes = [
 	{
 		title: 'Sekolah',
-		icon: 'building-library',
+		icon: 'school-building',
 		items: [
 			{
 				name: 'Sekolah',
-				icon: 'building-library',
+				icon: 'school-building',
 				child: [
 					{
 						title: 'Daftar Sekolah',

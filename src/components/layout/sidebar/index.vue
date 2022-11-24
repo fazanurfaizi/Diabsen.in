@@ -92,7 +92,7 @@
 											<div
 												class="flex items-start pl-1 px-1"
 											>
-												<heroicons-outline-vue
+												<Icon
 													:name="menu.icon"
 													class="flex shrink-0 h-6 w-6 text-primary"
 												/>
@@ -106,7 +106,7 @@
 											<div
 												class="flex shrink-0 ml-2 px-2"
 											>
-												<heroicons-outline-vue
+												<Icon
 													name="chevron-right"
 													class="h-4 w-4 text-primary"
 													:class="
@@ -182,113 +182,115 @@
 </template>
 
 <script>
-	import { ref, defineComponent, onMounted, onUnmounted, watch } from 'vue'
-	import { useRouter } from 'vue-router'
-	import SidebarLink from './SidebarLink.vue'
-	import { appRoutes } from './routes'
-	import Link from '@/components/ui/link/index.vue'
-	import heroiconsOutlineVue from '@/components/icons/heroicons-outline.vue'
+import { ref, defineComponent, onMounted, onUnmounted, watch } from 'vue'
+import { useRouter } from 'vue-router'
+import SidebarLink from './SidebarLink.vue'
+import { appRoutes } from './routes'
+import Link from '@/components/ui/link/index.vue'
+import Icon from '@/components/ui/svg-icon/index.vue'
+import heroiconsOutlineVue from '@/components/icons/heroicons-outline.vue'
 
-	export default defineComponent({
-		name: 'v-sidebar',
-		components: {
-			Link,
-			SidebarLink,
-			heroiconsOutlineVue,
+export default defineComponent({
+	name: 'v-sidebar',
+	components: {
+		Link,
+		SidebarLink,
+		Icon,
+		heroiconsOutlineVue,
+	},
+	props: {
+		sidebarOpen: {
+			type: Boolean,
+			required: true,
+			default: false,
 		},
-		props: {
-			sidebarOpen: {
-				type: Boolean,
-				required: true,
-				default: false,
-			},
-		},
-		emits: ['close-sidebar'],
-		setup(props, { emit }) {
-			const routes = ref(appRoutes)
-			const trigger = ref(null)
-			const sidebar = ref(null)
-			const storedSidebarExpanded =
-				localStorage.getItem('sidebar-expanded')
-			const sidebarExpanded = ref(
-				storedSidebarExpanded === null
-					? false
-					: storedSidebarExpanded === 'true'
+	},
+	emits: ['close-sidebar'],
+	setup(props, { emit }) {
+		const routes = ref(appRoutes)
+		const trigger = ref(null)
+		const sidebar = ref(null)
+		const storedSidebarExpanded =
+			localStorage.getItem('sidebar-expanded')
+		const sidebarExpanded = ref(
+			storedSidebarExpanded === null
+				? false
+				: storedSidebarExpanded === 'true'
+		)
+
+		const currentRoute = useRouter().currentRoute.value
+
+		// close on click outside
+		const clickHandler = ({ target }) => {
+			if (!sidebar.value || !trigger.value) return
+			if (
+				!props.sidebarOpen ||
+				sidebar.value.contains(target) ||
+				trigger.value.contains(target)
 			)
+				return
+			emit('close-sidebar')
+		}
 
-			const currentRoute = useRouter().currentRoute.value
+		// close if the `esc` key is pressed
+		const keyHandler = ({ keyCode }) => {
+			if (!props.sidebarOpen || keyCode !== 27) return
+			emit('close-sidebar')
+		}
 
-			// close on click outside
-			const clickHandler = ({ target }) => {
-				if (!sidebar.value || !trigger.value) return
-				if (
-					!props.sidebarOpen ||
-					sidebar.value.contains(target) ||
-					trigger.value.contains(target)
-				)
-					return
-				emit('close-sidebar')
-			}
+		const addExpandable = () => {
+			document
+				.querySelector('body')
+				?.classList.add('sidebar-expanded')
+		}
 
-			// close if the `esc` key is pressed
-			const keyHandler = ({ keyCode }) => {
-				if (!props.sidebarOpen || keyCode !== 27) return
-				emit('close-sidebar')
-			}
+		const removeExpandable = () => {
+			document
+				.querySelector('body')
+				?.classList.remove('sidebar-expanded')
+		}
 
-			const addExpandable = () => {
-				document
-					.querySelector('body')
-					?.classList.add('sidebar-expanded')
-			}
+		const isRouteActive = (path) => {
+			return (
+				currentRoute.fullPath === path ||
+				currentRoute.fullPath.includes(path)
+			)
+		}
 
-			const removeExpandable = () => {
-				document
-					.querySelector('body')
-					?.classList.remove('sidebar-expanded')
-			}
+		onMounted(() => {
+			addExpandable()
+			localStorage.setItem('sidebar-expanded', 'true')
+			document.addEventListener('click', clickHandler)
+			document.addEventListener('keydown', keyHandler)
+		})
 
-			const isRouteActive = (path) => {
-				return (
-					currentRoute.fullPath === path ||
-					currentRoute.fullPath.includes(path)
-				)
-			}
+		onUnmounted(() => {
+			removeExpandable()
+			localStorage.removeItem('sidebar-expanded')
+			document.removeEventListener('click', clickHandler)
+			document.removeEventListener('keydown', keyHandler)
+		})
 
-			onMounted(() => {
+		watch(sidebarExpanded, () => {
+			localStorage.setItem(
+				'sidebar-expanded',
+				sidebarExpanded.value.toString()
+			)
+			if (sidebarExpanded.value) {
 				addExpandable()
-				localStorage.setItem('sidebar-expanded', 'true')
-				document.addEventListener('click', clickHandler)
-				document.addEventListener('keydown', keyHandler)
-			})
-
-			onUnmounted(() => {
+			} else {
 				removeExpandable()
-				localStorage.removeItem('sidebar-expanded')
-				document.removeEventListener('click', clickHandler)
-				document.removeEventListener('keydown', keyHandler)
-			})
-
-			watch(sidebarExpanded, () => {
-				localStorage.setItem(
-					'sidebar-expanded',
-					sidebarExpanded.value.toString()
-				)
-				if (sidebarExpanded.value) {
-					addExpandable()
-				} else {
-					removeExpandable()
-				}
-			})
-
-			return {
-				routes,
-				trigger,
-				sidebar,
-				sidebarExpanded,
-				currentRoute,
-				isRouteActive,
 			}
-		},
-	})
+		})
+
+		return {
+			routes,
+			trigger,
+			sidebar,
+			sidebarExpanded,
+			currentRoute,
+			isRouteActive,
+		}
+	},
+})
 </script>

@@ -52,8 +52,7 @@
 									<span class="sr-only">Open user menu</span>
 									<Icon
 										name="chevron-down"
-										set="solid"
-										class="w-5 h-5"
+										class="w-4 h-4 mx-1"
 										@click="isShow = !isShow"
 									/>
 								</button>
@@ -74,7 +73,7 @@
 									id="user-menu-item-0"
 								>
 									<div class="inline-flex items-center">
-										<heroicons-outline-vue
+										<Icon
 											name="user-circle"
 											class="w-4 h-4 mr-2"
 										/>
@@ -90,7 +89,7 @@
 									id="user-menu-item-0"
 								>
 									<div class="inline-flex items-center">
-										<heroicons-outline-vue
+										<Icon
 											name="lock-closed"
 											class="w-4 h-4 mr-2"
 										/>
@@ -107,7 +106,7 @@
 									id="user-menu-item-2"
 								>
 									<div class="inline-flex items-center">
-										<heroicons-outline-vue
+										<Icon
 											name="power"
 											class="w-4 h-4 mr-2"
 										/>
@@ -124,57 +123,57 @@
 </template>
 
 <script>
-	import { defineComponent, onMounted, onUnmounted, ref } from 'vue'
-	import { useStore } from 'vuex'
-	import heroiconsOutlineVue from '@/components/icons/heroicons-outline.vue'
+import { defineComponent, onMounted, onUnmounted, ref } from 'vue'
+import { useStore } from 'vuex'
+import Icon from '@/components/ui/svg-icon/index.vue'
 
-	export default defineComponent({
-		name: 'TheHeader',
-		components: {
-			heroiconsOutlineVue,
+export default defineComponent({
+	name: 'TheHeader',
+	components: {
+		Icon,
+	},
+	props: {
+		sidebarOpen: {
+			type: Boolean,
+			default: false,
 		},
-		props: {
-			sidebarOpen: {
-				type: Boolean,
-				default: false,
-			},
-		},
-		setup() {
-			const store = useStore()
+	},
+	setup() {
+		const store = useStore()
 
-			const dropdown = ref(null)
+		const dropdown = ref(null)
 
-			const isShow = ref(false)
+		const isShow = ref(false)
 
-			// close on click outside
-			const clickHandler = ({ target }) => {
-				if (!dropdown.value) return
-				if (!isShow.value || dropdown.value.contains(target)) return
+		// close on click outside
+		const clickHandler = ({ target }) => {
+			if (!dropdown.value) return
+			if (!isShow.value || dropdown.value.contains(target)) return
 
-				isShow.value = !isShow.value
-				// emit('close-dropdown')
-			}
+			isShow.value = !isShow.value
+			// emit('close-dropdown')
+		}
 
-			const user = store.getters['profile/getUserProfile']
+		const user = store.getters['profile/getUserProfile']
 
-			const logout = () => {
-				store.dispatch('auth/logout')
-			}
+		const logout = () => {
+			store.dispatch('auth/logout')
+		}
 
-			onMounted(() => {
-				document.addEventListener('click', clickHandler)
-			})
+		onMounted(() => {
+			document.addEventListener('click', clickHandler)
+		})
 
-			onUnmounted(() => {
-				document.removeEventListener('click', clickHandler)
-			})
+		onUnmounted(() => {
+			document.removeEventListener('click', clickHandler)
+		})
 
-			return {
-				dropdown,
-				isShow,
-				user,
-				logout,
-			}
-		},
-	})
+		return {
+			dropdown,
+			isShow,
+			user,
+			logout,
+		}
+	},
+})
 </script>

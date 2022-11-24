@@ -4,7 +4,7 @@ import { schoolAdminRoutes } from './schoolAdmin'
 
 const routes = {
 	'Super Admin': superAdminRoutes,
-	Admin: schoolAdminRoutes,
+	'Admin': schoolAdminRoutes,
 }
 
 const user = store.getters['profile/getUserProfile']

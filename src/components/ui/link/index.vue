@@ -14,9 +14,8 @@
 			@click="navigate"
 		>
 			<div class="flex items-center pl-1">
-				<icon
+				<Icon
 					:name="icon"
-					:set="iconSet"
 					class="shrink-0 h-6 w-6 text-primary"
 					:class="isExactActive && '!text-white'"
 				/>
@@ -32,12 +31,12 @@
 
 <script>
 	import { defineComponent } from 'vue'
-	import icon from '@/components/Icon.vue'
+	import Icon from '@/components/ui/svg-icon/index.vue'
 
 	export default defineComponent({
 		name: 'v-link',
 		components: {
-			icon,
+			Icon,
 		},
 		props: {
 			title: {
