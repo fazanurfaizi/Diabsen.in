@@ -23,16 +23,26 @@ export default {
 		},
 	},
 	actions: {
-		async login({ commit }, payload) {
+		async login({ commit, dispatch }, payload) {
 			authService
 				.login(payload.email, payload.password)
 				.then((response) => {
-					console.log(response)
 					commit('setToken', response.data.data.access_token)
 					commit('setRefreshToken', response.data.data.refresh_token)
 					commit('profile/setUserProfile', response.data.data.user, {
 						root: true,
 					})
+					setTimeout(() => {
+						dispatch('userable/fetchUserable', response.data.data.user.id, {
+							root: true
+						})
+						router.push({
+							path:
+								router.currentRoute.value.query.redirect ||
+								router.currentRoute.value.path,
+							force: true,
+						})
+					}, 2000);
 				})
 				.catch((error) => console.log(error))
 		},
@@ -43,16 +53,14 @@ export default {
 				.then((response) => {
 					commit('setToken', response.data.access_token)
 					commit('setRefreshToken', response.data.refresh_token)
-				})
-				.catch((error) => console.log(error))
-				.finally(() =>
 					router.push({
 						path:
 							router.currentRoute.value.query.redirect ||
 							router.currentRoute.value.path,
 						force: true,
 					})
-				)
+				})
+				.catch((error) => console.log(error))
 		},
 
 		async logout({ commit }) {

@@ -83,7 +83,7 @@ let routes = [
 				],
 			},
 			{
-				path: '/schools',
+				path: 'schools',
 				name: 'schools',
 				component: RouterView,
 				meta: {
@@ -104,19 +104,45 @@ let routes = [
 						component: () => import('@/pages/school/create.vue'),
 						meta: {
 							requiresAuth: true,
-							breadCrumb: 'Tambah Sekolah',
+							breadcrumbName: 'Tambah Sekolah',
 						},
-					},
-					{
-						path: ':id/detail',
-						name: 'school-detail',
-						component: () => import('@/pages/school/detail.vue'),
-						meta: { requiresAuth: true },
 					},
 					{
 						path: ':id/edit',
 						component: () => import('@/pages/school/edit.vue'),
 						meta: { requiresAuth: true },
+					},
+					{
+						path: ':npsn',
+						component: RouterView,
+						meta: { requiresAuth: true },
+						children: [
+							{
+								path: '',
+								name: 'school-detail',
+								component: () => import('@/pages/school/detail.vue'),
+								meta: {
+									requiresAuth: true,
+									breadcrumbName: 'Detail Sekolah'
+								}
+							},
+							{
+								path: 'teachers',
+								name: 'teachers',
+								component: RouterView,
+								meta: { requiresAuth: true },
+								children: [
+									{
+										path: '',
+										name: 'teachers-index',
+										component: () => import('@/pages/teachers/index.vue'),
+										meta: {
+											breadcrumbName: 'Daftar Guru'
+										}
+									}
+								]
+							}
+						]
 					},
 				],
 			},

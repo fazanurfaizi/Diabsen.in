@@ -71,7 +71,7 @@
 							>
 								<SidebarLink
 									v-slot="parentLink"
-									:active-condition="isRouteActive(menu.path)"
+									:active-condition="isRouteActive(menu)"
 									v-if="menu.child && menu.child.length > 0"
 								>
 									<a
@@ -135,7 +135,7 @@
 											>
 												<router-link
 													v-slot="{ href, navigate }"
-													:to="{ name: child.path }"
+													:to="{ name: child.path.name, params: child.path.params }"
 													custom
 												>
 													<li
@@ -165,13 +165,16 @@
 									</div>
 								</SidebarLink>
 
-								<li class="py-2 rounded-sm" v-else>
+								<SidebarLink
+									:active-condition="isRouteActive(menu)"
+									v-else
+								>
 									<Link
 										:title="menu.name"
-										:path="menu.path"
+										:path="menu.path.name"
 										:icon="menu.icon"
 									/>
-								</li>
+								</SidebarLink>
 							</template>
 						</ul>
 					</div>
@@ -252,8 +255,8 @@ export default defineComponent({
 
 		const isRouteActive = (path) => {
 			return (
-				currentRoute.fullPath === path ||
-				currentRoute.fullPath.includes(path)
+				currentRoute.name === path.name ||
+				currentRoute.name.includes(path.name)
 			)
 		}
 

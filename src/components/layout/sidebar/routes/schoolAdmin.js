@@ -1,4 +1,31 @@
+import store from "@/store"
+
 export const schoolAdminRoutes = [
+	{
+		title: 'Sekolah',
+		icon: 'school-building',
+		items: [
+			{
+				name: 'Sekolah',
+				icon: 'school-building',
+				path: 'academic-year-list',
+			},
+			{
+				name: 'Kelas',
+				icon: 'school-building',
+				child: [
+					{
+						title: 'Daftar Kelas',
+						path: 'academic-year-list',
+					},
+					{
+						title: 'Tambah Kelas',
+						path: 'academic-year-create',
+					},
+				],
+			},
+		],
+	},
 	{
 		title: 'Pengelolaan',
 		icon: 'play',
@@ -9,11 +36,18 @@ export const schoolAdminRoutes = [
 				child: [
 					{
 						title: 'Daftar Guru',
-						path: 'user-list',
+						path: {
+							name: 'teachers-index',
+							params: {
+								npsn: store.getters['userable/getUserable'].school.npsn
+							}
+						},
 					},
 					{
 						title: 'Tambah Guru',
-						path: 'user-create',
+						path: {
+							name: 'user-create'
+						},
 					},
 				],
 			},
@@ -62,47 +96,8 @@ export const schoolAdminRoutes = [
 		],
 	},
 	{
-		title: 'Sekolah',
-		icon: 'building-library',
-		items: [
-			{
-				name: 'Sekolah',
-				icon: 'building-library',
-				path: 'academic-year-list',
-			},
-			{
-				name: 'Kelas',
-				icon: 'building-library',
-				child: [
-					{
-						title: 'Daftar Kelas',
-						path: 'academic-year-list',
-					},
-					{
-						title: 'Tambah Kelas',
-						path: 'academic-year-create',
-					},
-				],
-			},
-			{
-				name: 'Gedung',
-				icon: 'building-library',
-				child: [
-					{
-						title: 'Daftar Gedung',
-						path: 'academic-year-list',
-					},
-					{
-						title: 'Tambah Gedung',
-						path: 'academic-year-create',
-					},
-				],
-			},
-		],
-	},
-	{
 		title: 'Akademik',
-		icon: 'building-library',
+		icon: 'school-building',
 		items: [
 			{
 				name: 'Tahun Ajaran',
@@ -119,9 +114,32 @@ export const schoolAdminRoutes = [
 				],
 			},
 			{
-				name: 'Kalendar Pendidikan',
+				name: 'Mata Pelajaran',
 				icon: 'calendar',
-				path: 'academic-year-list',
+				child: [
+					{
+						title: 'Daftar Mata Pelajaran',
+						path: 'academic-year-list',
+					},
+					{
+						title: 'Tambah Mata Pelajaran',
+						path: 'academic-year-create',
+					},
+				],
+			},
+			{
+				name: 'Jadwal Pelajaran',
+				icon: 'calendar',
+				child: [
+					{
+						title: 'Daftar Jadwal Pelajaran',
+						path: 'academic-year-list',
+					},
+					{
+						title: 'Tambah Jadwal Pelajaran',
+						path: 'academic-year-create',
+					},
+				],
 			},
 		],
 	},
