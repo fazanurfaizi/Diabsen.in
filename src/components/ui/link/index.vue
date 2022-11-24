@@ -1,7 +1,7 @@
 <template>
 	<router-link
 		v-slot="{ href, navigate, isActive, isExactActive }"
-		:to="{ name: path }"
+		:to="{ name: path, params: params }"
 		custom
 	>
 		<a
@@ -46,6 +46,10 @@
 			path: {
 				type: String,
 				required: true,
+			},
+			params: {
+				type: Object,
+				required: false,
 			},
 			icon: {
 				type: String,

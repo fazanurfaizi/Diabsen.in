@@ -1,5 +1,7 @@
 import store from "@/store"
 
+const currentNpsn = store.getters['userable/getUserable'].school.npsn
+
 export const schoolAdminRoutes = [
 	{
 		title: 'Sekolah',
@@ -8,15 +10,25 @@ export const schoolAdminRoutes = [
 			{
 				name: 'Sekolah',
 				icon: 'school-building',
-				path: 'academic-year-list',
+				path: {
+					name: 'school-detail',
+					params: {
+						npsn: currentNpsn
+					}
+				},
 			},
 			{
 				name: 'Kelas',
-				icon: 'school-building',
+				icon: 'academic-cap',
 				child: [
 					{
 						title: 'Daftar Kelas',
-						path: 'academic-year-list',
+						path: {
+							name: 'school-classes-index',
+							params: {
+								npsn: currentNpsn
+							}
+						},
 					},
 					{
 						title: 'Tambah Kelas',
@@ -39,57 +51,67 @@ export const schoolAdminRoutes = [
 						path: {
 							name: 'teachers-index',
 							params: {
-								npsn: store.getters['userable/getUserable'].school.npsn
+								npsn: currentNpsn
 							}
 						},
 					},
 					{
 						title: 'Tambah Guru',
 						path: {
-							name: 'user-create'
+							name: 'dashboard'
 						},
 					},
 				],
 			},
-			{
-				name: 'Siswa',
-				icon: 'users',
-				child: [
-					{
-						title: 'Daftar Siswa',
-						path: 'user-list',
-					},
-					{
-						title: 'Tambah Siswa',
-						path: 'user-create',
-					},
-				],
-			},
-			{
-				name: 'Orang Tua',
-				icon: 'users',
-				child: [
-					{
-						title: 'Daftar Orang Tua',
-						path: 'user-list',
-					},
-					{
-						title: 'Tambah Orang Tua',
-						path: 'user-create',
-					},
-				],
-			},
+			// {
+			// 	name: 'Siswa',
+			// 	icon: 'users',
+			// 	child: [
+			// 		{
+			// 			title: 'Daftar Siswa',
+			// 			path: {
+			// 				name: 'students-index',
+			// 				params: {
+			// 					npsn: currentNpsn
+			// 				}
+			// 			},
+			// 		},
+			// 		{
+			// 			title: 'Tambah Siswa',
+			// 			path: 'dashboard',
+			// 		},
+			// 	],
+			// },
+			// {
+			// 	name: 'Orang Tua',
+			// 	icon: 'users',
+			// 	child: [
+			// 		{
+			// 			title: 'Daftar Orang Tua',
+			// 			path: 'user-list',
+			// 		},
+			// 		{
+			// 			title: 'Tambah Orang Tua',
+			// 			path: 'dashboard',
+			// 		},
+			// 	],
+			// },
 			{
 				name: 'Admin',
-				icon: 'users',
+				icon: 'user-group',
 				child: [
 					{
 						title: 'Daftar Admin',
-						path: 'user-list',
+						path: {
+							name: 'admins-index',
+							params: {
+								npsn: currentNpsn
+							}
+						},
 					},
 					{
 						title: 'Tambah Admin',
-						path: 'user-create',
+						path: 'admins-create',
 					},
 				],
 			},
@@ -105,7 +127,12 @@ export const schoolAdminRoutes = [
 				child: [
 					{
 						title: 'Daftar Tahun Ajaran',
-						path: 'academic-year-list',
+						path: {
+							name: 'school-years-index',
+							params: {
+								npsn: currentNpsn
+							}
+						},
 					},
 					{
 						title: 'Tambah Tahun Ajaran',
@@ -115,11 +142,16 @@ export const schoolAdminRoutes = [
 			},
 			{
 				name: 'Mata Pelajaran',
-				icon: 'calendar',
+				icon: 'book-open',
 				child: [
 					{
 						title: 'Daftar Mata Pelajaran',
-						path: 'academic-year-list',
+						path: {
+							name: 'courses-index',
+							params: {
+								npsn: currentNpsn
+							}
+						},
 					},
 					{
 						title: 'Tambah Mata Pelajaran',
@@ -129,11 +161,16 @@ export const schoolAdminRoutes = [
 			},
 			{
 				name: 'Jadwal Pelajaran',
-				icon: 'calendar',
+				icon: 'calendar-days',
 				child: [
 					{
 						title: 'Daftar Jadwal Pelajaran',
-						path: 'academic-year-list',
+						path: {
+							name: 'schedules-index',
+							params: {
+								npsn: currentNpsn
+							}
+						},
 					},
 					{
 						title: 'Tambah Jadwal Pelajaran',

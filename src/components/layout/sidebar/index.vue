@@ -172,6 +172,7 @@
 									<Link
 										:title="menu.name"
 										:path="menu.path.name"
+										:params="menu.path.params"
 										:icon="menu.icon"
 									/>
 								</SidebarLink>

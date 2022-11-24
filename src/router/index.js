@@ -42,7 +42,7 @@ let routes = [
 	{
 		path: '/',
 		name: 'index',
-		redirect: 'dashboard',
+		// redirect: 'dashboard',
 		component: BaseLayout,
 		meta: {
 			breadcrumbName: 'Beranda',
@@ -114,17 +114,50 @@ let routes = [
 					},
 					{
 						path: ':npsn',
+						name: 'school-detail',
+						component: () => import('@/pages/school/detail.vue'),
+						meta: {
+							requiresAuth: true,
+							breadcrumbName: 'Detail Sekolah'
+						}
+					},
+
+					{
+						path: ':npsn?',
 						component: RouterView,
 						meta: { requiresAuth: true },
 						children: [
 							{
-								path: '',
-								name: 'school-detail',
-								component: () => import('@/pages/school/detail.vue'),
-								meta: {
-									requiresAuth: true,
-									breadcrumbName: 'Detail Sekolah'
-								}
+								path: 'school-classes',
+								name: 'school-classes',
+								component: RouterView,
+								meta: { requiresAuth: true },
+								children: [
+									{
+										path: '',
+										name: 'school-classes-index',
+										component: () => import('@/pages/school-classes/index.vue'),
+										meta: {
+											breadcrumbName: 'Daftar Kelas'
+										}
+									},
+									{
+										path: 'students',
+										name: 'students',
+										component: RouterView,
+										meta: { requiresAuth: true },
+										children: [
+											{
+												path: '',
+												name: 'students-index',
+												component: () => import('@/pages/students/index.vue'),
+												meta: {
+													breadcrumbName: 'Daftar Kelas'
+												}
+											}
+										]
+									},
+								]
 							},
 							{
 								path: 'teachers',
@@ -141,116 +174,72 @@ let routes = [
 										}
 									}
 								]
-							}
+							},
+							{
+								path: 'admins',
+								name: 'admins',
+								component: RouterView,
+								meta: { requiresAuth: true },
+								children: [
+									{
+										path: '',
+										name: 'admins-index',
+										component: () => import('@/pages/admins/index.vue'),
+										meta: {
+											breadcrumbName: 'Daftar Admin'
+										}
+									}
+								]
+							},
+							{
+								path: 'school-years',
+								name: 'school-years',
+								component: RouterView,
+								meta: { requiresAuth: true },
+								children: [
+									{
+										path: '',
+										name: 'school-years-index',
+										component: () => import('@/pages/school-years/index.vue'),
+										meta: {
+											breadcrumbName: 'Daftar Admin'
+										}
+									}
+								]
+							},
+							{
+								path: 'courses',
+								name: 'courses',
+								component: RouterView,
+								meta: { requiresAuth: true },
+								children: [
+									{
+										path: '',
+										name: 'courses-index',
+										component: () => import('@/pages/courses/index.vue'),
+										meta: {
+											breadcrumbName: 'Daftar Admin'
+										}
+									}
+								]
+							},
+							{
+								path: 'schedules',
+								name: 'schedules',
+								component: RouterView,
+								meta: { requiresAuth: true },
+								children: [
+									{
+										path: '',
+										name: 'schedules-index',
+										component: () => import('@/pages/schedules/index.vue'),
+										meta: {
+											breadcrumbName: 'Daftar Admin'
+										}
+									}
+								]
+							},
 						]
-					},
-				],
-			},
-			{
-				path: '/foobar',
-				name: 'foobar',
-				component: RouterView,
-				meta: {
-					breadCrumb: 'FooBar',
-				},
-				children: [
-					{
-						path: '',
-						name: 'foobar-list',
-						component: () => import('@/pages/foobar/index.vue'),
-						// meta: { requiresAuth: true }
-					},
-					{
-						path: '/create',
-						name: 'foobar-create',
-						component: () => import('@/pages/foobar/create.vue'),
-						meta: {
-							breadCrumb: 'Tambah',
-						},
-						// meta: { requiresAuth: true }
-					},
-					{
-						path: '/edit',
-						name: 'foobar-edit',
-						component: () => import('@/pages/foobar/edit.vue'),
-						meta: {
-							breadCrumb: 'Ubah',
-						},
-						// meta: { requiresAuth: true }
-					},
-				],
-			},
-			{
-				path: '/academic-years',
-				name: 'academic-years',
-				component: RouterView,
-				meta: {
-					breadCrumb: 'Tahun Ajaran',
-				},
-				children: [
-					{
-						path: '',
-						name: 'academic-year-list',
-						component: () =>
-							import('@/pages/academic-year/index.vue'),
-						meta: {
-							requiresAuth: true,
-						},
-					},
-					{
-						path: '/create',
-						name: 'academic-year-create',
-						component: () =>
-							import('@/pages/academic-year/create.vue'),
-						meta: {
-							breadCrumb: 'Tambah',
-							requiresAuth: true,
-						},
-					},
-					{
-						path: '/edit',
-						name: 'foobar-edit',
-						component: () => import('@/pages/foobar/edit.vue'),
-						meta: {
-							breadCrumb: 'Ubah',
-							requiresAuth: true,
-						},
-					},
-				],
-			},
-			{
-				path: '/users',
-				name: 'users',
-				component: RouterView,
-				meta: {
-					breadCrumb: 'Pengguna',
-				},
-				children: [
-					{
-						path: '',
-						name: 'user-list',
-						component: () => import('@/pages/users/index.vue'),
-						meta: {
-							requiresAuth: true,
-						},
-					},
-					{
-						path: '/create',
-						name: 'user-create',
-						component: () => import('@/pages/users/create.vue'),
-						meta: {
-							breadCrumb: 'Tambah',
-							requiresAuth: true,
-						},
-					},
-					{
-						path: '/edit',
-						name: 'foobar-edit',
-						component: () => import('@/pages/foobar/edit.vue'),
-						meta: {
-							breadCrumb: 'Ubah',
-							requiresAuth: true,
-						},
 					},
 				],
 			},
