@@ -96,9 +96,9 @@
 </template>
 
 <script>
-export default {
-	name: 'schools-index'
-}
+	export default {
+		name: 'schools-index',
+	}
 </script>
 
 <script setup>

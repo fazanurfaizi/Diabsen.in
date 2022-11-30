@@ -1,19 +1,19 @@
-import userableService from "@/core/services/userable.service";
+import userableService from '@/core/services/userable.service'
 
 export default {
 	namespaced: true,
 	state() {
 		return {
-			userable: null
+			userable: null,
 		}
 	},
 	getters: {
-		getUserable: (state) => state.userable
+		getUserable: (state) => state.userable,
 	},
 	mutations: {
 		setUserable(state, userable) {
 			state.userable = userable
-		}
+		},
 	},
 	actions: {
 		async fetchUserable({ commit }, payload) {
@@ -23,6 +23,6 @@ export default {
 					commit('setUserable', response.data.data.user)
 				})
 				.catch((error) => console.error(error))
-		}
-	}
+		},
+	},
 }

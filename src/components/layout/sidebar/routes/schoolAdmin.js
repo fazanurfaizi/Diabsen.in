@@ -1,4 +1,4 @@
-import store from "@/store"
+import store from '@/store'
 
 const currentNpsn = store.getters['userable/getUserable'].school.npsn
 
@@ -13,8 +13,8 @@ export const schoolAdminRoutes = [
 				path: {
 					name: 'school-detail',
 					params: {
-						npsn: currentNpsn
-					}
+						npsn: currentNpsn,
+					},
 				},
 			},
 			{
@@ -26,8 +26,8 @@ export const schoolAdminRoutes = [
 						path: {
 							name: 'school-classes-index',
 							params: {
-								npsn: currentNpsn
-							}
+								npsn: currentNpsn,
+							},
 						},
 					},
 					{
@@ -51,14 +51,14 @@ export const schoolAdminRoutes = [
 						path: {
 							name: 'teachers-index',
 							params: {
-								npsn: currentNpsn
-							}
+								npsn: currentNpsn,
+							},
 						},
 					},
 					{
 						title: 'Tambah Guru',
 						path: {
-							name: 'dashboard'
+							name: 'dashboard',
 						},
 					},
 				],
@@ -105,8 +105,8 @@ export const schoolAdminRoutes = [
 						path: {
 							name: 'admins-index',
 							params: {
-								npsn: currentNpsn
-							}
+								npsn: currentNpsn,
+							},
 						},
 					},
 					{
@@ -130,8 +130,8 @@ export const schoolAdminRoutes = [
 						path: {
 							name: 'school-years-index',
 							params: {
-								npsn: currentNpsn
-							}
+								npsn: currentNpsn,
+							},
 						},
 					},
 					{
@@ -149,8 +149,8 @@ export const schoolAdminRoutes = [
 						path: {
 							name: 'courses-index',
 							params: {
-								npsn: currentNpsn
-							}
+								npsn: currentNpsn,
+							},
 						},
 					},
 					{
@@ -168,8 +168,8 @@ export const schoolAdminRoutes = [
 						path: {
 							name: 'schedules-index',
 							params: {
-								npsn: currentNpsn
-							}
+								npsn: currentNpsn,
+							},
 						},
 					},
 					{

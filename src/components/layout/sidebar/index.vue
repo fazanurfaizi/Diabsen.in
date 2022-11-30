@@ -135,7 +135,11 @@
 											>
 												<router-link
 													v-slot="{ href, navigate }"
-													:to="{ name: child.path.name, params: child.path.params }"
+													:to="{
+														name: child.path.name,
+														params: child.path
+															.params,
+													}"
 													custom
 												>
 													<li
@@ -186,115 +190,115 @@
 </template>
 
 <script>
-import { ref, defineComponent, onMounted, onUnmounted, watch } from 'vue'
-import { useRouter } from 'vue-router'
-import SidebarLink from './SidebarLink.vue'
-import { appRoutes } from './routes'
-import Link from '@/components/ui/link/index.vue'
-import Icon from '@/components/ui/svg-icon/index.vue'
-import heroiconsOutlineVue from '@/components/icons/heroicons-outline.vue'
+	import { ref, defineComponent, onMounted, onUnmounted, watch } from 'vue'
+	import { useRouter } from 'vue-router'
+	import SidebarLink from './SidebarLink.vue'
+	import { appRoutes } from './routes'
+	import Link from '@/components/ui/link/index.vue'
+	import Icon from '@/components/ui/svg-icon/index.vue'
+	import heroiconsOutlineVue from '@/components/icons/heroicons-outline.vue'
 
-export default defineComponent({
-	name: 'v-sidebar',
-	components: {
-		Link,
-		SidebarLink,
-		Icon,
-		heroiconsOutlineVue,
-	},
-	props: {
-		sidebarOpen: {
-			type: Boolean,
-			required: true,
-			default: false,
+	export default defineComponent({
+		name: 'v-sidebar',
+		components: {
+			Link,
+			SidebarLink,
+			Icon,
+			heroiconsOutlineVue,
 		},
-	},
-	emits: ['close-sidebar'],
-	setup(props, { emit }) {
-		const routes = ref(appRoutes)
-		const trigger = ref(null)
-		const sidebar = ref(null)
-		const storedSidebarExpanded =
-			localStorage.getItem('sidebar-expanded')
-		const sidebarExpanded = ref(
-			storedSidebarExpanded === null
-				? false
-				: storedSidebarExpanded === 'true'
-		)
-
-		const currentRoute = useRouter().currentRoute.value
-
-		// close on click outside
-		const clickHandler = ({ target }) => {
-			if (!sidebar.value || !trigger.value) return
-			if (
-				!props.sidebarOpen ||
-				sidebar.value.contains(target) ||
-				trigger.value.contains(target)
+		props: {
+			sidebarOpen: {
+				type: Boolean,
+				required: true,
+				default: false,
+			},
+		},
+		emits: ['close-sidebar'],
+		setup(props, { emit }) {
+			const routes = ref(appRoutes)
+			const trigger = ref(null)
+			const sidebar = ref(null)
+			const storedSidebarExpanded =
+				localStorage.getItem('sidebar-expanded')
+			const sidebarExpanded = ref(
+				storedSidebarExpanded === null
+					? false
+					: storedSidebarExpanded === 'true'
 			)
-				return
-			emit('close-sidebar')
-		}
 
-		// close if the `esc` key is pressed
-		const keyHandler = ({ keyCode }) => {
-			if (!props.sidebarOpen || keyCode !== 27) return
-			emit('close-sidebar')
-		}
+			const currentRoute = useRouter().currentRoute.value
 
-		const addExpandable = () => {
-			document
-				.querySelector('body')
-				?.classList.add('sidebar-expanded')
-		}
-
-		const removeExpandable = () => {
-			document
-				.querySelector('body')
-				?.classList.remove('sidebar-expanded')
-		}
-
-		const isRouteActive = (path) => {
-			return (
-				currentRoute.name === path.name ||
-				currentRoute.name.includes(path.name)
-			)
-		}
-
-		onMounted(() => {
-			addExpandable()
-			localStorage.setItem('sidebar-expanded', 'true')
-			document.addEventListener('click', clickHandler)
-			document.addEventListener('keydown', keyHandler)
-		})
-
-		onUnmounted(() => {
-			removeExpandable()
-			localStorage.removeItem('sidebar-expanded')
-			document.removeEventListener('click', clickHandler)
-			document.removeEventListener('keydown', keyHandler)
-		})
-
-		watch(sidebarExpanded, () => {
-			localStorage.setItem(
-				'sidebar-expanded',
-				sidebarExpanded.value.toString()
-			)
-			if (sidebarExpanded.value) {
-				addExpandable()
-			} else {
-				removeExpandable()
+			// close on click outside
+			const clickHandler = ({ target }) => {
+				if (!sidebar.value || !trigger.value) return
+				if (
+					!props.sidebarOpen ||
+					sidebar.value.contains(target) ||
+					trigger.value.contains(target)
+				)
+					return
+				emit('close-sidebar')
 			}
-		})
 
-		return {
-			routes,
-			trigger,
-			sidebar,
-			sidebarExpanded,
-			currentRoute,
-			isRouteActive,
-		}
-	},
-})
+			// close if the `esc` key is pressed
+			const keyHandler = ({ keyCode }) => {
+				if (!props.sidebarOpen || keyCode !== 27) return
+				emit('close-sidebar')
+			}
+
+			const addExpandable = () => {
+				document
+					.querySelector('body')
+					?.classList.add('sidebar-expanded')
+			}
+
+			const removeExpandable = () => {
+				document
+					.querySelector('body')
+					?.classList.remove('sidebar-expanded')
+			}
+
+			const isRouteActive = (path) => {
+				return (
+					currentRoute.name === path.name ||
+					currentRoute.name.includes(path.name)
+				)
+			}
+
+			onMounted(() => {
+				addExpandable()
+				localStorage.setItem('sidebar-expanded', 'true')
+				document.addEventListener('click', clickHandler)
+				document.addEventListener('keydown', keyHandler)
+			})
+
+			onUnmounted(() => {
+				removeExpandable()
+				localStorage.removeItem('sidebar-expanded')
+				document.removeEventListener('click', clickHandler)
+				document.removeEventListener('keydown', keyHandler)
+			})
+
+			watch(sidebarExpanded, () => {
+				localStorage.setItem(
+					'sidebar-expanded',
+					sidebarExpanded.value.toString()
+				)
+				if (sidebarExpanded.value) {
+					addExpandable()
+				} else {
+					removeExpandable()
+				}
+			})
+
+			return {
+				routes,
+				trigger,
+				sidebar,
+				sidebarExpanded,
+				currentRoute,
+				isRouteActive,
+			}
+		},
+	})
 </script>

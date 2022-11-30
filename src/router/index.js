@@ -118,8 +118,8 @@ let routes = [
 						component: () => import('@/pages/school/detail.vue'),
 						meta: {
 							requiresAuth: true,
-							breadcrumbName: 'Detail Sekolah'
-						}
+							breadcrumbName: 'Detail Sekolah',
+						},
 					},
 
 					{
@@ -136,10 +136,13 @@ let routes = [
 									{
 										path: '',
 										name: 'school-classes-index',
-										component: () => import('@/pages/school-classes/index.vue'),
+										component: () =>
+											import(
+												'@/pages/school-classes/index.vue'
+											),
 										meta: {
-											breadcrumbName: 'Daftar Kelas'
-										}
+											breadcrumbName: 'Daftar Kelas',
+										},
 									},
 									{
 										path: 'students',
@@ -150,14 +153,18 @@ let routes = [
 											{
 												path: '',
 												name: 'students-index',
-												component: () => import('@/pages/students/index.vue'),
+												component: () =>
+													import(
+														'@/pages/students/index.vue'
+													),
 												meta: {
-													breadcrumbName: 'Daftar Kelas'
-												}
-											}
-										]
+													breadcrumbName:
+														'Daftar Kelas',
+												},
+											},
+										],
 									},
-								]
+								],
 							},
 							{
 								path: 'teachers',
@@ -168,12 +175,15 @@ let routes = [
 									{
 										path: '',
 										name: 'teachers-index',
-										component: () => import('@/pages/teachers/index.vue'),
+										component: () =>
+											import(
+												'@/pages/teachers/index.vue'
+											),
 										meta: {
-											breadcrumbName: 'Daftar Guru'
-										}
-									}
-								]
+											breadcrumbName: 'Daftar Guru',
+										},
+									},
+								],
 							},
 							{
 								path: 'admins',
@@ -184,12 +194,13 @@ let routes = [
 									{
 										path: '',
 										name: 'admins-index',
-										component: () => import('@/pages/admins/index.vue'),
+										component: () =>
+											import('@/pages/admins/index.vue'),
 										meta: {
-											breadcrumbName: 'Daftar Admin'
-										}
-									}
-								]
+											breadcrumbName: 'Daftar Admin',
+										},
+									},
+								],
 							},
 							{
 								path: 'school-years',
@@ -200,12 +211,15 @@ let routes = [
 									{
 										path: '',
 										name: 'school-years-index',
-										component: () => import('@/pages/school-years/index.vue'),
+										component: () =>
+											import(
+												'@/pages/school-years/index.vue'
+											),
 										meta: {
-											breadcrumbName: 'Daftar Admin'
-										}
-									}
-								]
+											breadcrumbName: 'Daftar Admin',
+										},
+									},
+								],
 							},
 							{
 								path: 'courses',
@@ -216,12 +230,13 @@ let routes = [
 									{
 										path: '',
 										name: 'courses-index',
-										component: () => import('@/pages/courses/index.vue'),
+										component: () =>
+											import('@/pages/courses/index.vue'),
 										meta: {
-											breadcrumbName: 'Daftar Admin'
-										}
-									}
-								]
+											breadcrumbName: 'Daftar Admin',
+										},
+									},
+								],
 							},
 							{
 								path: 'schedules',
@@ -232,14 +247,17 @@ let routes = [
 									{
 										path: '',
 										name: 'schedules-index',
-										component: () => import('@/pages/schedules/index.vue'),
+										component: () =>
+											import(
+												'@/pages/schedules/index.vue'
+											),
 										meta: {
-											breadcrumbName: 'Daftar Admin'
-										}
-									}
-								]
+											breadcrumbName: 'Daftar Admin',
+										},
+									},
+								],
 							},
-						]
+						],
 					},
 				],
 			},

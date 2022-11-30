@@ -33,16 +33,20 @@ export default {
 						root: true,
 					})
 					setTimeout(() => {
-						dispatch('userable/fetchUserable', response.data.data.user.id, {
-							root: true
-						})
+						dispatch(
+							'userable/fetchUserable',
+							response.data.data.user.id,
+							{
+								root: true,
+							}
+						)
 						router.push({
 							path:
 								router.currentRoute.value.query.redirect ||
 								router.currentRoute.value.path,
 							force: true,
 						})
-					}, 2000);
+					}, 2000)
 				})
 				.catch((error) => console.log(error))
 		},
