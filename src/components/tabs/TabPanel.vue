@@ -1,13 +1,13 @@
 <template>
-	<div class="w-full inline-block align-top" style="white-space: initial;">
+	<div class="w-full inline-block align-top" style="white-space: initial">
 		<slot></slot>
 	</div>
 </template>
 
 <script>
-import { defineComponent } from 'vue'
+	import { defineComponent } from 'vue'
 
-export default defineComponent({
-	name: 'v-tab-panel'
-})
+	export default defineComponent({
+		name: 'v-tab-panel',
+	})
 </script>

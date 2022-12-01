@@ -1,9 +1,9 @@
 <template>
 	<div
 		@click="onClickTab"
-		class="mr-4"
 		:class="{
-			'border-0 border-b-2 border-solid border-black': isActive && indicator
+			'border-0 border-b-2 border-solid border-black':
+				isActive && indicator,
 		}"
 	>
 		<slot>
@@ -13,45 +13,45 @@
 </template>
 
 <script>
-import { defineComponent, inject, reactive, computed, toRefs } from 'vue'
+	import { defineComponent, inject, reactive, computed, toRefs } from 'vue'
 
-export default defineComponent({
-	name: 'v-tab',
-	props: {
-		val: {
-			default: null,
-			type: [String, Number]
+	export default defineComponent({
+		name: 'v-tab',
+		props: {
+			val: {
+				default: null,
+				type: [String, Number],
+			},
+			label: {
+				default: null,
+				type: String,
+			},
+			indicator: {
+				default: false,
+				type: Boolean,
+			},
 		},
-		label: {
-			default: null,
-			type: String
+		setup(props) {
+			const tabs = inject('tabs', {
+				state: reactive({
+					active: null,
+				}),
+				activateTab: () => {},
+			})
+
+			const state = reactive({
+				isActive: computed(() => tabs.state.active === props.val),
+			})
+
+			const onClickTab = () => {
+				tabs.activateTab(props.val)
+			}
+
+			return {
+				tabs,
+				onClickTab,
+				...toRefs(state),
+			}
 		},
-		indicator: {
-			default: false,
-			type: Boolean
-		}
-	},
-	setup(props) {
-		const tabs = inject('tabs', {
-			state: reactive({
-				active: null
-			}),
-			activateTab: () => {}
-		})
-
-		const state = reactive({
-			isActive: computed(() => tabs.state.active === props.val)
-		})
-
-		const onClickTab = () => {
-			tabs.activateTab(props.val)
-		}
-
-		return {
-			tabs,
-			onClickTab,
-			...toRefs(state)
-		}
-	}
-})
+	})
 </script>

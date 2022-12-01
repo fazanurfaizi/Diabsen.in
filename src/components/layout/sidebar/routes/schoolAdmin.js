@@ -4,11 +4,11 @@ const currentNpsn = store.getters['userable/getUserable'].school.npsn
 
 export const schoolAdminRoutes = [
 	{
-		title: 'Sekolah',
+		title: 'schools',
 		icon: 'school-building',
 		items: [
 			{
-				name: 'Sekolah',
+				name: 'schools',
 				icon: 'school-building',
 				path: {
 					name: 'school-detail',

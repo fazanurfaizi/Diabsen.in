@@ -108,12 +108,12 @@ let routes = [
 						},
 					},
 					{
-						path: ':id/edit',
+						path: ':npsn(\\d+)/edit',
 						component: () => import('@/pages/school/edit.vue'),
 						meta: { requiresAuth: true },
 					},
 					{
-						path: ':npsn',
+						path: ':npsn(\\d+)',
 						name: 'school-detail',
 						component: () => import('@/pages/school/detail.vue'),
 						meta: {
@@ -123,7 +123,7 @@ let routes = [
 					},
 
 					{
-						path: ':npsn?',
+						path: ':npsn(\\d+)?',
 						component: RouterView,
 						meta: { requiresAuth: true },
 						children: [

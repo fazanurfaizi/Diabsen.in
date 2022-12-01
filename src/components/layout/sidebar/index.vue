@@ -259,9 +259,14 @@
 			}
 
 			const isRouteActive = (path) => {
+				const check = currentRoute.matched.filter(
+					(match) => match.name === path.name
+				)
 				return (
 					currentRoute.name === path.name ||
-					currentRoute.name.includes(path.name)
+					(currentRoute.name &&
+						currentRoute.name.includes(path.name)) ||
+					check.length > 0
 				)
 			}
 

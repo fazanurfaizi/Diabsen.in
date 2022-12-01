@@ -128,26 +128,21 @@
 							box.style.borderColor = item.fillStyle
 							box.style.pointerEvents = 'none'
 							// Label
-							const labelContainer = document.createElement('span')
+							const labelContainer =
+								document.createElement('span')
 							labelContainer.style.display = 'flex'
 							labelContainer.style.alignItems = 'center'
 							const value = document.createElement('span')
 							value.style.color = colors.gray[800]
 							value.style.fontSize = theme.fontSize['3xl'][0]
 							value.style.lineHeight =
-								theme.fontSize[
-									'3xl'
-								][1].lineHeight
-							value.style.fontWeight =
-								theme.fontWeight.bold
-							value.style.marginRight =
-								theme.margin[2]
+								theme.fontSize['3xl'][1].lineHeight
+							value.style.fontWeight = theme.fontWeight.bold
+							value.style.marginRight = theme.margin[2]
 							value.style.pointerEvents = 'none'
 							const label = document.createElement('span')
-							label.style.color =
-								colors.gray[500]
-							label.style.fontSize =
-								theme.fontSize.sm[0]
+							label.style.color = colors.gray[500]
+							label.style.fontSize = theme.fontSize.sm[0]
 							label.style.lineHeight =
 								theme.fontSize.sm[1].lineHeight
 							const theValue = c.data.datasets[
