@@ -1,22 +1,5 @@
 import { ref, customRef } from 'vue'
-
-/**
- * debounce
- * @param {void} cb callback function
- * @param {Number} delay time deplay before executing callback
- * @param {Boolean} immediate force running while app mounted
- */
-const debounce = (cb, delay = 0, immediate = false) => {
-	let timeout
-	return (...args) => {
-		if (immediate && !timeout) cb(...args)
-		clearTimeout(timeout)
-
-		timeout = setTimeout(() => {
-			cb(...args)
-		}, delay)
-	}
-}
+import { debounce } from '@/core/utils'
 
 /**
  * Use debounce hook
