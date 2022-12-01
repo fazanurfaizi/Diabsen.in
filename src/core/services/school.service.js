@@ -5,7 +5,7 @@ class SchoolService {
 		this.baseUrl = import.meta.env.VITE_API_URL_MASTER_DATA
 	}
 
-	async getSchools({
+	async list({
 		limit = 10,
 		page = 1,
 		keyword = '',
@@ -23,6 +23,15 @@ class SchoolService {
 						sortOrder,
 					},
 				})
+				.then((response) => resolve(response))
+				.catch((error) => reject(error))
+		})
+	}
+
+	async show(schoolId) {
+		return await new Promise((resolve, reject) => {
+			axiosInstance
+				.get(`${this.baseUrl}/schools/${schoolId}`)
 				.then((response) => resolve(response))
 				.catch((error) => reject(error))
 		})

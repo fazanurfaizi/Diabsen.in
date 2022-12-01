@@ -4,7 +4,8 @@ export default {
 	namespaced: true,
 	state() {
 		return {
-			schools: null,
+			school: null,
+			schools: [],
 			pagination: {
 				currentPage: 1,
 				lastPage: 1,
@@ -13,10 +14,14 @@ export default {
 		}
 	},
 	getters: {
+		getSchool: (state) => state.school,
 		getSchools: (state) => state.schools,
 		getPagination: (state) => state.pagination,
 	},
 	mutations: {
+		setSchool(state, payload) {
+			state.school = payload
+		},
 		setSchools(state, payload) {
 			state.schools = payload
 		},
@@ -26,7 +31,7 @@ export default {
 	},
 	actions: {
 		async getSchools({ commit }, payload) {
-			await SchoolService.getSchools(payload)
+			await SchoolService.list(payload)
 				.then((response) => {
 					commit('setSchools', response.data.data)
 					commit('setSchoolsPagination', {
@@ -37,5 +42,12 @@ export default {
 				})
 				.catch((error) => console.log(error))
 		},
+		async getDetailSchool({ commit }, payload) {
+			await SchoolService.show(payload)
+				.then((response) => {
+					commit('setSchool', response.data.data)
+				})
+				.catch((error) => console.log(error))
+		}
 	},
 }

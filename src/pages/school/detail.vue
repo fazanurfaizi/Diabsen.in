@@ -40,43 +40,35 @@
 					>
 						<div class="grid grid-cols-2 gap-4">
 							<div>NPSN</div>
-							<div>12345</div>
+							<div>{{ school.npsn }}</div>
 						</div>
 						<div class="grid grid-cols-2 gap-4">
 							<div>Nama Sekolah</div>
-							<div>SMAN 21 Bandung</div>
+							<div>{{ school.name }}</div>
 						</div>
 						<div class="grid grid-cols-2 gap-4">
 							<div>Status Sekolah</div>
-							<div>Aktif</div>
+							<div>{{ school.status }}</div>
 						</div>
 						<div class="grid grid-cols-2 gap-4">
 							<div>Jenjang Pendidikan</div>
-							<div>3</div>
+							<div>{{ school.study_type }}</div>
 						</div>
 						<div class="grid grid-cols-2 gap-4">
 							<div>Status Kepemilikan</div>
-							<div>Pemerintah</div>
+							<div>{{ school.ownership_status }}</div>
 						</div>
 						<div class="grid grid-cols-2 gap-4">
 							<div>No. SK Pendirian Sekolah</div>
-							<div>1234</div>
+							<div>{{ school.establishment_letter }}</div>
 						</div>
 						<div class="grid grid-cols-2 gap-4">
 							<div>Tanggal SK Pendirian</div>
-							<div>2022-11-11</div>
-						</div>
-						<div class="grid grid-cols-2 gap-4">
-							<div>No. SK Izin Operasional</div>
-							<div>1234</div>
-						</div>
-						<div class="grid grid-cols-2 gap-4">
-							<div>Tanggal SK Izin Operasional</div>
-							<div>2020-11-20</div>
+							<div>{{ school.operational_date }}</div>
 						</div>
 						<div class="grid grid-cols-2 gap-4">
 							<div>Waktu Kegiatan Belajar Mengajar (KBM)</div>
-							<div>2 Sesi</div>
+							<div>{{ school.teaching_learning_time }}</div>
 						</div>
 					</div>
 					<div
@@ -85,31 +77,31 @@
 					>
 						<div class="grid grid-cols-2 gap-4">
 							<div>Alamat</div>
-							<div>Bandung</div>
+							<div>{{ school.address }}</div>
 						</div>
 						<div class="grid grid-cols-2 gap-4">
 							<div>RT/RW</div>
-							<div>02/01</div>
+							<div>{{ `${school.rt}/${school.rw}` }}</div>
 						</div>
 						<div class="grid grid-cols-2 gap-4">
 							<div>Desa/Kelurahaan</div>
-							<div>Sindangjaya</div>
+							<div>{{ school.sub_district?.name }}</div>
 						</div>
 						<div class="grid grid-cols-2 gap-4">
 							<div>Kecamatan</div>
-							<div>Mandalajati</div>
+							<div>{{ school.sub_district?.name }}</div>
 						</div>
 						<div class="grid grid-cols-2 gap-4">
 							<div>Kota/Kabupaten</div>
-							<div>Kota Bandung</div>
+							<div>{{ school.city?.name }}</div>
 						</div>
 						<div class="grid grid-cols-2 gap-4">
 							<div>Kode Pos</div>
-							<div>40195</div>
+							<div>{{ school.postal_code?.code }}</div>
 						</div>
 						<div class="grid grid-cols-2 gap-4">
 							<div>Provinsi</div>
-							<div>Jawa Barat</div>
+							<div>{{ school.province?.name }}</div>
 						</div>
 					</div>
 					<div
@@ -118,19 +110,19 @@
 					>
 						<div class="grid grid-cols-2 gap-4">
 							<div>Nomor Telepon</div>
-							<div>0910290129</div>
+							<a :href="`tel:+${school.phone_number}`">{{ school.phone_number }}</a>
 						</div>
 						<div class="grid grid-cols-2 gap-4">
 							<div>Nomor FAX</div>
-							<div>18291829</div>
+							<div>{{ school.fax_number }}</div>
 						</div>
 						<div class="grid grid-cols-2 gap-4">
 							<div>Email Sekolah</div>
-							<div>sman21bdg@gmail.com</div>
+							<a :href="`mailto:${school.email}`">{{ school.email }}</a>
 						</div>
 						<div class="grid grid-cols-2 gap-4">
 							<div>Website Sekolah</div>
-							<div>www.sman21bdg.sch.id</div>
+							<a :href="school.website" target="__blank">{{ school.website }}</a>
 						</div>
 					</div>
 					<div class="flex flex-row-reverse space-x-1">
@@ -143,13 +135,18 @@
 </template>
 
 <script setup>
+	import { reactive, onMounted, computed } from 'vue'
+	import { useRoute } from 'vue-router'
+	import { useStore } from 'vuex'
 	import VTab from '@/components/tabs/Tab.vue'
 	import VTabs from '@/components/tabs/Tabs.vue'
 	import VTabPanel from '@/components/tabs/TabPanel.vue'
 	import VTabPanels from '@/components/tabs/TabPanels.vue'
 	import VButton from '@/components/ui/button/index.vue'
 
-	import { reactive } from 'vue'
+	const route = useRoute()
+
+	const store = useStore()
 
 	const tabs = [
 		{
@@ -173,4 +170,10 @@
 	const getActive = (tab) => {
 		return state.selectedTab === tab
 	}
+
+	const school = computed(() => store.getters['schools/getSchool'])
+
+	onMounted(async () => {
+		await store.dispatch('schools/getDetailSchool', route.params?.npsn)
+	})
 </script>

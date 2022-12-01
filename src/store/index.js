@@ -3,14 +3,14 @@ import { createStore } from 'vuex'
 import auth from './auth'
 import profile from './profile'
 import userable from './userable'
-import school from './school/school'
+import schools from './schools'
 
 export default createStore({
 	modules: {
 		auth,
 		profile,
 		userable,
-		school,
+		schools,
 	},
 	plugins: [createPersistedState()],
 })
