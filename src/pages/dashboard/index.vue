@@ -1,6 +1,6 @@
 <template>
 	<v-container>
-		<template #title>Dashboard</template>
+		<template #title>{{ t('menus.dashboard.index') }}</template>
 		<template #content>
 			<div class="py-8 w-full max-w-9xl mx-auto">
 				<WelcomeBanner />
@@ -25,7 +25,7 @@
 	</v-container>
 </template>
 
-<script setup>
+<script>
 	import WelcomeBanner from '@/components/ui/welcome-banner/index.vue'
 	import Dropdown from '@/components/ui/dropdown/index.vue'
 	import DatePicker from '@/components/form/date-picker/index.vue'
@@ -33,4 +33,25 @@
 	import PermitChart from './components/permit-chart.vue'
 	import AlphaChart from './components/alpha-chart.vue'
 	import AttendChart from './components/attend-chart.vue'
+	import { useI18n } from 'vue-i18n'
+
+	export default {
+		name: "dashboard-page",
+		components: {
+			WelcomeBanner,
+			Dropdown,
+			DatePicker,
+			PresentChart,
+			PermitChart,
+			AlphaChart,
+			AttendChart
+		},
+		setup() {
+			const { t } = useI18n()
+
+			return {
+				t
+			}
+		}
+	}
 </script>

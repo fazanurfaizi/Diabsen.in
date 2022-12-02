@@ -1,6 +1,6 @@
 <template>
 	<v-container>
-		<template #title>Detail Sekolah</template>
+		<template #title>{{ t('menus.schools.detail') }}</template>
 		<template #content>
 			<VTabs v-model="state.selectedTab" class="border-b border-gray-300">
 				<VTab
@@ -39,35 +39,35 @@
 						class="border border-color-tabs rounded-lg p-[20px] mb-[18px] space-y-4"
 					>
 						<div class="grid grid-cols-2 gap-4">
-							<div>NPSN</div>
+							<div>{{ t('schools.form.npsn') }}</div>
 							<div>{{ school.npsn }}</div>
 						</div>
 						<div class="grid grid-cols-2 gap-4">
-							<div>Nama Sekolah</div>
+							<div>{{ t('schools.form.name') }}</div>
 							<div>{{ school.name }}</div>
 						</div>
 						<div class="grid grid-cols-2 gap-4">
-							<div>Status Sekolah</div>
+							<div>{{ t('schools.form.status') }}</div>
 							<div>{{ school.status }}</div>
 						</div>
 						<div class="grid grid-cols-2 gap-4">
-							<div>Jenjang Pendidikan</div>
+							<div>{{ t('schools.form.studyType') }}</div>
 							<div>{{ school.study_type }}</div>
 						</div>
 						<div class="grid grid-cols-2 gap-4">
-							<div>Status Kepemilikan</div>
+							<div>{{ t('schools.form.ownershipStatus') }}</div>
 							<div>{{ school.ownership_status }}</div>
 						</div>
 						<div class="grid grid-cols-2 gap-4">
-							<div>No. SK Pendirian Sekolah</div>
+							<div>{{ t('schools.form.establishmentLetter') }}</div>
 							<div>{{ school.establishment_letter }}</div>
 						</div>
 						<div class="grid grid-cols-2 gap-4">
-							<div>Tanggal SK Pendirian</div>
+							<div>{{ t('schools.form.establishmentDate') }}</div>
 							<div>{{ school.operational_date }}</div>
 						</div>
 						<div class="grid grid-cols-2 gap-4">
-							<div>Waktu Kegiatan Belajar Mengajar (KBM)</div>
+							<div>{{ t('schools.form.teachingLearningTime') }}</div>
 							<div>{{ school.teaching_learning_time }}</div>
 						</div>
 					</div>
@@ -76,31 +76,31 @@
 						class="border border-color-tabs rounded-lg p-[20px] mb-[18px] space-y-4"
 					>
 						<div class="grid grid-cols-2 gap-4">
-							<div>Alamat</div>
+							<div>{{ t('schools.form.address') }}</div>
 							<div>{{ school.address }}</div>
 						</div>
 						<div class="grid grid-cols-2 gap-4">
-							<div>RT/RW</div>
+							<div>{{ t('schools.form.neighborhoodAssociation')/t('schools.form.citizensAssociation') }}</div>
 							<div>{{ `${school.rt}/${school.rw}` }}</div>
 						</div>
 						<div class="grid grid-cols-2 gap-4">
-							<div>Desa/Kelurahaan</div>
+							<div>{{ t('schools.form.subDistrict') }}</div>
 							<div>{{ school.sub_district?.name }}</div>
 						</div>
 						<div class="grid grid-cols-2 gap-4">
-							<div>Kecamatan</div>
+							<div>{{ t('schools.form.district') }}</div>
 							<div>{{ school.sub_district?.name }}</div>
 						</div>
 						<div class="grid grid-cols-2 gap-4">
-							<div>Kota/Kabupaten</div>
+							<div>{{ t('schools.form.city') }}</div>
 							<div>{{ school.city?.name }}</div>
 						</div>
 						<div class="grid grid-cols-2 gap-4">
-							<div>Kode Pos</div>
+							<div>{{ t('schools.form.postalCode') }}</div>
 							<div>{{ school.postal_code?.code }}</div>
 						</div>
 						<div class="grid grid-cols-2 gap-4">
-							<div>Provinsi</div>
+							<div>{{ t('schools.form.province') }}</div>
 							<div>{{ school.province?.name }}</div>
 						</div>
 					</div>
@@ -109,23 +109,23 @@
 						class="border border-color-tabs rounded-lg p-[20px] mb-[18px] space-y-4"
 					>
 						<div class="grid grid-cols-2 gap-4">
-							<div>Nomor Telepon</div>
+							<div>{{ t('schools.form.phoneNumber') }}</div>
 							<a :href="`tel:+${school.phone_number}`">{{
 								school.phone_number
 							}}</a>
 						</div>
 						<div class="grid grid-cols-2 gap-4">
-							<div>Nomor FAX</div>
+							<div>{{ t('schools.form.faxNumber') }}</div>
 							<div>{{ school.fax_number }}</div>
 						</div>
 						<div class="grid grid-cols-2 gap-4">
-							<div>Email Sekolah</div>
+							<div>{{ t('schools.form.email') }}</div>
 							<a :href="`mailto:${school.email}`">{{
 								school.email
 							}}</a>
 						</div>
 						<div class="grid grid-cols-2 gap-4">
-							<div>Website Sekolah</div>
+							<div>{{ t('schools.form.website') }}</div>
 							<a :href="school.website" target="__blank">{{
 								school.website
 							}}</a>
@@ -141,7 +141,7 @@
 									params: { npsn: route.params?.npsn },
 								})
 							"
-							>Edit</VButton
+							>{{ t('buttons.edit') }}</VButton
 						>
 					</div>
 				</VTabPanel>
@@ -150,7 +150,7 @@
 	</v-container>
 </template>
 
-<script setup>
+<script>
 	import { reactive, onMounted, computed } from 'vue'
 	import { useRoute, useRouter } from 'vue-router'
 	import { useStore } from 'vuex'
@@ -159,39 +159,65 @@
 	import VTabPanel from '@/components/tabs/TabPanel.vue'
 	import VTabPanels from '@/components/tabs/TabPanels.vue'
 	import VButton from '@/components/ui/button/index.vue'
+	import { useI18n } from 'vue-i18n'
 
-	const route = useRoute()
-
-	const router = useRouter()
-
-	const store = useStore()
-
-	const tabs = [
-		{
-			label: 'Identitas Sekolah',
-			value: 1,
+	export default {
+		name: 'school-detail-page',
+		components: {
+			VTab,
+			VTabs,
+			VTabPanel,
+			VTabPanels,
+			VButton
 		},
-		{
-			label: 'Alamat Sekolah',
-			value: 2,
-		},
-		{
-			label: 'Kontak Sekolah',
-			value: 3,
-		},
-	]
+		setup() {
+			const { t } = useI18n()
 
-	const state = reactive({
-		selectedTab: tabs[0].value,
-	})
+			const route = useRoute()
 
-	const getActive = (tab) => {
-		return state.selectedTab === tab
+			const router = useRouter()
+
+			const store = useStore()
+
+			const tabs = [
+				{
+					label: t('schools.tabs.identity'),
+					value: 1,
+				},
+				{
+					label: t('schools.tabs.address'),
+					value: 2,
+				},
+				{
+					label: t('schools.tabs.contract'),
+					value: 3,
+				},
+			]
+
+			const state = reactive({
+				selectedTab: tabs[0].value,
+			})
+
+			const getActive = (tab) => {
+				return state.selectedTab === tab
+			}
+
+			const school = computed(() => store.getters['schools/getSchool'])
+
+			onMounted(async () => {
+				await store.dispatch('schools/getDetailSchool', route.params?.npsn)
+			})
+
+			return {
+				t,
+				route,
+				router,
+				store,
+				tabs,
+				state,
+				getActive,
+				school
+			}
+		}
 	}
-
-	const school = computed(() => store.getters['schools/getSchool'])
-
-	onMounted(async () => {
-		await store.dispatch('schools/getDetailSchool', route.params?.npsn)
-	})
 </script>

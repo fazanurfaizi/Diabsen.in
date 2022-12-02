@@ -77,7 +77,7 @@
 											name="user-circle"
 											class="w-4 h-4 mr-2"
 										/>
-										<span>Profil</span>
+										<span>{{ t('navbar.profile') }}</span>
 									</div>
 								</router-link>
 
@@ -93,7 +93,7 @@
 											name="lock-closed"
 											class="w-4 h-4 mr-2"
 										/>
-										<span>Ubah Kata Sandi</span>
+										<span>{{ t('navbar.changePassword') }}</span>
 									</div>
 								</router-link>
 
@@ -110,7 +110,7 @@
 											name="power"
 											class="w-4 h-4 mr-2"
 										/>
-										<span>Keluar</span>
+										<span>{{ t('navbar.logout') }}</span>
 									</div>
 								</a>
 							</div>
@@ -126,6 +126,7 @@
 	import { defineComponent, onMounted, onUnmounted, ref } from 'vue'
 	import { useStore } from 'vuex'
 	import Icon from '@/components/ui/svg-icon/index.vue'
+	import { useI18n } from 'vue-i18n'
 
 	export default defineComponent({
 		name: 'TheHeader',
@@ -139,6 +140,8 @@
 			},
 		},
 		setup() {
+			const { t } = useI18n()
+
 			const store = useStore()
 
 			const dropdown = ref(null)
@@ -169,6 +172,7 @@
 			})
 
 			return {
+				t,
 				dropdown,
 				isShow,
 				user,

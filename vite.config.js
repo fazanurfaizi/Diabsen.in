@@ -2,12 +2,21 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import svgLoader from 'vite-svg-loader'
 import { VitePWA } from 'vite-plugin-pwa'
-import { resolve } from 'path'
+import { dirname, resolve } from 'path'
+import vueI18n from '@intlify/vite-plugin-vue-i18n'
+import { fileURLToPath } from 'url'
 
 export default defineConfig({
 	plugins: [
 		vue(),
 		svgLoader(),
+		vueI18n({
+			include: resolve(
+				dirname(fileURLToPath(import.meta.url)),
+				'./src/locales/**'
+			),
+			runtimeOnly: false
+		}),
 		VitePWA({
 			mode: "development",
 			base: "/",

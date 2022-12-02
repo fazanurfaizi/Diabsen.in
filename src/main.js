@@ -11,6 +11,7 @@ import { setupAxiosInterceptors } from './core/services/api.service'
 import { nprogress } from './core/modules/nprogress'
 import { setupPwa } from './core/modules/pwa'
 import { chartjs } from './core/modules/chartjs'
+import i18n from './core/modules/i18n'
 
 setupPwa(router)
 nprogress(router)
@@ -18,8 +19,9 @@ setupAxiosInterceptors(store)
 chartjs()
 
 createApp(App)
-	.use(router)
 	.use(store)
+	.use(i18n)
+	.use(router)
 	.use(VueAxios, axios)
 	.component('Icon', Icon)
 	.component('v-container', Container)

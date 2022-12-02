@@ -1,0 +1,131 @@
+{
+	"welcome": "Welcome",
+	"language": "en",
+	"sidebar": {
+		"home": "Home",
+		"schools": "Schools",
+		"classes": "Classes",
+		"management": "Management",
+		"teachers": "Teachers",
+		"admins": "Admins",
+		"studens": "Students",
+		"acedemic": "Academic",
+		"schoolYears": "School Years",
+		"courses": "Courses",
+		"schedules": "Schedules"
+	},
+	"navbar": {
+		"profile": "Profile",
+		"changePassword": "Change Password",
+		"logout": "Logout"
+	},
+	"menus": {
+		"dashboard": {
+			"index": "Dashboard"
+		},
+		"schools": {
+			"index": "School List",
+			"detail": "School Detail",
+			"create": "Create School",
+			"edit": "Edit School",
+			"delete": "Delete School"
+		},
+		"classes": {
+			"index": "Class List",
+			"detail": "Class Detail",
+			"create": "Create Class",
+			"edit": "Edit Class",
+			"delete": "Delete Class"
+		},
+		"teachers": {
+			"index": "Teacher List",
+			"detail": "Teacher Detail",
+			"create": "Create Teacher",
+			"edit": "Edit Teacher",
+			"delete": "Delete Teacher"
+		},
+		"admins": {
+			"index": "Admin List",
+			"detail": "Admin Detail",
+			"create": "Create Admin",
+			"edit": "Edit Admin",
+			"delete": "Delete Admin"
+		},
+		"schoolYears": {
+			"index": "School Year List",
+			"detail": "School Year Detail",
+			"create": "Create School Year",
+			"edit": "Edit School Year",
+			"delete": "Delete School Year"
+		},
+		"courses": {
+			"index": "Course List",
+			"detail": "Course Detail",
+			"create": "Create Course",
+			"edit": "Edit Course",
+			"delete": "Delete Course"
+		},
+		"schedules": {
+			"index": "Schedule List",
+			"detail": "Schedule Detail",
+			"create": "Create Schedule",
+			"edit": "Edit Schedule",
+			"delete": "Delete Schedule"
+		}
+	},
+	"buttons": {
+		"create": "Create",
+		"save": "Save",
+		"update": "Update",
+		"edit": "Edit",
+		"delete": "Delete",
+		"restore": "Restore",
+		"print": "Print",
+		"export": "Export",
+		"import": "Import",
+		"search": "Search",
+		"reset": "Reset",
+		"next": "Next",
+		"previous": "Previous"
+	},
+	"placeholders": {
+		"select": "Select",
+		"input": "Input"
+	},
+	"schools": {
+		"tabs": {
+			"identity": "School Identity",
+			"address": "School Address",
+			"contact": "School Contact"
+		},
+		"form": {
+			"npsn": "NPSN",
+			"name": "School Name",
+			"status": "School Status",
+			"studyType": "Educational Stage",
+			"ownershipStatus": "Ownership Status",
+			"establishmentLetter": "No. Decree of School Establishment",
+			"establishmentDate": "School Decree Date",
+			"teachingLearningTime": "Teacher Learning Time",
+			"address": "Address",
+			"neighborhoodAssociation": "Neighborhood Association",
+			"citizensAssociation": "Citizens Association",
+			"subDistrict": "Sub District",
+			"district": "District",
+			"city": "City",
+			"postalCode": "Postal Code",
+			"province": "Province",
+			"phoneNumber": "Phone Number",
+			"faxNumber": "FAX Number",
+			"email": "School Email",
+			"website": "School Website",
+			"maps": "Maps",
+			"adminContact": "Admin Contact"
+		}
+	},
+	"admin": {
+		"form": {
+
+		}
+	}
+}

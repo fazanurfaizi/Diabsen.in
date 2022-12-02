@@ -1,6 +1,6 @@
 <template>
 	<v-container>
-		<template #title>Ubah Sekolah</template>
+		<template #title>{{ t('menus.schools.edit') }}</template>
 		<template #content>
 			<VTabs
 				v-model="state.selectedTab"
@@ -58,7 +58,7 @@
 						class="grid grid-cols-1 gap-[20px] p-[20px] bg-white rounded-[8px] border border-[#CBD5E0] w-full"
 					>
 						<div class="text-[18px] text-[#6E6B7B]">
-							Data Sekolah
+							{{ tab.label }}
 						</div>
 						<div
 							class="grid lg:grid-cols-2 lg:gap-[24px] text-[#6E6B7B] text-[14px]"
@@ -68,11 +68,11 @@
 									<label
 										for="current_password"
 										class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]"
-										>NPSN
+										>{{ t('schools.form.npsn') }}
 										<Asterisk />
 									</label>
 									<input
-										placeholder="Masukan NPSN"
+										:placeholder="`${t('placeholders.input')} ${t('schools.form.npsn')}`"
 										id="current_password"
 										name="current_password"
 										type="text"
@@ -89,14 +89,14 @@
 									<label
 										for="current_password"
 										class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]"
-										>Status Sekolah
+										>{{ t('schools.form.status') }}
 										<Asterisk />
 									</label>
 									<select
 										class="bg-white appearance-none block w-full h-[44px] py-[10px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary sm:text-[14px]"
 									>
 										<option value="" selected>
-											-- Pilih Status --
+											-- {{ t('placeholders.select') }} {{ t('schools.form.status') }} --
 										</option>
 										<option value="0">Negeri</option>
 										<option value="1">Swasta</option>
@@ -111,14 +111,14 @@
 									<label
 										for="current_password"
 										class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]"
-										>Status Kepemilikan
+										>{{ t('schools.form.ownershipStatus') }}
 										<Asterisk />
 									</label>
 									<select
 										class="bg-white appearance-none block w-full h-[44px] py-[10px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary sm:text-[14px]"
 									>
 										<option value="" selected>
-											-- Pilih Status Kepemilikan --
+											-- {{ t('placeholders.select') }} {{ t('schools.form.ownershipStatus') }} --
 										</option>
 										<option value="f">Yayasan</option>
 										<option value="g">Pemerintah</option>
@@ -134,11 +134,11 @@
 									<label
 										for="current_password"
 										class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]"
-										>Tanggal SK Izin Operasional
+										>{{ t('schools.form.establishmentDate') }}
 										<Asterisk />
 									</label>
 									<input
-										placeholder="Masukan Tanggal SK Izin Operasional"
+										:placeholder="`${t('placeholders.input')} ${t('schools.form.establishmentDate')}`"
 										id="current_password"
 										name="current_password"
 										type="date"
@@ -157,11 +157,11 @@
 									<label
 										for="current_password"
 										class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]"
-										>Nama Sekolah
+										>{{ t('schools.form.name') }}
 										<Asterisk />
 									</label>
 									<input
-										placeholder="Masukan Nama Sekolah"
+										:placeholder="`${t('placeholders.input')} ${t('schools.form.name')}`"
 										id="current_password"
 										name="current_password"
 										type="text"
@@ -178,7 +178,7 @@
 									<label
 										for="current_password"
 										class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]"
-										>Jenjang Pendidikan
+										>{{ t('schools.form.studyType') }}
 										<Asterisk />
 									</label>
 									<select
@@ -186,7 +186,7 @@
 										ref="study_type"
 									>
 										<option value="" selected>
-											-- Pilih Jenjang Pendidikan --
+											-- {{ t('placeholders.select') }} {{ t('schools.form.studyType') }} --
 										</option>
 										<option value="sd">SD</option>
 										<option value="smp">SMP</option>
@@ -205,11 +205,11 @@
 									<label
 										for="current_password"
 										class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]"
-										>No. SK Pendirian Sekolah
+										>{{ t('schools.form.establishmentLetter') }}
 										<Asterisk />
 									</label>
 									<input
-										placeholder="Masukan No. SK Pendirian"
+										:placeholder="`${t('placeholders.input')} ${t('schools.form.establishmentLetter')}`"
 										id="current_password"
 										name="current_password"
 										type="text"
@@ -226,11 +226,11 @@
 									<label
 										for="current_password"
 										class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]"
-										>Waktu Kegiatan Mengajar (KBM)
+										>{{ t('schools.form.teachingLearningTime') }}
 										<Asterisk />
 									</label>
 									<input
-										placeholder="Masukan Waktu Kegiatan Mengajar (KBM)"
+										:placeholder="`${t('placeholders.input')} ${t('schools.form.teachingLearningTime')}`"
 										id="current_password"
 										name="current_password"
 										type="number"
@@ -250,7 +250,7 @@
 							class="grid grid-cols-1 gap-[20px] p-[20px] bg-white rounded-[8px] border border-[#CBD5E0] w-full"
 						>
 							<div class="text-[18px] text-[#6E6B7B]">
-								Identitas Sekolah
+								{{ tab.label }}
 							</div>
 							<div>
 								<div
@@ -261,11 +261,11 @@
 											<label
 												for="current_password"
 												class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]"
-												>Alamat
+												>{{ t('schools.form.address') }}
 												<Asterisk />
 											</label>
 											<input
-												placeholder="Masukan Alamat"
+												:placeholder="`${t('placeholders.input')} ${t('schools.form.address')}`"
 												id="current_password"
 												name="current_password"
 												type="text"
@@ -287,14 +287,14 @@
 											<label
 												for="current_password"
 												class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]"
-												>Provinsi
+												>{{ t('schools.form.province') }}
 												<Asterisk />
 											</label>
 											<select
 												class="bg-white appearance-none block w-full h-[44px] py-[10px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary sm:text-[14px]"
 											>
 												<option value="" selected>
-													-- Pilih Provinsi --
+													-- {{ t('placeholders.select') }} {{ t('schools.form.province') }} --
 												</option>
 												<!-- <option
 													v-for="province in provinces"
@@ -317,14 +317,14 @@
 												<label
 													for="current_password"
 													class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]"
-													>Kecamatan
+													>{{ t('schools.form.district') }}
 													<Asterisk />
 												</label>
 												<select
 													class="bg-white appearance-none block w-full h-[44px] py-[10px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary sm:text-[14px]"
 												>
 													<option value="" selected>
-														-- Pilih Kecamatan --
+														-- {{ t('placeholders.select') }} {{ t('schools.form.district') }} --
 													</option>
 													<!-- <option
 														v-for="district in districts"
@@ -348,14 +348,14 @@
 												<label
 													for="current_password"
 													class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]"
-													>RT/RW
+													>{{ t('schools.form.neighborhoodAssociation') }} / {{ t('schools.form.citizensAssociation') }}
 													<Asterisk />
 												</label>
 												<span
 													class="flex flex-col-3 w-full border border-gray-300 rounded-[4px] focus:ring-secondary focus:border-secondary text-[14px]"
 												>
 													<input
-														placeholder="RT"
+														:placeholder="t('schools.form.neighborhoodAssociation')"
 														type="text"
 														required=""
 														min="1"
@@ -366,7 +366,7 @@
 														>/</span
 													>
 													<input
-														placeholder="RW"
+														:placeholder="t('schools.form.citizensAssociation')"
 														type="text"
 														required=""
 														min="1"
@@ -386,14 +386,14 @@
 											<label
 												for="current_password"
 												class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]"
-												>Kota/Kabupaten
+												>{{ t('schools.form.city') }}
 												<Asterisk />
 											</label>
 											<select
 												class="bg-white appearance-none block w-full h-[44px] py-[10px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary sm:text-[14px]"
 											>
 												<option value="" selected>
-													-- Pilih Kota/Kabupaten --
+													-- {{ t('placeholders.select') }} {{ t('schools.form.city') }} --
 												</option>
 												<!-- <option
 													v-for="city in cities"
@@ -415,14 +415,14 @@
 											<label
 												for="current_password"
 												class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]"
-												>Desa/Kelurahan
+												>{{ t('schools.form.subDistrict') }}
 												<Asterisk />
 											</label>
 											<select
 												class="bg-white appearance-none block w-full h-[44px] py-[10px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary sm:text-[14px]"
 											>
 												<option value="" selected>
-													-- Pilih Desa/Kelurahan --
+													-- {{ t('placeholders.select') }} {{ t('schools.form.subDistrict') }} --
 												</option>
 												<!-- <option
 													v-for="sub_district in sub_districts"
@@ -446,14 +446,14 @@
 											<label
 												for="current_password"
 												class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]"
-												>Kode Pos
+												>{{ t('schools.form.postalCode') }}
 												<Asterisk />
 											</label>
 											<select
 												class="bg-white appearance-none block w-full h-[44px] py-[10px] px-[12px] border border-gray-300 rounded-[4px] shadow-sm placeholder-gray-400 focus:outline-none focus:ring-secondary focus:border-secondary sm:text-[14px]"
 											>
 												<option value="" selected>
-													-- Pilih Kode Pos --
+													-- {{ t('placeholders.select') }} {{ t('schools.form.postalCode') }} --
 												</option>
 												<!-- <option
 													v-for="postal_code in postal_codes"
@@ -480,7 +480,7 @@
 							<label
 								for="current_password"
 								class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]"
-								>Peta Lokasi
+								>{{ t('schools.form.maps') }}
 								<Asterisk />
 							</label>
 							<!-- <GoogleMaps
@@ -503,7 +503,7 @@
 							class="grid grid-cols-1 gap-[20px] p-[20px] bg-white rounded-[8px] border border-[#CBD5E0] w-full"
 						>
 							<div class="text-[18px] text-[#6E6B7B]">
-								Kontak Sekolah
+								{{ tab.label }}
 							</div>
 							<div
 								class="grid lg:grid-cols-2 lg:gap-[24px] text-[#6E6B7B] text-[14px]"
@@ -513,11 +513,11 @@
 										<label
 											for="current_password"
 											class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]"
-											>Nomor Telepon
+											>{{ t('schools.form.phoneNumber') }}
 											<Asterisk />
 										</label>
 										<input
-											placeholder="Masukan Nomor Telepon"
+											:placeholder="`${t('placeholders.input')} ${t('schools.form.phoneNumber')}`"
 											id="current_password"
 											name="current_password"
 											type="text"
@@ -534,11 +534,11 @@
 										<label
 											for="current_password"
 											class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]"
-											>E-Mail Sekolah
+											>{{ t('schools.form.email') }}
 											<Asterisk />
 										</label>
 										<input
-											placeholder="Masukan E-Mail Sekolah"
+											:placeholder="`${t('placeholders.input')} ${t('schools.form.email')}`"
 											id="current_password"
 											name="current_password"
 											type="text"
@@ -557,10 +557,10 @@
 										<label
 											for="current_password"
 											class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]"
-											>Nomor Fax
+											>{{ t('schools.form.faxNumber') }}
 										</label>
 										<input
-											placeholder="Masukan Nomor Fax"
+											:placeholder="`${t('placeholders.input')} ${t('schools.form.faxNumber')}`"
 											id="current_password"
 											name="current_password"
 											type="text"
@@ -577,10 +577,10 @@
 										<label
 											for="current_password"
 											class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]"
-											>Website Sekolah
+											>{{ t('schools.form.website') }}
 										</label>
 										<input
-											placeholder="Masukan Website Sekolah"
+											:placeholder="`${t('placeholders.input')} ${t('schools.form.website')}`"
 											id="current_password"
 											name="current_password"
 											type="text"
@@ -599,7 +599,7 @@
 							class="grid grid-cols-1 gap-[20px] p-[20px] bg-white rounded-[8px] border border-[#CBD5E0] w-full"
 						>
 							<div class="text-[18px] text-[#6E6B7B]">
-								Kontak Admin
+								{{ t('schools.form.adminContact') }}
 							</div>
 							<div
 								class="grid lg:grid-cols-1 lg:gap-[20px] text-[#6E6B7B] text-[14px]"
@@ -680,13 +680,13 @@
 							v-if="i < tabs.length && i !== tabs.length - 1"
 							variant="info"
 						>
-							Selanjutnya
+							{{ t('buttons.next') }}
 						</VButton>
 						<VButton v-if="i === tabs.length - 1" variant="info">
-							Simpan
+							{{ t('buttons.save') }}
 						</VButton>
 						<VButton v-if="i > 0 && i" variant="info" outline>
-							Sebelumnya
+							{{ t('buttons.previous') }}
 						</VButton>
 					</div>
 				</VTabPanel>
@@ -695,35 +695,56 @@
 	</v-container>
 </template>
 
-<script setup>
+<script>
+	import { reactive } from 'vue'
+	import { useI18n } from 'vue-i18n'
 	import VTab from '@/components/tabs/Tab.vue'
 	import VTabs from '@/components/tabs/Tabs.vue'
 	import VTabPanel from '@/components/tabs/TabPanel.vue'
 	import VTabPanels from '@/components/tabs/TabPanels.vue'
 	import VButton from '@/components/ui/button/index.vue'
 
-	import { reactive } from 'vue'
-
-	const tabs = [
-		{
-			label: 'Identitas Sekolah',
-			value: 1,
+	export default {
+		name: 'school-edit-page',
+		components: {
+			VTab,
+			VTabs,
+			VTabPanel,
+			VTabPanels,
+			VButton
 		},
-		{
-			label: 'Alamat Sekolah',
-			value: 2,
-		},
-		{
-			label: 'Kontak Sekolah',
-			value: 3,
-		},
-	]
+		setup() {
+			const { t } = useI18n()
 
-	const state = reactive({
-		selectedTab: tabs[0].value,
-	})
+			const tabs = [
+				{
+					label: t('schools.tabs.identity'),
+					value: 1,
+				},
+				{
+					label: t('schools.tabs.address'),
+					value: 2,
+				},
+				{
+					label: t('schools.tabs.contact'),
+					value: 3,
+				},
+			]
 
-	const getActive = (tab) => {
-		return state.selectedTab === tab
+			const state = reactive({
+				selectedTab: tabs[0].value,
+			})
+
+			const getActive = (tab) => {
+				return state.selectedTab === tab
+			}
+
+			return {
+				t,
+				tabs,
+				state,
+				getActive
+			}
+		}
 	}
 </script>

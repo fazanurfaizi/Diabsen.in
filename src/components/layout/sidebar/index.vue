@@ -44,7 +44,7 @@
 
 			<!-- Links -->
 			<div class="space-y-4">
-				<Link title="Beranda" path="dashboard" icon="home" />
+				<Link :title="t('sidebar.home')" path="dashboard" icon="home" />
 
 				<!-- Pages group -->
 				<template
@@ -61,7 +61,7 @@
 							></span>
 
 							<span class="hidden sidebar-expanded:block pl-1">
-								{{ route.title }}
+								{{ t(route.title) }}
 							</span>
 						</span>
 						<ul class="mt-1">
@@ -99,7 +99,7 @@
 												<span
 													class="hidden sidebar-expanded:block text-sm font-medium ml-3 mt-0.5 md:opacity-0 md:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"
 												>
-													{{ menu.name }}
+													{{ t(menu.name) }}
 												</span>
 											</div>
 											<!-- Icon -->
@@ -158,7 +158,7 @@
 																class="text-sm font-medium ml-4 md:opacity-0 md:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"
 															>
 																{{
-																	child.title
+																	t(child.title)
 																}}
 															</span>
 														</a>
@@ -174,7 +174,7 @@
 									v-else
 								>
 									<Link
-										:title="menu.name"
+										:title="t(menu.name)"
 										:path="menu.path.name"
 										:params="menu.path.params"
 										:icon="menu.icon"
@@ -194,6 +194,7 @@
 	import { useRouter } from 'vue-router'
 	import SidebarLink from './SidebarLink.vue'
 	import { appRoutes } from './routes'
+	import { useI18n } from 'vue-i18n'
 	import Link from '@/components/ui/link/index.vue'
 	import Icon from '@/components/ui/svg-icon/index.vue'
 	import heroiconsOutlineVue from '@/components/icons/heroicons-outline.vue'
@@ -215,6 +216,7 @@
 		},
 		emits: ['close-sidebar'],
 		setup(props, { emit }) {
+			const { t } = useI18n()
 			const routes = ref(appRoutes)
 			const trigger = ref(null)
 			const sidebar = ref(null)
@@ -297,6 +299,7 @@
 			})
 
 			return {
+				t,
 				routes,
 				trigger,
 				sidebar,

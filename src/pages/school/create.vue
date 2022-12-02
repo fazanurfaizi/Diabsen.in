@@ -26,12 +26,12 @@
 											<label
 												for="current_password"
 												class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]"
-												>NPSN
+												>{{ t('schools.form.npsn') }}
 												<Asterisk />
 											</label>
 											<input
 												v-model="form.npsn"
-												placeholder="Masukan NPSN"
+												:placeholder="`${t('placehoders.input') t('schools.form.npsn')}`"
 												id="current_password"
 												name="current_password"
 												type="text"

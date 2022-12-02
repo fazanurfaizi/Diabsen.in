@@ -4,11 +4,11 @@ const currentNpsn = store.getters['userable/getUserable'].school.npsn
 
 export const schoolAdminRoutes = [
 	{
-		title: 'schools',
+		title: 'sidebar.schools',
 		icon: 'school-building',
 		items: [
 			{
-				name: 'schools',
+				name: 'menus.schools.detail',
 				icon: 'school-building',
 				path: {
 					name: 'school-detail',
@@ -18,11 +18,11 @@ export const schoolAdminRoutes = [
 				},
 			},
 			{
-				name: 'Kelas',
+				name: 'sidebar.classes',
 				icon: 'academic-cap',
 				child: [
 					{
-						title: 'Daftar Kelas',
+						title: 'menus.classes.index',
 						path: {
 							name: 'school-classes-index',
 							params: {
@@ -31,7 +31,7 @@ export const schoolAdminRoutes = [
 						},
 					},
 					{
-						title: 'Tambah Kelas',
+						title: 'menus.classes.create',
 						path: 'academic-year-create',
 					},
 				],
@@ -39,15 +39,15 @@ export const schoolAdminRoutes = [
 		],
 	},
 	{
-		title: 'Pengelolaan',
+		title: 'sidebar.management',
 		icon: 'play',
 		items: [
 			{
-				name: 'Guru',
+				name: 'sidebar.teachers',
 				icon: 'users',
 				child: [
 					{
-						title: 'Daftar Guru',
+						title: 'menus.teachers.index',
 						path: {
 							name: 'teachers-index',
 							params: {
@@ -56,7 +56,7 @@ export const schoolAdminRoutes = [
 						},
 					},
 					{
-						title: 'Tambah Guru',
+						title: 'menus.teachers.create',
 						path: {
 							name: 'dashboard',
 						},
@@ -97,11 +97,11 @@ export const schoolAdminRoutes = [
 			// 	],
 			// },
 			{
-				name: 'Admin',
+				name: 'sidebar.admins',
 				icon: 'user-group',
 				child: [
 					{
-						title: 'Daftar Admin',
+						title: 'menus.admins.index',
 						path: {
 							name: 'admins-index',
 							params: {
@@ -110,7 +110,7 @@ export const schoolAdminRoutes = [
 						},
 					},
 					{
-						title: 'Tambah Admin',
+						title: 'menus.admins.create',
 						path: 'admins-create',
 					},
 				],
@@ -118,15 +118,15 @@ export const schoolAdminRoutes = [
 		],
 	},
 	{
-		title: 'Akademik',
+		title: 'sidebar.academic',
 		icon: 'school-building',
 		items: [
 			{
-				name: 'Tahun Ajaran',
+				name: 'sidebar.schoolYears',
 				icon: 'calendar',
 				child: [
 					{
-						title: 'Daftar Tahun Ajaran',
+						title: 'menus.schoolYears.index',
 						path: {
 							name: 'school-years-index',
 							params: {
@@ -135,17 +135,17 @@ export const schoolAdminRoutes = [
 						},
 					},
 					{
-						title: 'Tambah Tahun Ajaran',
+						title: 'menus.schoolYears.create',
 						path: 'academic-year-create',
 					},
 				],
 			},
 			{
-				name: 'Mata Pelajaran',
+				name: 'sidebar.courses',
 				icon: 'book-open',
 				child: [
 					{
-						title: 'Daftar Mata Pelajaran',
+						title: 'menus.courses.index',
 						path: {
 							name: 'courses-index',
 							params: {
@@ -154,17 +154,17 @@ export const schoolAdminRoutes = [
 						},
 					},
 					{
-						title: 'Tambah Mata Pelajaran',
+						title: 'menus.courses.create',
 						path: 'academic-year-create',
 					},
 				],
 			},
 			{
-				name: 'Jadwal Pelajaran',
+				name: 'sidebar.schedules',
 				icon: 'calendar-days',
 				child: [
 					{
-						title: 'Daftar Jadwal Pelajaran',
+						title: 'menus.schedules.index',
 						path: {
 							name: 'schedules-index',
 							params: {
@@ -173,7 +173,7 @@ export const schoolAdminRoutes = [
 						},
 					},
 					{
-						title: 'Tambah Jadwal Pelajaran',
+						title: 'menus.schedules.create',
 						path: 'academic-year-create',
 					},
 				],

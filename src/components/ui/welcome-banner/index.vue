@@ -82,15 +82,23 @@
 		<!-- Content -->
 		<div class="relative">
 			<h1 class="text-2xl md:text-3xl text-gray-800 font-bold mb-1">
-				Good afternoon, Acme Inc. 👋
+				{{ t('welcome') }}, Acme Inc. 👋
 			</h1>
-			<p>Here is what’s happening with your projects today:</p>
+			<p>Here is what's happening with your projects today:</p>
 		</div>
 	</div>
 </template>
 
 <script>
+	import { useI18n } from 'vue-i18n'
 	export default {
 		name: 'WelcomeBanner',
+		setup() {
+			const { t } = useI18n()
+
+			return {
+				t
+			}
+		}
 	}
 </script>
