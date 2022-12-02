@@ -48,6 +48,6 @@ export default {
 					commit('setSchool', response.data.data)
 				})
 				.catch((error) => console.log(error))
-		}
+		},
 	},
 }

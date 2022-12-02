@@ -110,7 +110,9 @@
 					>
 						<div class="grid grid-cols-2 gap-4">
 							<div>Nomor Telepon</div>
-							<a :href="`tel:+${school.phone_number}`">{{ school.phone_number }}</a>
+							<a :href="`tel:+${school.phone_number}`">{{
+								school.phone_number
+							}}</a>
 						</div>
 						<div class="grid grid-cols-2 gap-4">
 							<div>Nomor FAX</div>
@@ -118,15 +120,29 @@
 						</div>
 						<div class="grid grid-cols-2 gap-4">
 							<div>Email Sekolah</div>
-							<a :href="`mailto:${school.email}`">{{ school.email }}</a>
+							<a :href="`mailto:${school.email}`">{{
+								school.email
+							}}</a>
 						</div>
 						<div class="grid grid-cols-2 gap-4">
 							<div>Website Sekolah</div>
-							<a :href="school.website" target="__blank">{{ school.website }}</a>
+							<a :href="school.website" target="__blank">{{
+								school.website
+							}}</a>
 						</div>
 					</div>
 					<div class="flex flex-row-reverse space-x-1">
-						<VButton class="w-24" variant="info">Edit</VButton>
+						<VButton
+							class="w-24"
+							variant="info"
+							@click="
+								router.push({
+									name: 'school-edit',
+									params: { npsn: route.params?.npsn },
+								})
+							"
+							>Edit</VButton
+						>
 					</div>
 				</VTabPanel>
 			</VTabPanels>
@@ -136,7 +152,7 @@
 
 <script setup>
 	import { reactive, onMounted, computed } from 'vue'
-	import { useRoute } from 'vue-router'
+	import { useRoute, useRouter } from 'vue-router'
 	import { useStore } from 'vuex'
 	import VTab from '@/components/tabs/Tab.vue'
 	import VTabs from '@/components/tabs/Tabs.vue'
@@ -145,6 +161,8 @@
 	import VButton from '@/components/ui/button/index.vue'
 
 	const route = useRoute()
+
+	const router = useRouter()
 
 	const store = useStore()
 

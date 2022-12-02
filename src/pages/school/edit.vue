@@ -498,10 +498,7 @@
 							></div>
 						</div>
 					</div>
-					<div
-						v-if="(i === 2)"
-						class="grid grid-cols-1 gap-[20px]"
-					>
+					<div v-if="i === 2" class="grid grid-cols-1 gap-[20px]">
 						<div
 							class="grid grid-cols-1 gap-[20px] p-[20px] bg-white rounded-[8px] border border-[#CBD5E0] w-full"
 						>
@@ -680,22 +677,15 @@
 					</div> -->
 					<div class="flex flex-row-reverse items-end gap-2 mt-4">
 						<VButton
-							v-if="(i < tabs.length && i !== tabs.length - 1)"
+							v-if="i < tabs.length && i !== tabs.length - 1"
 							variant="info"
 						>
 							Selanjutnya
 						</VButton>
-						<VButton
-							v-if="(i === tabs.length - 1)"
-							variant="info"
-						>
+						<VButton v-if="i === tabs.length - 1" variant="info">
 							Simpan
 						</VButton>
-						<VButton
-							v-if="(i > 0 && i)"
-							variant="info"
-							outline
-						>
+						<VButton v-if="i > 0 && i" variant="info" outline>
 							Sebelumnya
 						</VButton>
 					</div>

@@ -109,6 +109,7 @@ let routes = [
 					},
 					{
 						path: ':npsn(\\d+)/edit',
+						name: 'school-edit',
 						component: () => import('@/pages/school/edit.vue'),
 						meta: { requiresAuth: true },
 					},
