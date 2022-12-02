@@ -1,4 +1,131 @@
 {
 	"welcome": "Selamat Datang",
-	"language": "id"
+	"language": "id",
+	"sidebar": {
+		"home": "Beranda",
+		"schools": "Sekolah",
+		"classes": "Kelas",
+		"management": "Pengelolaan",
+		"teachers": "Guru",
+		"admins": "Admin",
+		"studens": "Murid",
+		"academic": "Akademik",
+		"schoolYears": "Tahun Ajaran",
+		"courses": "Mata Pelajaran",
+		"schedules": "Jadwal Pelajaran"
+	},
+	"navbar": {
+		"profile": "Profil",
+		"changePassword": "Ubah Kata Sandi",
+		"logout": "Keluar"
+	},
+	"menus": {
+		"dashboard": {
+			"index": "Dashboard"
+		},
+		"schools": {
+			"index": "Daftar Sekolah",
+			"detail": "Detail Sekolah",
+			"create": "Tambah School",
+			"edit": "Ubah School",
+			"delete": "Hapus School"
+		},
+		"classes": {
+			"index": "Daftar Kelas",
+			"detail": "Detail Kelas",
+			"create": "Tambah Kelas",
+			"edit": "Ubah Kelas",
+			"delete": "Hapus Kelas"
+		},
+		"teachers": {
+			"index": "Daftar Guru",
+			"detail": "Detail Guru",
+			"create": "Tambah Guru",
+			"edit": "Ubah Guru",
+			"delete": "Hapus Guru"
+		},
+		"admins": {
+			"index": "Daftar Admin",
+			"detail": "Detail Admin",
+			"create": "Tambah Admin",
+			"edit": "Ubah Admin",
+			"delete": "Hapus Admin"
+		},
+		"schoolYears": {
+			"index": "Daftar Tahun Ajaran",
+			"detail": "Detail Tahun Ajaran",
+			"create": "Tambah Tahun Ajaran",
+			"edit": "Ubah Tahun Ajaran",
+			"delete": "Hapus Tahun Ajaran"
+		},
+		"courses": {
+			"index": "Daftar Mata Pelajaran",
+			"detail": "Detail Mata Pelajaran",
+			"create": "Tambah Mata Pelajaran",
+			"edit": "Ubah Mata Pelajaran",
+			"delete": "Hapus Mata Pelajaran"
+		},
+		"schedules": {
+			"index": "Daftar Jadwal Pelajaran",
+			"detail": "Detail Jadwal Pelajaran",
+			"create": "Tambah Jadwal Pelajaran",
+			"edit": "Ubah Jadwal Pelajaran",
+			"delete": "Hapus Jadwal Pelajaran"
+		}
+	},
+	"buttons": {
+		"create": "Tambah",
+		"save": "Simpan",
+		"update": "Perbarui",
+		"edit": "Ubah",
+		"delete": "Hapus",
+		"restore": "Pulihkan",
+		"print": "Cetak",
+		"export": "Ekspor",
+		"import": "Impor",
+		"search": "Cari",
+		"reset": "Atur Ulang",
+		"next": "Selanjutnya",
+		"previous": "Sebelumnya"
+	},
+	"placeholders": {
+		"select": "Pilih",
+		"input": "Masukkan"
+	},
+	"schools": {
+		"tabs": {
+			"identity": "Identitas Sekolah",
+			"address": "Alamat Sekolah",
+			"contact": "Kontak Sekolah"
+		},
+		"form": {
+			"npsn": "NPSN",
+			"name": "Nama Sekolah",
+			"status": "Status Sekolah",
+			"studyType": "Jenjang Pendidikan",
+			"ownershipStatus": "Status Kepemilikan",
+			"establishmentLetter": "No. SK Pendirian Sekolah",
+			"establishmentDate": "Tanggal SK Izin Operasional",
+			"teachingLearningTime": "Waktu Kegiatan Mengajar (KBM)",
+			"address": "Alamant",
+			"neighborhoodAssociation": "RT",
+			"citizensAssociation": "RW",
+			"subDistrict": "Desa/Kelurahan",
+			"district": "Kecamatan",
+			"city": "Kota/Kabupaten",
+			"postalCode": "Kode Pos",
+			"province": "Provinsi",
+			"phoneNumber": "Nomor Telepon",
+			"faxNumber": "Nomor FAX",
+			"email": "Email Sekolah",
+			"website": "Website Sekolah",
+			"maps": "Peta Lokasi",
+			"adminContact": "Kontak Admin"
+		}
+	},
+	"admin": {
+		"form": {
+
+		}
+	}
 }

@@ -80,7 +80,7 @@
 							<div>{{ school.address }}</div>
 						</div>
 						<div class="grid grid-cols-2 gap-4">
-							<div>{{ t('schools.form.neighborhoodAssociation')/t('schools.form.citizensAssociation') }}</div>
+							<div>{{ t('schools.form.neighborhoodAssociation') }} / {{ t('schools.form.citizensAssociation') }}</div>
 							<div>{{ `${school.rt}/${school.rw}` }}</div>
 						</div>
 						<div class="grid grid-cols-2 gap-4">
@@ -189,7 +189,7 @@
 					value: 2,
 				},
 				{
-					label: t('schools.tabs.contract'),
+					label: t('schools.tabs.contact'),
 					value: 3,
 				},
 			]

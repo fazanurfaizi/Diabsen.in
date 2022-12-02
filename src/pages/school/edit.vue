@@ -348,7 +348,7 @@
 												<label
 													for="current_password"
 													class="block mb-[7px] text-[14px] font-normal text-[#6E6B7B]"
-													>{{ t('schools.form.neighborhoodAssociation') }} / {{ t('schools.form.citizensAssociation') }}
+													>{{ `${t('schools.form.neighborhoodAssociation')}` }} {{ t('schools.form.citizensAssociation') }}
 													<Asterisk />
 												</label>
 												<span
