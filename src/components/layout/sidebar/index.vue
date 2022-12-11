@@ -134,21 +134,21 @@
 												:key="childIndex"
 											>
 												<router-link
-													v-slot="{ href, navigate }"
 													:to="{
 														name: child.path.name,
-														params: child.path
-															.params,
+														params: child.path.params,
 													}"
-													custom
+													@click.prevent="
+														sidebarExpanded
+															? parentLink.handleClick()
+															: (sidebarExpanded = true)
+													"
 												>
 													<li
 														class="px-2 mb-2 last:mb-0"
 													>
-														<a
+														<div
 															class="flex items-center text-gray-700 hover:text-gray-500 p-1.5 px-2.5 rounded-md transition duration-150 truncate"
-															:href="href"
-															@click="navigate"
 														>
 															<heroicons-outline-vue
 																name="circle"
@@ -161,7 +161,7 @@
 																	t(child.title)
 																}}
 															</span>
-														</a>
+														</div>
 													</li>
 												</router-link>
 											</template>
