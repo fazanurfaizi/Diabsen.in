@@ -20,11 +20,12 @@
 				<div class="px-4 sm:px-6 lg:px-8 py-8">
 					<!-- <breadcrumb /> -->
 
-					<router-view v-slot="{ Component }">
+					<router-view />
+					<!-- <router-view>
 						<transition name="fade" mode="out-in">
 							<component :is="Component" />
 						</transition>
-					</router-view>
+					</router-view> -->
 
 					<Footer color-text="black" />
 				</div>
