@@ -9,11 +9,11 @@ import VueAxios from 'vue-axios'
 import store from './store/index'
 import { setupAxiosInterceptors } from './core/services/api.service'
 import { nprogress } from './core/modules/nprogress'
-import { setupPwa } from './core/modules/pwa'
+// import { setupPwa } from './core/modules/pwa'
 import { chartjs } from './core/modules/chartjs'
 import i18n from './core/modules/i18n'
 
-setupPwa(router)
+// setupPwa(router)
 nprogress(router)
 setupAxiosInterceptors(store)
 chartjs()

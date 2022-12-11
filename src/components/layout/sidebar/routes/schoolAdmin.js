@@ -1,6 +1,6 @@
 import store from '@/store'
 
-const currentNpsn = store.getters['userable/getUserable'].school.npsn
+const currentNpsn = store.getters['userable/getUserable']?.school?.npsn
 
 export const schoolAdminRoutes = [
 	{
@@ -24,7 +24,7 @@ export const schoolAdminRoutes = [
 					{
 						title: 'menus.classes.index',
 						path: {
-							name: 'school-classes-index',
+							name: 'classes-index',
 							params: {
 								npsn: currentNpsn,
 							},

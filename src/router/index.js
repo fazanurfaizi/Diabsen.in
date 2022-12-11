@@ -8,7 +8,7 @@ import MagicLink from '../pages/auth/magic-link.vue'
 import ProfileEdit from '../pages/profile/edit.vue'
 import ChangePassword from '../pages/profile/change-password.vue'
 
-import store from '../store/index'
+import auth from '@/core/middleware/auth'
 
 let routes = [
 	{
@@ -42,17 +42,16 @@ let routes = [
 	{
 		path: '/',
 		name: 'index',
-		// redirect: 'dashboard',
+		redirect: 'dashboard',
 		component: BaseLayout,
 		meta: {
-			breadcrumbName: 'Beranda',
+			requiresAuth: true,
 		},
 		children: [
 			{
 				path: 'dashboard',
 				name: 'dashboard',
 				component: () => import('@/pages/dashboard/index.vue'),
-				meta: { requiresAuth: true },
 			},
 			{
 				path: '/profile',
@@ -66,19 +65,16 @@ let routes = [
 						path: '',
 						name: 'profile-user',
 						component: () => import('@/pages/profile/index.vue'),
-						meta: { requiresAuth: true },
 					},
 					{
 						path: 'edit',
 						name: 'profile-edit',
 						component: ProfileEdit,
-						meta: { requiresAuth: true },
 					},
 					{
 						path: 'change-password',
 						name: 'profile-change-password',
 						component: ChangePassword,
-						meta: { requiresAuth: true },
 					},
 				],
 			},
@@ -94,74 +90,46 @@ let routes = [
 						path: '',
 						name: 'school-list',
 						component: () => import('@/pages/school/index.vue'),
-						meta: {
-							requiresAuth: true,
-						},
 					},
 					{
 						path: 'create',
 						name: 'school-create',
 						component: () => import('@/pages/school/create.vue'),
-						meta: {
-							requiresAuth: true,
-							breadcrumbName: 'Tambah Sekolah',
-						},
 					},
 					{
 						path: ':npsn(\\d+)/edit',
 						name: 'school-edit',
 						component: () => import('@/pages/school/edit.vue'),
-						meta: { requiresAuth: true },
 					},
 					{
-						path: ':npsn(\\d+)',
+						path: ':npsn(\\d+)/detail',
 						name: 'school-detail',
 						component: () => import('@/pages/school/detail.vue'),
-						meta: {
-							requiresAuth: true,
-							breadcrumbName: 'Detail Sekolah',
-						},
 					},
 
 					{
 						path: ':npsn(\\d+)?',
 						component: RouterView,
-						meta: { requiresAuth: true },
 						children: [
 							{
-								path: 'school-classes',
-								name: 'school-classes',
+								path: 'classes',
+								name: 'classes',
 								component: RouterView,
-								meta: { requiresAuth: true },
 								children: [
 									{
 										path: '',
-										name: 'school-classes-index',
-										component: () =>
-											import(
-												'@/pages/school-classes/index.vue'
-											),
-										meta: {
-											breadcrumbName: 'Daftar Kelas',
-										},
+										name: 'classes-index',
+										component: () => import('@/pages/classes/index.vue'),
 									},
 									{
 										path: 'students',
 										name: 'students',
 										component: RouterView,
-										meta: { requiresAuth: true },
 										children: [
 											{
 												path: '',
 												name: 'students-index',
-												component: () =>
-													import(
-														'@/pages/students/index.vue'
-													),
-												meta: {
-													breadcrumbName:
-														'Daftar Kelas',
-												},
+												component: () =>import('@/pages/students/index.vue'),
 											},
 										],
 									},
@@ -171,18 +139,11 @@ let routes = [
 								path: 'teachers',
 								name: 'teachers',
 								component: RouterView,
-								meta: { requiresAuth: true },
 								children: [
 									{
 										path: '',
 										name: 'teachers-index',
-										component: () =>
-											import(
-												'@/pages/teachers/index.vue'
-											),
-										meta: {
-											breadcrumbName: 'Daftar Guru',
-										},
+										component: () => import('@/pages/teachers/index.vue'),
 									},
 								],
 							},
@@ -190,16 +151,11 @@ let routes = [
 								path: 'admins',
 								name: 'admins',
 								component: RouterView,
-								meta: { requiresAuth: true },
 								children: [
 									{
 										path: '',
 										name: 'admins-index',
-										component: () =>
-											import('@/pages/admins/index.vue'),
-										meta: {
-											breadcrumbName: 'Daftar Admin',
-										},
+										component: () => import('@/pages/admins/index.vue'),
 									},
 								],
 							},
@@ -207,18 +163,11 @@ let routes = [
 								path: 'school-years',
 								name: 'school-years',
 								component: RouterView,
-								meta: { requiresAuth: true },
 								children: [
 									{
 										path: '',
 										name: 'school-years-index',
-										component: () =>
-											import(
-												'@/pages/school-years/index.vue'
-											),
-										meta: {
-											breadcrumbName: 'Daftar Admin',
-										},
+										component: () => import('@/pages/school-years/index.vue'),
 									},
 								],
 							},
@@ -226,16 +175,11 @@ let routes = [
 								path: 'courses',
 								name: 'courses',
 								component: RouterView,
-								meta: { requiresAuth: true },
 								children: [
 									{
 										path: '',
 										name: 'courses-index',
-										component: () =>
-											import('@/pages/courses/index.vue'),
-										meta: {
-											breadcrumbName: 'Daftar Admin',
-										},
+										component: () => import('@/pages/courses/index.vue'),
 									},
 								],
 							},
@@ -243,18 +187,11 @@ let routes = [
 								path: 'schedules',
 								name: 'schedules',
 								component: RouterView,
-								meta: { requiresAuth: true },
 								children: [
 									{
 										path: '',
 										name: 'schedules-index',
-										component: () =>
-											import(
-												'@/pages/schedules/index.vue'
-											),
-										meta: {
-											breadcrumbName: 'Daftar Admin',
-										},
+										component: () => import('@/pages/schedules/index.vue'),
 									},
 								],
 							},
@@ -272,20 +209,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-	if (to.meta.requiresAuth && !store.getters['auth/isAuthenticated']) {
-		next({
-			path: '/auth/login',
-			query: {
-				redirect: to.fullPath,
-			},
-		})
-	} else if (!to.meta.requiresAuth && store.getters['auth/isAuthenticated']) {
-		next({
-			name: 'dashboard',
-		})
-	}
-
-	next()
+	auth(to, from, next)
 })
 
 export default router

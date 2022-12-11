@@ -204,8 +204,8 @@
 
 			const school = computed(() => store.getters['schools/getSchool'])
 
-			onMounted(async () => {
-				await store.dispatch('schools/getDetailSchool', route.params?.npsn)
+			onMounted(() => {
+				store.dispatch('schools/getDetailSchool', route.params?.npsn)
 			})
 
 			return {

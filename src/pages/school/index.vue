@@ -102,13 +102,17 @@
 </script>
 
 <script setup>
-	import { computed, ref, onMounted } from 'vue'
+	import { computed, ref, onMounted, onBeforeMount } from 'vue'
 	import VDatatable from '@/components/datatable/index.vue'
 	import { mockClientItems } from '@/mock'
 	import VSearchFilter from '@/components/ui/search-filter/index.vue'
 	import useDebounce from '@/hooks/useDebounce'
 	import VButton from '@/components/ui/button/index.vue'
-	import SvgIcon from '@/components/ui/svg-icon/index.vue'
+	import { permissions } from '@/core/middleware/permissions'
+
+	onBeforeMount(() => {
+		permissions('school', 'index')
+	})
 
 	const searchValue = useDebounce('', 400)
 	const sortBy = ref(['indicator.weigth', 'number'])

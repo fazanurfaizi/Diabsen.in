@@ -17,49 +17,57 @@ export default defineConfig({
 			),
 			runtimeOnly: false
 		}),
-		VitePWA({
-			mode: "development",
-			base: "/",
-			srcDir: "src/core/modules",
-			filename: "pwa.js",
-			includeAssets: ["/favicon.ico"],
-			strategies: "injectManifest",
-			registerType: 'autoUpdate',
-			devOptions: {
-				enabled: true
-			},
-			manifest: {
-				name: "Diabsen.in",
-				short_name: "Diabsen.in",
-				theme_color: "#ffffff",
-				start_url: "/",
-				display: "standalone",
-				background_color: "#ffffff",
-				icons: [
-					{
-						src: "/favicon.ico",
-						sizes: "192x192",
-						type: "image/png",
-					},
-					{
-						src: "/favicon.ico",
-						sizes: "512x512",
-						type: "image/png",
-					},
-					{
-						src: "/favicon.ico",
-						sizes: "512x512",
-						type: "image/png",
-						purpose: "any maskable",
-					},
-				],
-			},
-		}),
+		// VitePWA({
+		// 	mode: "development",
+		// 	base: "/",
+		// 	srcDir: "src/core/modules",
+		// 	filename: "pwa.js",
+		// 	includeAssets: [
+		// 		"robots.txt",
+		// 		"/favicon.ico"
+		// 	],
+		// 	strategies: "injectManifest",
+		// 	registerType: 'autoUpdate',
+		// 	devOptions: {
+		// 		enabled: true
+		// 	},
+		// 	workbox: {
+		// 		cleanupOutdatedCaches: true,
+		// 		globPatterns: ['**/*.{js,css,html,ico,png,jpg}'],
+		// 	},
+		// 	manifest: {
+		// 		name: "Diabsen.in",
+		// 		short_name: "Diabsen.in",
+		// 		theme_color: "#ffffff",
+		// 		start_url: "/",
+		// 		display: "standalone",
+		// 		background_color: "#ffffff",
+		// 		icons: [
+		// 			{
+		// 				src: "/favicon.ico",
+		// 				sizes: "192x192",
+		// 				type: "image/png",
+		// 			},
+		// 			{
+		// 				src: "/favicon.ico",
+		// 				sizes: "512x512",
+		// 				type: "image/png",
+		// 			},
+		// 			{
+		// 				src: "/favicon.ico",
+		// 				sizes: "512x512",
+		// 				type: "image/png",
+		// 				purpose: "any maskable",
+		// 			},
+		// 		],
+		// 	},
+		// }),
 	],
 	resolve: {
 		extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json', '.vue'],
 		alias: {
-			'@': resolve(__dirname, './src')
+			'@': resolve(__dirname, './src'),
+			'vue': 'vue/dist/vue.esm-bundler',
 		}
 	}
 })

@@ -6,6 +6,8 @@
 			@close-sidebar="sidebarOpen = false"
 		/>
 
+		<!-- <ReloadPwa /> -->
+
 		<div
 			class="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden"
 		>
@@ -16,7 +18,7 @@
 
 			<main class="bg-gray-100">
 				<div class="px-4 sm:px-6 lg:px-8 py-8">
-					<breadcrumb />
+					<!-- <breadcrumb /> -->
 
 					<router-view v-slot="{ Component }">
 						<transition name="fade" mode="out-in">
@@ -33,15 +35,17 @@
 
 <script>
 	import { defineComponent, ref } from 'vue'
-	import Breadcrumb from '@/components/layout/breadcrumb/index.vue'
+	// import Breadcrumb from '@/components/layout/breadcrumb/index.vue'
 	import Sidebar from '@/components/layout/sidebar/index.vue'
 	import Header from '@/components/layout/header/index.vue'
 	import Footer from '@/components/layout/footer/index.vue'
+	// import ReloadPwa from '@/components/ui/reload-pwa/index.vue'
 
 	export default defineComponent({
 		name: 'BaseLayout',
 		components: {
-			Breadcrumb,
+			// ReloadPwa,
+			// Breadcrumb,
 			Sidebar,
 			Header,
 			Footer,
