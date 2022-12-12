@@ -119,7 +119,8 @@ let routes = [
 									{
 										path: '',
 										name: 'classes-index',
-										component: () => import('@/pages/classes/index.vue'),
+										component: () =>
+											import('@/pages/classes/index.vue'),
 									},
 									{
 										path: 'students',
@@ -129,7 +130,10 @@ let routes = [
 											{
 												path: '',
 												name: 'students-index',
-												component: () =>import('@/pages/students/index.vue'),
+												component: () =>
+													import(
+														'@/pages/students/index.vue'
+													),
 											},
 										],
 									},
@@ -143,7 +147,10 @@ let routes = [
 									{
 										path: '',
 										name: 'teachers-index',
-										component: () => import('@/pages/teachers/index.vue'),
+										component: () =>
+											import(
+												'@/pages/teachers/index.vue'
+											),
 									},
 								],
 							},
@@ -155,7 +162,8 @@ let routes = [
 									{
 										path: '',
 										name: 'admins-index',
-										component: () => import('@/pages/admins/index.vue'),
+										component: () =>
+											import('@/pages/admins/index.vue'),
 									},
 								],
 							},
@@ -167,7 +175,10 @@ let routes = [
 									{
 										path: '',
 										name: 'school-years-index',
-										component: () => import('@/pages/school-years/index.vue'),
+										component: () =>
+											import(
+												'@/pages/school-years/index.vue'
+											),
 									},
 								],
 							},
@@ -179,7 +190,8 @@ let routes = [
 									{
 										path: '',
 										name: 'courses-index',
-										component: () => import('@/pages/courses/index.vue'),
+										component: () =>
+											import('@/pages/courses/index.vue'),
 									},
 								],
 							},
@@ -191,7 +203,10 @@ let routes = [
 									{
 										path: '',
 										name: 'schedules-index',
-										component: () => import('@/pages/schedules/index.vue'),
+										component: () =>
+											import(
+												'@/pages/schedules/index.vue'
+											),
 									},
 								],
 							},

@@ -37,7 +37,7 @@
 					<h1
 						class="text-md sidebar-expanded:text-3xl mt-0.5 text-primary"
 					>
-						LOGO
+						<img :src="fullLogoSrc" alt="Diabsen.in">
 					</h1>
 				</router-link>
 			</div>
@@ -136,7 +136,8 @@
 												<router-link
 													:to="{
 														name: child.path.name,
-														params: child.path.params,
+														params: child.path
+															.params,
 													}"
 													@click.prevent="
 														sidebarExpanded
@@ -158,7 +159,9 @@
 																class="text-sm font-medium ml-4 md:opacity-0 md:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200"
 															>
 																{{
-																	t(child.title)
+																	t(
+																		child.title
+																	)
 																}}
 															</span>
 														</div>
@@ -198,6 +201,7 @@
 	import Link from '@/components/ui/link/index.vue'
 	import Icon from '@/components/ui/svg-icon/index.vue'
 	import heroiconsOutlineVue from '@/components/icons/heroicons-outline.vue'
+	import { getImageSrc } from '@/core/utils'
 
 	export default defineComponent({
 		name: 'v-sidebar',
@@ -272,6 +276,8 @@
 				)
 			}
 
+			const fullLogoSrc = getImageSrc('full-logo')
+
 			onMounted(() => {
 				addExpandable()
 				localStorage.setItem('sidebar-expanded', 'true')
@@ -305,6 +311,7 @@
 				sidebar,
 				sidebarExpanded,
 				currentRoute,
+				fullLogoSrc,
 				isRouteActive,
 			}
 		},

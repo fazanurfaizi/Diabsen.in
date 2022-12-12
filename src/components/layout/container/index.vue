@@ -2,11 +2,11 @@
 	<div class="mt-5 p-6 bg-white rounded-lg">
 		<div class="mb-1">
 			<h1 class="text-xl font-normal text-title-content py-2.5">
-				<slot name="title"></slot>
+				{{ title }}
 			</h1>
 		</div>
 		<div class="my-1">
-			<slot name="content"></slot>
+			<slot></slot>
 		</div>
 	</div>
 </template>
@@ -16,5 +16,11 @@
 
 	export default defineComponent({
 		name: 'v-container',
+		props: {
+			title: {
+				type: String,
+				required: false,
+			},
+		},
 	})
 </script>

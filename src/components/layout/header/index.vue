@@ -93,7 +93,9 @@
 											name="lock-closed"
 											class="w-4 h-4 mr-2"
 										/>
-										<span>{{ t('navbar.changePassword') }}</span>
+										<span>{{
+											t('navbar.changePassword')
+										}}</span>
 									</div>
 								</router-link>
 

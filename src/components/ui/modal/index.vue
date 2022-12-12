@@ -13,7 +13,9 @@
 				ref="modal-backdrop"
 				class="fixed z-10 inset-0 overflow-y-auto bg-black bg-opacity-50"
 			>
-				<div class="flex items-start justify-center min-h-screen pt-24 text-center">
+				<div
+					class="flex items-start justify-center min-h-screen pt-24 text-center"
+				>
 					<transition
 						enter-active-class="transition ease-out duration-300 transform "
 						enter-from-class="opacity-0 translate-y-10 scale-95"
@@ -30,8 +32,14 @@
 							aria-labelledby="modal-headline"
 							v-show="showModal"
 						>
-							<button class="absolute top-4 right-4" @click="closeModal">
-								<Icon name="close" class="flex shrink-0 h-6 w-6 text-primary" />
+							<button
+								class="absolute top-4 right-4"
+								@click="closeModal"
+							>
+								<Icon
+									name="close"
+									class="flex shrink-0 h-6 w-6 text-primary"
+								/>
 							</button>
 							<slot>I'm empty inside</slot>
 						</div>
@@ -43,43 +51,46 @@
 </template>
 
 <script>
-import { defineComponent, ref, watch } from 'vue';
-import Icon from '@/components/ui/svg-icon/index.vue'
-import useClickOutside from '@/hooks/useClickOutside'
+	import { defineComponent, ref, watch } from 'vue'
+	import Icon from '@/components/ui/svg-icon/index.vue'
+	import useClickOutside from '@/hooks/useClickOutside'
 
-export default defineComponent({
-	name: 'v-modal',
-	components: {
-		Icon
-	},
-	props: {
-		show: {
-			type: Boolean,
-			default: false
-		}
-	},
-	setup(props) {
-		const showModal = ref(false)
-		const modal = ref(null)
-		const { onClickOutside } = useClickOutside()
+	export default defineComponent({
+		name: 'v-modal',
+		components: {
+			Icon,
+		},
+		props: {
+			show: {
+				type: Boolean,
+				default: false,
+			},
+		},
+		setup(props) {
+			const showModal = ref(false)
+			const modal = ref(null)
+			const { onClickOutside } = useClickOutside()
 
-		watch(() => props.show, (show) => {
-			showModal.value = show
-		})
+			watch(
+				() => props.show,
+				(show) => {
+					showModal.value = show
+				}
+			)
 
-		const closeModal = () => {
-			showModal.value = !showModal.value
-		}
+			const closeModal = () => {
+				showModal.value = !showModal.value
+			}
 
-		onClickOutside(modal, () => {
-			if(showModal.value) closeModal()
-		})
+			onClickOutside(modal, () => {
+				if (showModal.value) closeModal()
+			})
 
-		return {
-			modal,
-			showModal,
-			closeModal
-		}
-	}
-})
+			return {
+				modal,
+				showModal,
+				closeModal,
+			}
+		},
+	})
 </script>

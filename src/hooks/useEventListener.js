@@ -1,22 +1,21 @@
-import { onUnmounted, unref, watch } from "vue";
+import { onUnmounted, unref, watch } from 'vue'
 
 export default function useEventListener(...args) {
-	let target;
-	let event;
-	let listener;
-	let options;
+	let target
+	let event
+	let listener
+	let options
+	;[target, event, listener, options] = args
 
-	[target, event, listener, options] = args
-
-	if(!target) return
+	if (!target) return
 
 	let cleanup = () => {}
 
 	watch(
 		() => unref(target),
-		el => {
+		(el) => {
 			cleanup()
-			if(!el) return
+			if (!el) return
 
 			el.addEventListener(event, listener, options)
 
@@ -26,7 +25,7 @@ export default function useEventListener(...args) {
 			}
 		},
 		{
-			immediate: true
+			immediate: true,
 		}
 	)
 
